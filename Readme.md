@@ -9,6 +9,8 @@
 - goto front end directory run "npm start" or "expo start" it will most possbly start server and give barcode to scan open expo client in phone and scan it to procede further
 
 # how to start back end project
+- if running first time try install pipenv command for it "pip install pipenv"
+- if showing some error try command in backend directory "pipenv install"
 - got backend directory run "pipenv shell" and the run "python manage.py runserver" if on linux "python3 manage.py runserver"
 - it will start backend server to begin with
 

@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import Navigation from "../Sub Components/Navbar.jsx";
+import Navbar from "../Sub Components/Navbar.jsx";
 import { styling } from "../../Configs/Style/Style.jsx";
 import { Text, View } from "react-native";
 
@@ -20,7 +20,7 @@ export default function Home() {
 				recently with desktop publishing software like Aldus PageMaker
 				including versions of Lorem Ipsum.
 			</Text>
-			<Navigation />
+			<Navbar />
 			<StatusBar style="auto" />
 		</View>
 	);

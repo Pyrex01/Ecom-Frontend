@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import Navbar from "../Sub Components/Navbar.jsx";
-import { styling } from "../../Configs/Style/Style.jsx";
+import Navbar from "../../Components/Sub Components/Navbar";
+import { styling } from "../../Configs/Style/Style";
 import { Text, View } from "react-native";
 
 export default function Home() {

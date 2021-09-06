@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import Navigation from "../Sub Components/Navigation.jsx";
+import Navigation from "../Sub Components/Navbar.jsx";
 import { styling } from "../../Configs/Style/Style.jsx";
 import { Text, View } from "react-native";
 

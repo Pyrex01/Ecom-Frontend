@@ -1,7 +1,8 @@
 import React from "react";
-import Home from "./Components/Pages/Home";
+import Home from "./APP/Components/Pages/Home.jsx";
+import Screen_1 from "./APP/Components/Screens/Screen_1.jsx";
 /* import Navigation from "./Components/Sub Components/Navigation"; */
 
 export default function App() {
-	return <Home />;
+	return <Screen_1 />;
 }

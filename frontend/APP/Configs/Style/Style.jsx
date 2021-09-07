@@ -21,6 +21,10 @@ const styling = StyleSheet.create({
 		color: Colors.medium,
 		fontFamily: "cursive",
 	},
+	Bgimg: {
+		height: "100%",
+		width: "100%",
+	},
 });
 
 export { styling };

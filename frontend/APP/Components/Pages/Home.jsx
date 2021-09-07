@@ -1,15 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-<<<<<<< HEAD:frontend/Components/Pages/Home.jsx
-import Navigation from "../Sub Components/Navigation.jsx";
-import { styling } from "../../Configs/Style/Style.jsx";
-import { Image, Text, View } from "react-native";
-=======
 import Navbar from "../../Components/Sub Components/Navbar";
 import { styling } from "../../Configs/Style/Style";
 import { Text, View } from "react-native";
 import Screen_1 from "../Screens/Screen_1";
->>>>>>> e1e9d274c483e156f42c87225e5a5bcb0b19209a:frontend/APP/Components/Pages/Home.jsx
 
 export default function Home() {
 	return (
@@ -27,13 +21,8 @@ export default function Home() {
 				recently with desktop publishing software like Aldus PageMaker
 				including versions of Lorem Ipsum.
 			</Text>
-<<<<<<< HEAD:frontend/Components/Pages/Home.jsx
-			<Image src={require("../../assets/favicon.png")}/>
-			<Navigation />
-=======
 			<Navbar />
 
->>>>>>> e1e9d274c483e156f42c87225e5a5bcb0b19209a:frontend/APP/Components/Pages/Home.jsx
 			<StatusBar style="auto" />
 		</View>
 	);

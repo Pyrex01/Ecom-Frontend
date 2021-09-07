@@ -3,6 +3,7 @@ import React from "react";
 import Navbar from "../../Components/Sub Components/Navbar";
 import { styling } from "../../Configs/Style/Style";
 import { Text, View } from "react-native";
+import Screen_1 from "../Screens/Screen_1";
 
 export default function Home() {
 	return (
@@ -21,6 +22,7 @@ export default function Home() {
 				including versions of Lorem Ipsum.
 			</Text>
 			<Navbar />
+
 			<StatusBar style="auto" />
 		</View>
 	);

@@ -4,9 +4,9 @@
     "slug": "frontend",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "/frontend/APP/assets/icon.png",
+    "icon": "./APP/assets/icon.png",
     "splash": {
-      "image": "/frontend/APP/assets/splash.png",
+      "image": "./APP/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,12 +21,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "/frontend/APP/assets/adaptive-icon.png",
+        "foregroundImage": "./APP/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "/frontend/APP/assets/favicon.png"
+      "favicon": "./APP/assets/favicon.png"
     }
   }
 }

@@ -1,0 +1,25 @@
+# front end
+                    files.etention
+                    folderwith/
+App.js
+
+src/assest/
+.logos
+
+src/comonents/screens/
+.sreens
+
+src/comonents/sub_components/
+Buttons.jsx
+Header.jsx
+BottonNavigation.jsx
+
+src/comonents/config/style/
+Style.jsx
+customize.jsx
+
+src/comonents/config/colors/
+Colors.jsx
+
+src/comonents/fonts/
+Fonts

@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import Navigation from "../Sub Components/Navigation.jsx";
 import { styling } from "../../Configs/Style/Style.jsx";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 
 export default function Home() {
 	return (
@@ -20,6 +20,7 @@ export default function Home() {
 				recently with desktop publishing software like Aldus PageMaker
 				including versions of Lorem Ipsum.
 			</Text>
+			<Image src={require("../../assets/favicon.png")}/>
 			<Navigation />
 			<StatusBar style="auto" />
 		</View>

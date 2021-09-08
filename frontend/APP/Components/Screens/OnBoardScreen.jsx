@@ -1,87 +1,70 @@
 import React from "react";
-import { Platform, Text, StyleSheet, View, Image } from "react-native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
+import {
+	Platform,
+	Text,
+	StyleSheet,
+	View,
+	Image,
+	SafeAreaView,
+} from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import Colors from "../../Configs/Colors/Colors";
+import { Style } from "../../Configs/Style/Style";
+import { Styling } from "../../Configs/Style/Style";
 import { PrimaryButton } from "../Sub Components/Button";
 
 export default function OnBoardScreen() {
 	return (
 		<SafeAreaProvider>
 			<SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
-				<View style={{ height: 600 }}>
-					<Image
-						style={{
-							width: "100%",
-							resizeMode: "contain",
-
-							height: Platform.OS == "android" ? 500 : 500,
-							top: -150,
-						}}
-						source={require("../../assets/image.png")}
-					/>
-				</View>
-				<View style={style.textContainer}>
-					<View>
-						<Text
-							style={{
-								fontSize: 42,
-								marginTop: -270,
-								fontWeight: "bold",
-								textAlign: "center",
-							}}
-						>
-							Shopping Bazaar
-						</Text>
-						<Text
-							style={{
-								marginTop: 20,
-								fontSize: 20,
-								textAlign: "center",
-								color: Colors.grey,
-							}}
-						>
-							We help you to find the best
-						</Text>
+				<ScrollView
+					style={{
+						flex: 1,
+						paddingTop: StatusBar.currentHeight,
+					}}
+				>
+					<View style={{ height: 600 }}>
+						<Image
+							style={(Style.Web, Style.Android)}
+							source={require("../../assets/image.png")}
+						/>
 					</View>
-					<View style={style.indicatorContainer}>
-						<View style={style.currentIndicator} />
-						<View style={style.indicator} />
-						<View style={style.indicator} />
+					<View style={Style.textContainer}>
+						<View>
+							<Text
+								style={{
+									fontSize: 42,
+									marginTop: -170,
+									fontWeight: "bold",
+									textAlign: "center",
+								}}
+							>
+								Shopping Bazaar
+							</Text>
+							<Text
+								style={{
+									marginTop: 20,
+									fontSize: 20,
+									textAlign: "center",
+									color: Colors.grey,
+								}}
+							>
+								We help you to find the best
+							</Text>
+						</View>
+						<View style={Style.indicatorContainer}>
+							<View style={Style.currentIndicator} />
+							<View style={Style.indicator} />
+							<View style={Style.indicator} />
+						</View>
+						<View style={Style.PrimaryButton}>
+							<PrimaryButton title="Get Started" />
+						</View>
 					</View>
-					<PrimaryButton title="Get Started" />
-				</View>
+				</ScrollView>
 			</SafeAreaView>
 		</SafeAreaProvider>
 	);
 }
-
-const style = StyleSheet.create({
-	textContainer: {
-		flex: 1,
-		paddingHorizontal: 50,
-		justifyContent: "space-between",
-		paddingBottom: 40,
-	},
-	indicatorContainer: {
-		height: 50,
-		flex: 1,
-		justifyContent: "center",
-		flexDirection: "row",
-		alignItems: "center",
-		top: -10,
-	},
-	currentIndicator: {
-		height: 12,
-		width: 30,
-		borderRadius: 10,
-		backgroundColor: Colors.primary,
-		marginHorizontal: 5,
-	},
-	indicator: {
-		height: 12,
-		width: 12,
-		borderRadius: 6,
-		backgroundColor: Colors.grey,
-		marginHorizontal: 5,
-	},
-});

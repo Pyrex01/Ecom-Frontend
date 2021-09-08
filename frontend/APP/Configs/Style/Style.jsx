@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import Colors from "../Colors/Colors.jsx";
-
+import { Platform } from "react-native";
 // we are goin to write all the CSS in JSON form here!!!
 /* 
 
@@ -20,7 +20,7 @@ const Styling = StyleSheet.create({
 		fontWeight: "bold",
 		fontSize: 20,
 		color: Colors.secondary,
-		fontFamily: "cursive",
+		/* fontFamily: "cursive", */
 		backgroundColor: "rgba(0, 23, 255, 0.5)",
 	},
 	Bgimg: {
@@ -34,3 +34,54 @@ const Styling = StyleSheet.create({
 });
 
 export { Styling };
+
+/* OnBoardSreen Json css */
+
+const Style = StyleSheet.create({
+	textContainer: {
+		flex: 1,
+		paddingHorizontal: 50,
+		justifyContent: "space-between",
+		paddingBottom: 40,
+	},
+	indicatorContainer: {
+		height: 50,
+		flex: 1,
+		justifyContent: "center",
+		flexDirection: "row",
+		alignItems: "center",
+		top: 70,
+	},
+	currentIndicator: {
+		height: 12,
+		width: 30,
+		borderRadius: 10,
+		backgroundColor: Colors.primary,
+		marginHorizontal: 5,
+	},
+	indicator: {
+		height: 12,
+		width: 12,
+		borderRadius: 6,
+		backgroundColor: Colors.grey,
+		marginHorizontal: 5,
+	},
+	/* 	Web: {
+		height: Platform.OS == "native" ? 1900 : 1900,
+		width: "100%",
+		resizeMode: "contain",
+
+		top: -500,
+	}, */
+	Android: {
+		height: Platform.OS == "android" ? 1000 : 800,
+		width: "100%",
+		resizeMode: "contain",
+		top: -350,
+	},
+
+	PrimaryButton: {
+		top: 110,
+	},
+});
+export { Style };

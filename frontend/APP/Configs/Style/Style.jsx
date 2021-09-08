@@ -18,7 +18,10 @@ const Styling = StyleSheet.create({
 	},
 	text: {
 		fontWeight: "bold",
+<<<<<<< HEAD
 		fontSize: 20,
+=======
+>>>>>>> 8ead5e80816a8ce43ba1a2194e4018a36c2022e6
 		color: Colors.secondary,
 		fontFamily: "cursive",
 		backgroundColor: "rgba(0, 23, 255, 0.5)",
@@ -28,8 +31,8 @@ const Styling = StyleSheet.create({
 		width: "100%",
 	},
 	icon: {
-		height: "80px",
-		width: "100px",
+		height: 80,
+		width: 100,
 	},
 });
 

@@ -9,7 +9,12 @@ import React from "react";
 import {PrimaryButton } from "../Sub Components/Button";
 import { Button, View } from "react-native";
 
+<<<<<<< HEAD
 const Home = ({}) => {
+=======
+export default function Home() {
+	console.log(Bgimg);
+>>>>>>> 8ead5e80816a8ce43ba1a2194e4018a36c2022e6
 	return (
 		// <View style={Styling.container}>
 		// 	<ImageBackground

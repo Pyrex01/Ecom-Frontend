@@ -18,7 +18,7 @@ const Styling = StyleSheet.create({
 	},
 	text: {
 		fontWeight: "bold",
-		fontSize: "20px",
+		fontSize: 20,
 		color: Colors.secondary,
 		fontFamily: "cursive",
 		backgroundColor: "rgba(0, 23, 255, 0.5)",

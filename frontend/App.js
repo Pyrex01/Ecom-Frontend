@@ -1,6 +1,13 @@
-import React from "react";
-import Home from "./APP/Components/Screens/Home";
+import 'react-native-gesture-handler';
+import React from 'react';
+import OnBoardScreen from './APP/Components/Screens/OnBoardScreen';
 
-export default function App() {
-	return <Home />;
-}
+
+const App = () => {
+  return (
+   <OnBoardScreen/>
+  );
+};
+
+export default App;
+

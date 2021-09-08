@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "../Colors/Colors";
+import Colors from "../Colors/Colors.jsx";
 
 // we are goin to write all the CSS in JSON form here!!!
 /* 
@@ -18,10 +18,7 @@ const Styling = StyleSheet.create({
 	},
 	text: {
 		fontWeight: "bold",
-<<<<<<< HEAD
 		fontSize: 20,
-=======
->>>>>>> 8ead5e80816a8ce43ba1a2194e4018a36c2022e6
 		color: Colors.secondary,
 		fontFamily: "cursive",
 		backgroundColor: "rgba(0, 23, 255, 0.5)",

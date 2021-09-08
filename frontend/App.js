@@ -5,11 +5,7 @@ import Home from "./APP/Components/Screens/Home";
 import { View } from "react-native";
 
 const App = () => {
-	return (
-		<View>
-			<OnBoardScreen />,
-		</View>
-	);
+	return <OnBoardScreen />;
 };
 
 export default App;

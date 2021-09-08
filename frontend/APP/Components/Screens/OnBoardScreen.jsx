@@ -4,7 +4,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Colors from "../../Configs/Colors/Colors";
 import { PrimaryButton } from "../Sub Components/Button";
 
-const OnBoardScreen = ({}) => {
+export default function OnBoardScreen() {
 	return (
 		<SafeAreaProvider>
 			<SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
@@ -53,7 +53,7 @@ const OnBoardScreen = ({}) => {
 			</SafeAreaView>
 		</SafeAreaProvider>
 	);
-};
+}
 
 const style = StyleSheet.create({
 	textContainer: {
@@ -85,5 +85,3 @@ const style = StyleSheet.create({
 		marginHorizontal: 5,
 	},
 });
-
-export default OnBoardScreen;

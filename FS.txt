@@ -3,23 +3,30 @@
                     folderwith/
 App.js
 
-src/assest/
+App/assest/
 .logos
 
-src/comonents/screens/
-.sreens
+App/components/Forms/
+Login.jsx
+SignUp.jsx
 
-src/comonents/sub_components/
+App/components/screens/
+Home.jsx
+sreens_1.jsx
+
+App/components/sub_components/
 Buttons.jsx
 Header.jsx
-BottonNavigation.jsx
+BottomNavigation.jsx
 
-src/comonents/config/style/
-Style.jsx
-customize.jsx
-
-src/comonents/config/colors/
+App/components/config/colors/
 Colors.jsx
 
-src/comonents/fonts/
+App/components/config/style/
+Style.jsx
+Customize.jsx
+
+App/Config/fonts/
 Fonts
+
+App/Images/

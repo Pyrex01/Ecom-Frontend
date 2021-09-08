@@ -9,22 +9,28 @@ example "  <View style={basic.container}>  "
 
 */
 
-const styling = StyleSheet.create({
+const Styling = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: Colors.secondary,
+		backgroundColor: Colors.rbga,
 		alignItems: "center",
 		justifyContent: "center",
 	},
 	text: {
 		fontWeight: "bold",
-		color: Colors.medium,
+		fontSize: "20px",
+		color: Colors.secondary,
 		fontFamily: "cursive",
+		backgroundColor: "rgba(0, 23, 255, 0.5)",
 	},
 	Bgimg: {
 		height: "100%",
 		width: "100%",
 	},
+	icon: {
+		height: "80px",
+		width: "100px",
+	},
 });
 
-export { styling };
+export { Styling };

@@ -1,11 +1,11 @@
 import React from "react";
-import { styling } from "../../Configs/Style/Style";
+import { Styling } from "../../Configs/Style/Style";
 import { View, Text } from "react-native";
 
-export default function Navigation() {
+export default function Navbar() {
 	return (
 		<View>
-			<Text style={styling.text}>helllllllloooooo guyzzzzz</Text>
+			<Text style={Styling.text}>helllllllloooooo guyzzzzz</Text>
 		</View>
 	);
 }

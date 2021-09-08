@@ -7,6 +7,7 @@ import { Styling } from "../../Configs/Style/Style";
 import { Image, ImageBackground, Text, View } from "react-native";
 
 export default function Home() {
+	console.log(Bgimg);
 	return (
 		<View style={Styling.container}>
 			<ImageBackground

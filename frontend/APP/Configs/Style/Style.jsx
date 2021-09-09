@@ -50,7 +50,8 @@ const Style = StyleSheet.create({
 		justifyContent: "center",
 		flexDirection: "row",
 		alignItems: "center",
-		top: 70,
+		/* top: 70, */
+		backgroundColor: Colors.rbga,
 	},
 	currentIndicator: {
 		height: 12,
@@ -76,8 +77,9 @@ const Style = StyleSheet.create({
 	Android: {
 		height: Platform.OS == "android" ? 1000 : 800,
 		width: "100%",
+		height: "100%",
 		resizeMode: "contain",
-		top: -350,
+		top: -150,
 	},
 
 	PrimaryButton: {

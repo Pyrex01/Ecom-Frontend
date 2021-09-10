@@ -5,7 +5,7 @@ import Colors from "../../Configs/Colors/Colors";
 import { PrimaryButton } from "../Sub Components/Button";
 import { Styling } from "../../Configs/Style/Style";
 
-const OnBoardScreen = ({}) => {
+export default function OnBoardScreen() {
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: Colors.rgba }}>
 			<View style={{ height: 400 }}>
@@ -54,7 +54,7 @@ const OnBoardScreen = ({}) => {
 			</View>
 		</SafeAreaView>
 	);
-};
+}
 
 const style = StyleSheet.create({
 	textContainer: {
@@ -85,5 +85,3 @@ const style = StyleSheet.create({
 		marginHorizontal: 5,
 	},
 });
-
-export default OnBoardScreen;

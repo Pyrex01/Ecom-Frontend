@@ -48,8 +48,6 @@ const Styling = StyleSheet.create({
 	},
 });
 
-export { Styling };
-
 /* OnBoardSreen Json css */
 /*
 const Style = StyleSheet.create({
@@ -100,5 +98,6 @@ const Style = StyleSheet.create({
 	PrimaryButton: {
 		top: 110,
 	},
-});
-export { Style };*/
+});*/
+
+export { Styling, Style };

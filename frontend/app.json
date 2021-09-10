@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "frontend",
-    "slug": "frontend",
+    "name": "Shopping bazar",
+    "slug": "Shopping-bazar",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./APP/assets/icon.png",

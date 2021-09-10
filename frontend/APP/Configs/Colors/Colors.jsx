@@ -8,6 +8,6 @@ const Colors = {
 	light: "#f8f4f4",
 	dark: "#0c0c0c",
 	danger: "#ff5252",
-	rbga: "rgba(255, 129, 126, 0.5)",
+	//rbga: "rgba(255, 129, 126, 0.5)",
 };
 export default Colors;

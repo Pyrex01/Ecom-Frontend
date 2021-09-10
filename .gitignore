@@ -11,12 +11,14 @@ frontend/web-build/
 
 
 backend/Ecom/__pycache__/
-
 backend/store/__pycache__/
 backend/store/migrations/__pycache__/
 backend/addressCollection/__pycache__/
 backend/addressCollection/migrations/__pycache__/
 backend/userManagement/__pycache__/
 backend/userManagement/migrations/__pycache__/
+
+node_modules
+
 # macOS
 frontend/DS_Store

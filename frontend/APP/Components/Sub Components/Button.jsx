@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
-import COLORS from "../../Configs/Colors/Colors";
+import Colors from "../../Configs/Colors/Colors";
 
 const PrimaryButton = ({ title, onPress = () => {} }) => {
 	return (
@@ -15,9 +15,9 @@ const SecondaryButton = ({ title, onPress = () => {} }) => {
 	return (
 		<TouchableOpacity activeOpacity={0.8} onPress={onPress}>
 			<View
-				style={{ ...style.btnContainer, backgroundColor: COLORS.white }}
+				style={{ ...style.btnContainer, backgroundColor: Colors.white }}
 			>
-				<Text style={{ ...style.title, color: COLORS.primary }}>
+				<Text style={{ ...style.title, color: Colors.primary }}>
 					{title}
 				</Text>
 			</View>
@@ -26,12 +26,11 @@ const SecondaryButton = ({ title, onPress = () => {} }) => {
 };
 
 const style = StyleSheet.create({
-	title: { color: COLORS.white, fontWeight: "bold", fontSize: 18 },
+	title: { color: Colors.white, fontWeight: "bold", fontSize: 18 },
 	btnContainer: {
-		backgroundColor: COLORS.primary,
+		backgroundColor: Colors.primary,
 		height: 60,
 		borderRadius: 30,
-		/* top: -150, */
 		justifyContent: "center",
 		alignItems: "center",
 	},

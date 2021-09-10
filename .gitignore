@@ -9,5 +9,6 @@ frontend/*.mobileprovision
 frontend/*.orig.*
 frontend/web-build/
 backend/Ecom/__pycache__/
+
 # macOS
 frontend/DS_Store

@@ -3,17 +3,17 @@ import { Text, StyleSheet, View, Image, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "../../Configs/Colors/Colors";
 import { PrimaryButton } from "../Sub Components/Button";
+import { Styling } from "../../Configs/Style/Style";
 
 const OnBoardScreen = ({}) => {
 	return (
-		<SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
+		<SafeAreaView style={{ flex: 1, backgroundColor: Colors.rgba }}>
 			<View style={{ height: 400 }}>
 				<Image
 					style={{
 						width: "100%",
 						resizeMode: "contain",
 						height: Platform.OS === "web" ? 500 : 500,
-
 						top: -40,
 						marginTop: 10,
 					}}

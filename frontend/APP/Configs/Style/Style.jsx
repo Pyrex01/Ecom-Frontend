@@ -31,12 +31,27 @@ const Styling = StyleSheet.create({
 		height: 80,
 		width: 100,
 	},
+	Mobile: {
+		flex: 1,
+		...Platform.select({
+			android: {
+				backgroundColor: "green",
+			},
+			ios: {
+				backgroundColor: "red",
+			},
+			default: {
+				// other platforms, web for example
+				backgroundColor: "blue",
+			},
+		}),
+	},
 });
 
 export { Styling };
 
 /* OnBoardSreen Json css */
-
+/*
 const Style = StyleSheet.create({
 	textContainer: {
 		flex: 1,
@@ -50,7 +65,7 @@ const Style = StyleSheet.create({
 		justifyContent: "center",
 		flexDirection: "row",
 		alignItems: "center",
-		/* top: 70, */
+		top: 70, 
 		backgroundColor: Colors.rbga,
 	},
 	currentIndicator: {
@@ -67,13 +82,13 @@ const Style = StyleSheet.create({
 		backgroundColor: Colors.grey,
 		marginHorizontal: 5,
 	},
-	/* 	Web: {
+		Web: {
 		height: Platform.OS == "native" ? 1900 : 1900,
 		width: "100%",
 		resizeMode: "contain",
 
 		top: -500,
-	}, */
+	}, 
 	Android: {
 		height: Platform.OS == "android" ? 1000 : 800,
 		width: "100%",
@@ -86,4 +101,4 @@ const Style = StyleSheet.create({
 		top: 110,
 	},
 });
-export { Style };
+export { Style };*/

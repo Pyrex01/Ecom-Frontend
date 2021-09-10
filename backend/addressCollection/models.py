@@ -1,5 +1,6 @@
 from django.db import models
-from django.db.models.fields.related import ForeignKey
+from userManagement.models import Users
+
 
 class Address_types(models.Model):
     Address_type = models.CharField(max_length=15)
@@ -55,4 +56,5 @@ class Address(models.Model):
     Landmark = models.TextField()
     Town = models.TextField()
     State = models.CharField(max_length=2,choices=STATES)
-    Address_type_ID = ForeignKey(Address_types)    
+    Address_type_ID = models.ForeignKey(Address_types,on_delete=models.CASCADE)    
+    User_ID = models.ForeignKey(Users,on_delete=models.CASCADE)

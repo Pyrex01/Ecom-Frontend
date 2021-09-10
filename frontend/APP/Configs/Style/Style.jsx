@@ -19,9 +19,9 @@ const Styling = StyleSheet.create({
 	text: {
 		fontWeight: "bold",
 		fontSize: 20,
-		color: Colors.secondary,
-		/* fontFamily: "cursive", */
-		backgroundColor: "rgba(0, 23, 255, 0.5)",
+		/*color: Colors.secondary,
+		fontFamily: "cursive", 
+		backgroundColor: "rgba(0, 23, 255, 0.5)",*/
 	},
 	Bgimg: {
 		height: "100%",
@@ -36,6 +36,11 @@ const Styling = StyleSheet.create({
 		...Platform.select({
 			android: {
 				backgroundColor: "green",
+				color: "black",
+				alignItems: "center",
+				justifyContent: "center",
+				fontWeight: "bold",
+				fontSize: 30,
 			},
 			ios: {
 				backgroundColor: "red",
@@ -43,6 +48,23 @@ const Styling = StyleSheet.create({
 			default: {
 				// other platforms, web for example
 				backgroundColor: "blue",
+				color: "white",
+				fontWeight: "bold",
+				fontSize: 50,
+			},
+		}),
+	},
+
+	MobileImage: {
+		...Platform.select({
+			android: {
+				height: 300,
+				width: 400,
+			},
+			ios: {},
+			default: {
+				height: 700,
+				width: "full",
 			},
 		}),
 	},
@@ -100,4 +122,4 @@ const Style = StyleSheet.create({
 	},
 });*/
 
-export { Styling, Style };
+export { Styling /*, Style */ };

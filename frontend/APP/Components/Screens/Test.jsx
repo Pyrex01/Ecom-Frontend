@@ -3,6 +3,10 @@ import { Image, SafeAreaView, Text, View } from "react-native";
 import { Styling } from "../../Configs/Style/Style";
 import image from "../../assets/image.png";
 import { Device } from "../../Configs/Style/PlatformJson";
+import {
+	useDeviceOrientation,
+	useDimensions,
+} from "@react-native-community/hooks"; 
 
 export default function Test() {
 	return (

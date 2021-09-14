@@ -30,11 +30,11 @@ const Device = StyleSheet.create({
 		...Platform.select({
 			android: {
 				height: 300,
-				width: 400,
+				width: "100%",
 			},
 			ios: {},
 			default: {
-				height: 700,
+				height: 1000,
 				width: "full",
 			},
 		}),

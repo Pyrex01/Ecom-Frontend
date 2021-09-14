@@ -3,7 +3,7 @@
     "name": "Shopping bazar",
     "slug": "Shopping-bazar",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./APP/assets/icon.png",
     "splash": {
       "image": "./APP/assets/splash.png",

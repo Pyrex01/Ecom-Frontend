@@ -46,7 +46,7 @@ export default function Login() {
 							color: Colors.dark,
 						}}
 					>
-						Welcome Back,
+						Welcome Back...
 					</Text>
 					<Text
 						style={{
@@ -68,7 +68,11 @@ export default function Login() {
 							size={20}
 							style={STYLES.inputIcon}
 						/>
-						<TextInput placeholder="Email" style={STYLES.input} />
+						<TextInput
+							placeholder="Email"
+							type="email"
+							style={STYLES.input}
+						/>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon

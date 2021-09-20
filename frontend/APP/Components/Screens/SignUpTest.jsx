@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik } from "formik";
+/* import { Formik } from "formik"; */
 import * as Yup from "yup";
 
 import {
@@ -14,7 +14,7 @@ import STYLES from "../../Configs/Style/formStyles";
 import Colors from "../../Configs/Colors/Colors";
 import { SignupStyle } from "../../Configs/Style/SignUpStyle";
 import { Device } from "../../Configs/Style/PlatformJson";
-import AppFormField from "../Sub Components/AppFormField";
+import { AppForm, AppFormField, SubmitButton } from "../Forms/FormComponents";
 
 const validationSchema = Yup.object().shape({
 	name: Yup.string().required().label("Name"),
@@ -38,7 +38,7 @@ export default function SignUpTest() {
 					</Text>
 				</View>
 				<View style={{ marginTop: 20 }}>
-					<Formik
+					<AppForm
 						initailValues={{
 							name: "",
 							email: "",
@@ -48,62 +48,49 @@ export default function SignUpTest() {
 						onSubmit={values => console.log(values)}
 						validationSchema={validationSchema}
 					>
-						{({ handleSubmit }) => (
-							<>
-								<AppFormField
-									name="name"
-									placeholder="Name*"
-									clearButtonMode="always"
-									autoCompleteType="name"
-									Icons="person-outline"
-								/>
+						<AppFormField
+							name="name"
+							placeholder="Name*"
+							clearButtonMode="always"
+							autoCompleteType="name"
+							Icons="person-outline"
+						/>
 
-								<AppFormField
-									name="email"
-									placeholder="Email*"
-									keyboardType="email-address"
-									autoCompleteType="email"
-									autoCorrect={false}
-									autoCapitalize="none"
-									textContentType="emailAddress"
-									Icons="mail-outline"
-								/>
+						<AppFormField
+							name="email"
+							placeholder="Email*"
+							keyboardType="email-address"
+							autoCompleteType="email"
+							autoCorrect={false}
+							autoCapitalize="none"
+							textContentType="emailAddress"
+							Icons="mail-outline"
+						/>
 
-								<AppFormField
-									name="password"
-									placeholder="Password*"
-									secureTextEntry
-									autoCompleteType="password"
-									autoCorrect={false}
-									autoCapitalize="none"
-									textContentType="Password"
-									Icons="lock-outline"
-								/>
+						<AppFormField
+							name="password"
+							placeholder="Password*"
+							secureTextEntry
+							autoCompleteType="password"
+							autoCorrect={false}
+							autoCapitalize="none"
+							textContentType="Password"
+							Icons="lock-outline"
+						/>
 
-								<AppFormField
-									name="confirm_password"
-									placeholder="Confirm Password*"
-									secureTextEntry
-									autoCompleteType="password"
-									autoCorrect={false}
-									autoCapitalize="none"
-									textContentType="Password"
-									Icons="lock-outline"
-								/>
+						<AppFormField
+							name="confirm_password"
+							placeholder="Confirm Password*"
+							secureTextEntry
+							autoCompleteType="password"
+							autoCorrect={false}
+							autoCapitalize="none"
+							textContentType="Password"
+							Icons="lock-outline"
+						/>
 
-								<TouchableOpacity>
-									<View style={STYLES.btnPrimary}>
-										<Text
-											style={SignupStyle.SignupBtn}
-											onPress={handleSubmit}
-										>
-											Sign Up
-										</Text>
-									</View>
-								</TouchableOpacity>
-							</>
-						)}
-					</Formik>
+						<SubmitButton title="Sign Up" />
+					</AppForm>
 
 					<View style={SignupStyle.SignUpOr}>
 						<View style={STYLES.line}></View>

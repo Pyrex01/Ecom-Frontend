@@ -1,5 +1,7 @@
 import React from "react";
 import "react-native-gesture-handler";
+import {} from "react-native-gesture-handler";
+
 import {
 	SafeAreaView,
 	View,
@@ -13,7 +15,6 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
 import AppTextInput from "../Sub Components/AppTextInput";
-/* import {} from "react-native-gesture-handler"; */
 
 export default function SignUp() {
 	return (

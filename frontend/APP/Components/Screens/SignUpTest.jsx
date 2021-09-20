@@ -11,9 +11,10 @@ import {
 	Text,
 } from "react-native";
 import STYLES from "../../Configs/Style/formStyles";
+import Colors from "../../Configs/Colors/Colors";
 import { SignupStyle } from "../../Configs/Style/SignUpStyle";
 import { Device } from "../../Configs/Style/PlatformJson";
-import AppTextInput from "../Sub Components/AppTextInput";
+import AppFormField from "../Sub Components/AppFormField";
 
 const validationSchema = Yup.object().shape({
 	name: Yup.string().required().label("Name"),
@@ -47,46 +48,49 @@ export default function SignUpTest() {
 						onSubmit={values => console.log(values)}
 						validationSchema={validationSchema}
 					>
-						{({ handleChange, handleSubmit, errors }) => (
+						{({ handleSubmit }) => (
 							<>
-								<AppTextInput
-									placeholder="Name"
+								<AppFormField
+									name="name"
+									placeholder="Name*"
 									clearButtonMode="always"
 									autoCompleteType="name"
 									Icons="person-outline"
 								/>
-								<AppTextInput
-									placeholder="Email"
+
+								<AppFormField
+									name="email"
+									placeholder="Email*"
 									keyboardType="email-address"
 									autoCompleteType="email"
-									onChangeText={handleChange("email")}
 									autoCorrect={false}
 									autoCapitalize="none"
 									textContentType="emailAddress"
 									Icons="mail-outline"
 								/>
-								<AppTextInput
-									placeholder="Password"
+
+								<AppFormField
+									name="password"
+									placeholder="Password*"
 									secureTextEntry
 									autoCompleteType="password"
-									onChangeText={handleChange("password")}
 									autoCorrect={false}
 									autoCapitalize="none"
 									textContentType="Password"
 									Icons="lock-outline"
 								/>
-								<AppTextInput
-									placeholder="Comfirm Password"
+
+								<AppFormField
+									name="confirm_password"
+									placeholder="Confirm Password*"
 									secureTextEntry
 									autoCompleteType="password"
-									onChangeText={handleChange(
-										"confirm_password",
-									)}
 									autoCorrect={false}
 									autoCapitalize="none"
 									textContentType="Password"
 									Icons="lock-outline"
 								/>
+
 								<TouchableOpacity>
 									<View style={STYLES.btnPrimary}>
 										<Text

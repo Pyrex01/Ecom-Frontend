@@ -1,0 +1,1 @@
+rnss = react native style sheet

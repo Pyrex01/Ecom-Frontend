@@ -39,6 +39,16 @@ const Device = StyleSheet.create({
 			},
 		}),
 	},
+	SignupPage: {
+		...Platform.select({
+			web: {
+				flex: 1,
+				alignContent: "center",
+				justifyContent: "center",
+				padding: 100,
+			},
+		}),
+	},
 });
 
 export { Device };

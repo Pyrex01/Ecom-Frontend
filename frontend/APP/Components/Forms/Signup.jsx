@@ -1,10 +1,18 @@
 import "react-native-gesture-handler";
 import React from "react";
-import { SafeAreaView, View, Text, TextInput, Image } from "react-native";
+import {
+	SafeAreaView,
+	View,
+	Text,
+	TextInput,
+	Image,
+	ScrollView,
+	TouchableOpacity,
+} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+/* import {} from "react-native-gesture-handler"; */
 
 export default function SignUp() {
 	return (
@@ -45,7 +53,7 @@ export default function SignUp() {
 							color: Colors.dark,
 						}}
 					>
-						Welcome,
+						Welcome...
 					</Text>
 					<Text
 						style={{
@@ -86,6 +94,19 @@ export default function SignUp() {
 						/>
 						<TextInput
 							placeholder="Password"
+							style={STYLES.input}
+							secureTextEntry
+						/>
+					</View>
+					<View style={STYLES.inputContainer}>
+						<Icon
+							name="lock-outline"
+							color={Colors.grey}
+							size={20}
+							style={STYLES.inputIcon}
+						/>
+						<TextInput
+							placeholder="Comfirm Password"
 							style={STYLES.input}
 							secureTextEntry
 						/>

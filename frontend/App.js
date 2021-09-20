@@ -1,5 +1,5 @@
-import "react-native-gesture-handler";
 import React from "react";
+import "react-native-gesture-handler";
 import OnBoardScreen from "./APP/Components/Screens/OnBoardScreen";
 import { View, SafeAreaView, TextInput } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -18,9 +18,7 @@ const App = () => {
 					{/* <SignUp /> */}
 					{/* <Login /> */}
 					{/* {<Test />} */}
-					<AppTextInput>
-						<TextInput placeholder="email" />
-					</AppTextInput>
+					<AppTextInput placeholder="Username" Icons="mail-outline" />
 				</View>
 			</SafeAreaView>
 		</SafeAreaProvider>

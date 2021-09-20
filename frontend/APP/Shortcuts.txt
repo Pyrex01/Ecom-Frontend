@@ -1,1 +1,5 @@
 rnss = react native style sheet
+
+
+<AppTextInput placeholder="Username" Icons="mail-outline" />
+<AppTextInput placeholder="password" Icons="lock" />

@@ -1,5 +1,5 @@
-import "react-native-gesture-handler";
 import React from "react";
+import "react-native-gesture-handler";
 import {
 	SafeAreaView,
 	View,
@@ -12,6 +12,7 @@ import {
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
+import AppTextInput from "../Sub Components/AppTextInput";
 /* import {} from "react-native-gesture-handler"; */
 
 export default function SignUp() {
@@ -44,6 +45,7 @@ export default function SignUp() {
 						Bazaar
 					</Text>
 				</View>
+
 				<View style={{ marginTop: 40 }}>
 					<Text
 						style={{
@@ -74,6 +76,7 @@ export default function SignUp() {
 							size={20}
 							style={STYLES.inputIcon}
 						/>
+
 						<TextInput placeholder="Name" style={STYLES.input} />
 					</View>
 					<View style={STYLES.inputContainer}>

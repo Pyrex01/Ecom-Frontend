@@ -4,7 +4,6 @@ import Colors from "../Colors/Colors";
 const SignupStyle = StyleSheet.create({
 	SafeAreaView: {
 		paddingHorizontal: 40,
-		padding: 10,
 		flex: 1,
 		backgroundColor: Colors.white,
 	},

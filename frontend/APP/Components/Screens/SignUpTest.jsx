@@ -1,27 +1,28 @@
 import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+
 import {
 	SafeAreaView,
 	View,
-	Text,
-	TextInput,
 	Image,
-	ScrollView,
 	TouchableOpacity,
+	ScrollView,
+	Text,
 } from "react-native";
-import Icons from "react-native-vector-icons/MaterialIcons";
-import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
 import { SignupStyle } from "../../Configs/Style/SignUpStyle";
 import { Device } from "../../Configs/Style/PlatformJson";
+import AppTextInput from "../Sub Components/AppTextInput";
 
 const validationSchema = Yup.object().shape({
+	name: Yup.string().required().label("Name"),
 	email: Yup.string().required().email().label("Email"),
 	password: Yup.string().required().min(8).label("Password"),
+	confirm_password: Yup.string().required().min(8).label("Confirm Password"),
 });
 
-export default function Test() {
+export default function SignUpTest() {
 	return (
 		<ScrollView>
 			<SafeAreaView style={(SignupStyle.SafeAreaView, Device.SignupPage)}>
@@ -41,91 +42,51 @@ export default function Test() {
 							name: "",
 							email: "",
 							password: "",
-							password: "",
+							confirm_password: "",
 						}}
 						onSubmit={values => console.log(values)}
 						validationSchema={validationSchema}
 					>
 						{({ handleChange, handleSubmit, errors }) => (
 							<>
-								<View style={STYLES.inputContainer}>
-									<Icons
-										name="person-outline"
-										color={Colors.grey}
-										size={20}
-										style={STYLES.inputIcon}
-									/>
-									<TextInput
-										placeholder="Name"
-										style={STYLES.input}
-										clearButtonMode="always"
-										autoCompleteType="name"
-									/>
-								</View>
-								<View style={STYLES.inputContainer}>
-									<Icons
-										name="mail-outline"
-										color={Colors.grey}
-										size={20}
-										style={STYLES.inputIcon}
-									/>
-									<TextInput
-										style={STYLES.input}
-										placeholder="Email"
-										keyboardType="email-address"
-										autoCompleteType="email"
-										onChangeText={handleChange("email")}
-										autoCorrect={false}
-										autoCapitalize="none"
-										textContentType="emailAddress"
-									/>
-									<Text style={{ color: Colors.danger }}>
-										{errors.email}
-									</Text>
-								</View>
-								<View style={STYLES.inputContainer}>
-									<Icons
-										name="lock-outline"
-										color={Colors.grey}
-										size={20}
-										style={STYLES.inputIcon}
-									/>
-
-									<TextInput
-										style={STYLES.input}
-										placeholder="Password"
-										secureTextEntry
-										autoCompleteType="password"
-										onChangeText={handleChange("password")}
-										autoCorrect={false}
-										autoCapitalize="none"
-										textContentType="Password"
-									/>
-									<Text style={{ color: Colors.danger }}>
-										{errors.password}
-									</Text>
-								</View>
-								<View style={STYLES.inputContainer}>
-									<Icons
-										name="lock-outline"
-										color={Colors.grey}
-										size={20}
-										style={STYLES.inputIcon}
-									/>
-									<TextInput
-										style={STYLES.input}
-										placeholder="Comfirm Password"
-										secureTextEntry
-										autoCompleteType="password"
-										onChangeText={handleChange("password")}
-										autoCorrect={false}
-										autoCapitalize="none"
-										textContentType="Password"
-									/>
-									<Text style={{ color: Colors.danger }}>
-										{errors.password}
-									</Text>
-								</View>
+								<AppTextInput
+									placeholder="Name"
+									clearButtonMode="always"
+									autoCompleteType="name"
+									Icons="person-outline"
+								/>
+								<AppTextInput
+									placeholder="Email"
+									keyboardType="email-address"
+									autoCompleteType="email"
+									onChangeText={handleChange("email")}
+									autoCorrect={false}
+									autoCapitalize="none"
+									textContentType="emailAddress"
+									Icons="mail-outline"
+								/>
+								<AppTextInput
+									placeholder="Password"
+									secureTextEntry
+									autoCompleteType="password"
+									onChangeText={handleChange("password")}
+									autoCorrect={false}
+									autoCapitalize="none"
+									textContentType="Password"
+									Icons="lock-outline"
+								/>
+								<AppTextInput
+									placeholder="Comfirm Password"
+									secureTextEntry
+									autoCompleteType="password"
+									onChangeText={handleChange(
+										"confirm_password",
+									)}
+									autoCorrect={false}
+									autoCapitalize="none"
+									textContentType="Password"
+									Icons="lock-outline"
+								/>
 								<TouchableOpacity>
 									<View style={STYLES.btnPrimary}>
 										<Text

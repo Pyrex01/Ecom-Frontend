@@ -70,8 +70,8 @@ export default function Test() {
 										style={STYLES.inputIcon}
 									/>
 									<TextInput
-										placeholder="Email"
 										style={STYLES.input}
+										placeholder="Email"
 										keyboardType="email-address"
 										autoCompleteType="email"
 										onChangeText={handleChange("email")}
@@ -92,8 +92,8 @@ export default function Test() {
 									/>
 
 									<TextInput
-										placeholder="Password"
 										style={STYLES.input}
+										placeholder="Password"
 										secureTextEntry
 										autoCompleteType="password"
 										onChangeText={handleChange("password")}
@@ -113,8 +113,8 @@ export default function Test() {
 										style={STYLES.inputIcon}
 									/>
 									<TextInput
-										placeholder="Comfirm Password"
 										style={STYLES.input}
+										placeholder="Comfirm Password"
 										secureTextEntry
 										autoCompleteType="password"
 										onChangeText={handleChange("password")}

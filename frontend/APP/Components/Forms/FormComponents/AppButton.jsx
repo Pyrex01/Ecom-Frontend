@@ -1,0 +1,36 @@
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
+import colors from "../../../Configs/Colors/Colors";
+import STYLES from "../../../Configs/Style/formStyles";
+import { SignupStyle } from "../../../Configs/Style/SignUpStyle";
+
+export default function AppButton({ title, onPress }) {
+	return (
+		<TouchableOpacity>
+			<View style={STYLES.btnPrimary}>
+				<Text style={SignupStyle.SignupBtn} onPress={onPress}>
+					{title}
+				</Text>
+			</View>
+		</TouchableOpacity>
+	);
+}
+
+const styles = StyleSheet.create({
+	button: {
+		backgroundColor: colors.primary,
+		borderRadius: 25,
+		justifyContent: "center",
+		alignItems: "center",
+		padding: 15,
+		width: "100%",
+		marginVertical: 10,
+	},
+	text: {
+		color: colors.white,
+		fontSize: 18,
+		textTransform: "uppercase",
+		fontWeight: "bold",
+	},
+});

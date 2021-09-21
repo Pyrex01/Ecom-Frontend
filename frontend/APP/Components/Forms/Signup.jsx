@@ -16,10 +16,10 @@ import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
 
 export default function SignUp() {
-	let [name , setName] = useState("");
-	let [email , setEmail] = useState("");
-	let [password , setPass] = useState("");
-	let [Cpass , setCPass] = useState("");
+	let [name, setName] = useState("");
+	let [email, setEmail] = useState("");
+	let [password, setPass] = useState("");
+	let [Cpass, setCPass] = useState("");
 	return (
 		<ScrollView>
 			<SafeAreaView
@@ -81,7 +81,11 @@ export default function SignUp() {
 							style={STYLES.inputIcon}
 						/>
 
-						<TextInput placeholder="Name" onChangeText={text => setName(text)} style={STYLES.input} />
+						<TextInput
+							placeholder="Name"
+							onChangeText={text => setName(text)}
+							style={STYLES.input}
+						/>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -90,7 +94,12 @@ export default function SignUp() {
 							size={20}
 							style={STYLES.inputIcon}
 						/>
-						<TextInput placeholder="Email" onChangeText={text => setEmail(text)} style={STYLES.input} />
+						<TextInput
+							placeholder="Email"
+							onChangeText={text => setEmail(text)}
+							style={STYLES.input}
+						/>
+						
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -120,7 +129,9 @@ export default function SignUp() {
 							onChangeText={text => setCPass(text)}
 						/>
 					</View>
-					<TouchableOpacity onPress={()=>submit(name,email,password,Cpass)} >
+					<TouchableOpacity
+						onPress={() => submit(name, email, password, Cpass)}
+					>
 						<View style={STYLES.btnPrimary}>
 							<Text
 								style={{
@@ -220,15 +231,14 @@ export default function SignUp() {
 	);
 }
 
-
 let schema = Joi.object({
-	name:Joi.string().required().max(15).min(3),
-	email:Joi.string().email({ tlds: { allow: false } }),
-	password:Joi.string().required().alphanum().min(8).max(30),
-	Cpass:Joi.ref('password')
-})
+	name: Joi.string().required().max(15).min(3),
+	email: Joi.string().email({ tlds: { allow: false } }),
+	password: Joi.string().required().alphanum().min(8).max(30),
+	Cpass: Joi.ref("password"),
+});
 
-function submit(name,email,password,Cpass){
-	let result = schema.validate({name,email,password,Cpass})
-	console.log(result.error)
+function submit(name, email, password, Cpass) {
+	let result = schema.validate({ name, email, password, Cpass });
+	console.log(result.error);
 }

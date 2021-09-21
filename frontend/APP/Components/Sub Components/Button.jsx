@@ -29,7 +29,7 @@ const style = StyleSheet.create({
 	title: { color: Colors.white, fontWeight: "bold", fontSize: 18 },
 	btnContainer: {
 		backgroundColor: Colors.primary,
-		height: 60,
+		height: 61,
 		borderRadius: 30,
 		justifyContent: "center",
 		alignItems: "center",

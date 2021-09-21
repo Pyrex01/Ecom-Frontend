@@ -1,5 +1,4 @@
 import React from "react";
-/* import { Formik } from "formik"; */
 import * as Yup from "yup";
 
 import {
@@ -11,7 +10,7 @@ import {
 	Text,
 } from "react-native";
 import STYLES from "../../Configs/Style/formStyles";
-import Colors from "../../Configs/Colors/Colors";
+//import Colors from "../../Configs/Colors/Colors";
 import { SignupStyle } from "../../Configs/Style/SignUpStyle";
 import { Device } from "../../Configs/Style/PlatformJson";
 import { AppForm, AppFormField, SubmitButton } from "../Forms/FormComponents";
@@ -22,6 +21,8 @@ const validationSchema = Yup.object().shape({
 	password: Yup.string().required().min(8).label("Password"),
 	confirm_password: Yup.string().required().min(8).label("Confirm Password"),
 });
+
+
 
 export default function SignUpTest() {
 	return (

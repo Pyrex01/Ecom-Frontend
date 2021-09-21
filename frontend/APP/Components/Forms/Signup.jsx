@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "react-native-gesture-handler";
 import {} from "react-native-gesture-handler";
-
+import Joi from "joi";
 import {
 	SafeAreaView,
 	View,
@@ -13,13 +13,13 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../Configs/Colors/Colors";
-<<<<<<< HEAD
-import { STYLES } from "../../Configs/Style/formStyles";
-=======
 import STYLES from "../../Configs/Style/formStyles";
->>>>>>> 8b862f7747be7535281288572f77ccfa4eec54b1
 
 export default function SignUp() {
+	let [name , setName] = useState("");
+	let [email , setEmail] = useState("");
+	let [password , setPass] = useState("");
+	let [Cpass , setCPass] = useState("");
 	return (
 		<ScrollView>
 			<SafeAreaView
@@ -81,7 +81,7 @@ export default function SignUp() {
 							style={STYLES.inputIcon}
 						/>
 
-						<TextInput placeholder="Name" style={STYLES.input} />
+						<TextInput placeholder="Name" onChangeText={text => setName(text)} style={STYLES.input} />
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -90,7 +90,7 @@ export default function SignUp() {
 							size={20}
 							style={STYLES.inputIcon}
 						/>
-						<TextInput placeholder="Email" style={STYLES.input} />
+						<TextInput placeholder="Email" onChangeText={text => setEmail(text)} style={STYLES.input} />
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -103,6 +103,7 @@ export default function SignUp() {
 							placeholder="Password"
 							style={STYLES.input}
 							secureTextEntry
+							onChangeText={text => setPass(text)}
 						/>
 					</View>
 					<View style={STYLES.inputContainer}>
@@ -116,9 +117,10 @@ export default function SignUp() {
 							placeholder="Comfirm Password"
 							style={STYLES.input}
 							secureTextEntry
+							onChangeText={text => setCPass(text)}
 						/>
 					</View>
-					<TouchableOpacity>
+					<TouchableOpacity onPress={()=>submit(name,email,password,Cpass)} >
 						<View style={STYLES.btnPrimary}>
 							<Text
 								style={{
@@ -216,4 +218,17 @@ export default function SignUp() {
 			</SafeAreaView>
 		</ScrollView>
 	);
+}
+
+
+let schema = Joi.object({
+	name:Joi.string().required().max(15).min(3),
+	email:Joi.string().email({ tlds: { allow: false } }),
+	password:Joi.string().required().alphanum().min(8).max(30),
+	Cpass:Joi.ref('password')
+})
+
+function submit(name,email,password,Cpass){
+	let result = schema.validate({name,email,password,Cpass})
+	console.log(result.error)
 }

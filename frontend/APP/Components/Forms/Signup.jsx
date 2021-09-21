@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../Configs/Colors/Colors";
-import { STYLES } from "../../Configs/Style";
+import { STYLES } from "../../Configs/Style/formStyles";
 
 export default function SignUp() {
 	return (

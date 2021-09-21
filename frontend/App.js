@@ -16,10 +16,10 @@ const App = () => {
 			<SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
 				<View>
 					{/* <OnBoardScreen /> */}
-					{/* <SignUp /> */}
+					<SignUp />
 					{/* <Login /> */}
 					{/* {<Test />} */}
-					<SignUpTest />
+					{/* <SignUpTest /> */}
 				</View>
 			</SafeAreaView>
 		</SafeAreaProvider>

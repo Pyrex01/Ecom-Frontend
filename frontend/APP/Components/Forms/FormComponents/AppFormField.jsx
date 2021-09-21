@@ -4,9 +4,10 @@ import { useFormikContext } from "formik";
 import ErrorMessage from "./ErrorMessage";
 import AppTextInput from "./AppTextInput";
 
-export default function AppFormField({ name, ...otherProps }) {
+function AppFormField({ name, ...otherProps }) {
 	const { setFieldTouched, handleChange, errors, touched } =
 		useFormikContext();
+
 	return (
 		<>
 			<AppTextInput
@@ -18,3 +19,5 @@ export default function AppFormField({ name, ...otherProps }) {
 		</>
 	);
 }
+
+export default AppFormField;

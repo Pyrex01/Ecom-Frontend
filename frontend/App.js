@@ -4,10 +4,12 @@ import OnBoardScreen from "./APP/Components/Screens/OnBoardScreen";
 import { View, SafeAreaView, TextInput } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Colors from "./APP/Configs/Colors/Colors";
-import Test from "./APP/Components/Screens/Test";
-import SignUp from "./APP/Components/Forms/Signup";
-import AppTextInput from "./APP/Components/Sub Components/AppTextInput";
-// import Login from "./APP/Components/Forms/Login";
+// import Test from "./APP/Components/Screens/Test";
+// import SignUp from "./APP/Components/Forms/Signup";
+// import AppTextInput from "./APP/Components/Sub Components/AppTextInput";
+// // import Login from "./APP/Components/Forms/Login";
+
+import BottomNavigator from "./APP/Components/Navigation/BotomNavigator";
 
 const App = () => {
 	return (
@@ -18,9 +20,10 @@ const App = () => {
 					{/* <SignUp /> */}
 					{/* <Login /> */}
 					{/* {<Test />} */}
-					<AppTextInput>
+					{/* <AppTextInput>
 						<TextInput placeholder="email" />
-					</AppTextInput>
+					</AppTextInput> */}
+					<BottomNavigator />
 				</View>
 			</SafeAreaView>
 		</SafeAreaProvider>

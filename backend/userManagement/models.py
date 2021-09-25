@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager ,AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager ,AbstractBaseUser , PermissionsMixin
 
 
 
@@ -22,7 +22,7 @@ class MyUserManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
-    def create_superuser(self, First_Name,Second_Name,Email,is_admin ,Gender ,Photo, password):
+    def create_superuser(self, First_Name,Second_Name,Email , password):
         """
         Creates and saves a superuser with the given name, date of
         birth and password.
@@ -31,34 +31,31 @@ class MyUserManager(BaseUserManager):
             First_Name=First_Name,
             Second_Name=Second_Name,
             Email=Email,
-            is_admin=is_admin,
-            Gender=Gender,
-            Photo=Photo
         )
+        user.is_superuser =True
         user.is_admin = True
+        user.is_staff = True
         user.set_password(password)
         user.save(using=self._db)
         return user
 
 
 class Gender(models.Model):
-    GENDER = [
-        ('F',"Female"),
-        ('M',"Male"),
-    ]
-    type= models.CharField(max_length=2,choices=GENDER)
+    type= models.CharField(max_length=10)
+    def __str__(self):
+        return self.type
 
-
-class Users(AbstractBaseUser):
+class Users(AbstractBaseUser,PermissionsMixin):
     First_Name = models.CharField(max_length=40,)
     Second_Name = models.CharField(max_length=40)
-    Email = models.EmailField()
+    Email = models.EmailField(unique=True)
     is_admin = models.BooleanField(default=False)
-    Gender = models.ForeignKey(Gender,on_delete=models.CASCADE)
-    Photo = models.TextField()
+    is_staff = models.BooleanField(default=False)
+    Gender = models.ForeignKey(Gender,on_delete=models.CASCADE,null=True)
+    Photo = models.TextField(null=True,blank=True)
     objects = MyUserManager()
     USERNAME_FIELD = 'Email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['First_Name','Second_Name',]
     def __str__(self):
         return self.First_Name + ":" + self.Email
 

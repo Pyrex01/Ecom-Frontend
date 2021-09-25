@@ -9,6 +9,8 @@ class Categorie(models.Model):
 class Belongs(models.Model):
     Categorie_ID = models.ForeignKey(Categorie, on_delete=models.CASCADE)
     Sub_Categorie = models.CharField(max_length=50)
+    class Meta:
+        db_table = "sub Categorie"
 
 class Items(models.Model):
     Name = models.CharField(max_length=60)
@@ -63,8 +65,8 @@ class Return_Items(models.Model):
     Status = models.CharField(max_length=2,choices=STATUS)
     Tracking_ID = models.CharField(max_length=20)
 
-class Return_Items(models.Model):
-    CompletedOrders_ID = models.ForeignKey(CompletedOrders,on_delete=models.CASCADE)
+class Completed_Return_Items(models.Model):
+    Return_Items_ID = models.ForeignKey(Return_Items,on_delete=models.CASCADE)
     Pick_up_date = models.DateField()
     Tracking_ID = models.CharField(max_length=20)
     Recived_Date = models.DateField()

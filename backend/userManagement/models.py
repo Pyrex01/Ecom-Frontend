@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager ,AbstractBaseUser , PermissionsMixin
-
+import uuid
 
 
 class MyUserManager(BaseUserManager):
@@ -51,7 +51,7 @@ class Users(AbstractBaseUser,PermissionsMixin):
     Email = models.EmailField(unique=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    Gender = models.ForeignKey(Gender,on_delete=models.CASCADE,null=True)
+    Gender = models.ForeignKey(Gender,on_delete=models.SET_NULL,null=True)
     Photo = models.TextField(null=True,blank=True)
     objects = MyUserManager()
     USERNAME_FIELD = 'Email'
@@ -62,6 +62,7 @@ class Users(AbstractBaseUser,PermissionsMixin):
 
 
 class UnVerifiedUser(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     First_Name = models.CharField(max_length=40,)
     Second_Name = models.CharField(max_length=40)
     Email = models.EmailField()
@@ -71,3 +72,6 @@ class UnVerifiedUser(models.Model):
     password = models.CharField(max_length=128)
     OTP = models.CharField(max_length=6)
     Generated_Date = models.DateField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.First_Name

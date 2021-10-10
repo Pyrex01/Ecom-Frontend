@@ -9,8 +9,6 @@ class Categorie(models.Model):
 class Belongs(models.Model):
     Categorie_ID = models.ForeignKey(Categorie, on_delete=models.CASCADE)
     Sub_Categorie = models.CharField(max_length=50)
-    class Meta:
-        db_table = "sub Categorie"
 
 class Items(models.Model):
     Name = models.CharField(max_length=60)

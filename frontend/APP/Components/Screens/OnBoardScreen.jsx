@@ -4,29 +4,31 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "../../Configs/Colors/Colors";
 import { PrimaryButton } from "../Sub Components/Button";
 import { Styling } from "../../Configs/Style/Style";
+import { ImageBackground } from "react-native";
 
-export default function OnBoardScreen() {
+const OnBoardScreen = ({ navigation }) => {
 	return (
-		<SafeAreaView style={{ flex: 1, backgroundColor: Colors.rgba }}>
-			<View style={{ height: 400 }}>
+		<SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
+			<View style={{ height: 500 }}>
 				<Image
 					style={{
 						width: "100%",
 						resizeMode: "contain",
 						height: Platform.OS === "web" ? 500 : 500,
 						top: -40,
-						marginTop: 10,
+						marginTop: 20,
 					}}
-					source={require("../../assets/image.png")}
+					source={require("../../assets/Logo.png")}
 				/>
 			</View>
 			<View style={style.textContainer}>
 				<View>
 					<Text
 						style={{
-							fontSize: 32,
+							fontSize: 52,
 							fontWeight: "bold",
 							textAlign: "center",
+							marginTop: -100,
 						}}
 					>
 						Shopping Bazaar
@@ -34,7 +36,7 @@ export default function OnBoardScreen() {
 					<View>
 						<Text
 							style={{
-								marginTop: 20,
+								marginTop: 30,
 								fontSize: 18,
 								textAlign: "center",
 								color: Colors.grey,
@@ -44,8 +46,12 @@ export default function OnBoardScreen() {
 						</Text>
 					</View>
 				</View>
-
-				<PrimaryButton onPress={() => ""} title="Get Started" />
+				<View>
+					<PrimaryButton
+						onPress={() => navigation.navigate("Home")}
+						title="Get Started"
+					/>
+				</View>
 			</View>
 			<View style={style.indicatorContainer}>
 				<View style={style.currentIndicator} />
@@ -54,7 +60,7 @@ export default function OnBoardScreen() {
 			</View>
 		</SafeAreaView>
 	);
-}
+};
 
 const style = StyleSheet.create({
 	textContainer: {
@@ -85,3 +91,4 @@ const style = StyleSheet.create({
 		marginHorizontal: 5,
 	},
 });
+export default OnBoardScreen;

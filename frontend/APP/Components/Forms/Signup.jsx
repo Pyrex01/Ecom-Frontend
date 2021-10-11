@@ -9,17 +9,18 @@ import {
 	TextInput,
 	Image,
 	ScrollView,
+	StyleSheet,
 	TouchableOpacity,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
 
-export default function SignUp() {
-	let [name , setName] = useState("");
-	let [email , setEmail] = useState("");
-	let [password , setPass] = useState("");
-	let [Cpass , setCPass] = useState("");
+const SignUp = ({ navigation }) => {
+	let [name, setName] = useState("");
+	let [email, setEmail] = useState("");
+	let [password, setPass] = useState("");
+	let [Cpass, setCPass] = useState("");
 	return (
 		<ScrollView>
 			<SafeAreaView
@@ -29,6 +30,20 @@ export default function SignUp() {
 					backgroundColor: Colors.white,
 				}}
 			>
+				<SafeAreaView
+					style={{ backgroundColor: Colors.white, flex: 1 }}
+				>
+					<View style={style.header}>
+						<Icon
+							name="arrow-back-ios"
+							size={28}
+							onPress={navigation.goBack}
+						/>
+						<Text style={{ fontSize: 20, fontWeight: "bold" }}>
+							SignUp
+						</Text>
+					</View>
+				</SafeAreaView>
 				<View style={{ flexDirection: "row", marginTop: 60 }}>
 					<Text
 						style={{
@@ -81,7 +96,11 @@ export default function SignUp() {
 							style={STYLES.inputIcon}
 						/>
 
-						<TextInput placeholder="Name" onChangeText={text => setName(text)} style={STYLES.input} />
+						<TextInput
+							placeholder="Name"
+							onChangeText={(text) => setName(text)}
+							style={STYLES.input}
+						/>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -90,7 +109,11 @@ export default function SignUp() {
 							size={20}
 							style={STYLES.inputIcon}
 						/>
-						<TextInput placeholder="Email" onChangeText={text => setEmail(text)} style={STYLES.input} />
+						<TextInput
+							placeholder="Email"
+							onChangeText={(text) => setEmail(text)}
+							style={STYLES.input}
+						/>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -103,7 +126,7 @@ export default function SignUp() {
 							placeholder="Password"
 							style={STYLES.input}
 							secureTextEntry
-							onChangeText={text => setPass(text)}
+							onChangeText={(text) => setPass(text)}
 						/>
 					</View>
 					<View style={STYLES.inputContainer}>
@@ -117,10 +140,12 @@ export default function SignUp() {
 							placeholder="Comfirm Password"
 							style={STYLES.input}
 							secureTextEntry
-							onChangeText={text => setCPass(text)}
+							onChangeText={(text) => setCPass(text)}
 						/>
 					</View>
-					<TouchableOpacity onPress={()=>submit(name,email,password,Cpass)} >
+					<TouchableOpacity
+						onPress={() => submit(name, email, password, Cpass)}
+					>
 						<View style={STYLES.btnPrimary}>
 							<Text
 								style={{
@@ -203,7 +228,9 @@ export default function SignUp() {
 					>
 						Already have an account ?
 					</Text>
-					<TouchableOpacity onPress={() => ""}>
+					<TouchableOpacity
+						onPress={() => navigation.navigate("LogIn")}
+					>
 						<Text
 							style={{
 								color: Colors.black,
@@ -218,17 +245,27 @@ export default function SignUp() {
 			</SafeAreaView>
 		</ScrollView>
 	);
-}
-
+};
+const style = StyleSheet.create({
+	header: {
+		paddingVertical: 20,
+		flexDirection: "row",
+		alignItems: "center",
+		marginHorizontal: 1,
+		marginTop: 10,
+	},
+});
 
 let schema = Joi.object({
-	name:Joi.string().required().max(15).min(3),
-	email:Joi.string().email({ tlds: { allow: false } }),
-	password:Joi.string().required().alphanum().min(8).max(30),
-	Cpass:Joi.ref('password')
-})
+	name: Joi.string().required().max(15).min(3),
+	email: Joi.string().email({ tlds: { allow: false } }),
+	password: Joi.string().required().alphanum().min(8).max(30),
+	Cpass: Joi.ref("password"),
+});
 
-function submit(name,email,password,Cpass){
-	let result = schema.validate({name,email,password,Cpass})
-	console.log(result.error)
+function submit(name, email, password, Cpass) {
+	let result = schema.validate({ name, email, password, Cpass });
+	console.log(result.error);
 }
+
+export default SignUp;

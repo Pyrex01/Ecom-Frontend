@@ -1,6 +1,7 @@
 const Colors = {
 	primary: "#fc5c65",
 	secondary: "#4ecdc4",
+	Img: require("../../assets/bg.png"),
 	black: "#000",
 	white: "#fff",
 	grey: "#908e8c",

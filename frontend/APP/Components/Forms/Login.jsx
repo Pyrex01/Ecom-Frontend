@@ -1,22 +1,45 @@
 import "react-native-gesture-handler";
 import React from "react";
-import { SafeAreaView, View, Text, TextInput, Image } from "react-native";
+import {
+	SafeAreaView,
+	View,
+	Text,
+	TextInput,
+	Image,
+	StyleSheet,
+} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-export default function Login() {
+const Login = ({ navigation }) => {
 	return (
 		<ScrollView>
 			<SafeAreaProvider
 				style={{
 					paddingHorizontal: 40,
 					flex: 1,
+					margintop: 50,
 					backgroundColor: Colors.white,
 				}}
 			>
+				<SafeAreaView
+					style={{ backgroundColor: Colors.white, flex: 1 }}
+				>
+					<View style={style.header}>
+						<Icon
+							name="arrow-back-ios"
+							size={28}
+							onPress={navigation.goBack}
+						/>
+						<Text style={{ fontSize: 20, fontWeight: "bold" }}>
+							LogIn
+						</Text>
+					</View>
+				</SafeAreaView>
+
 				<View style={{ flexDirection: "row", marginTop: 60 }}>
 					<Text
 						style={{
@@ -37,6 +60,7 @@ export default function Login() {
 						Bazaar
 					</Text>
 				</View>
+
 				<View style={{ marginTop: 40 }}>
 					<Text
 						style={{
@@ -137,7 +161,7 @@ export default function Login() {
 						</View>
 						<View style={{ width: 10 }}></View>
 						<View style={STYLES.btnSecondary}>
-							<TouchableOpacity onPress={() => ""}>
+							<TouchableOpacity onPress={() => "Home"}>
 								<Text
 									style={{ fontWeight: "bold", fontSize: 18 }}
 								>
@@ -164,7 +188,9 @@ export default function Login() {
 					<Text style={{ color: Colors.grey, fontWeight: "bold" }}>
 						Don`t have an account ?
 					</Text>
-					<TouchableOpacity onPress={() => "SignUp"}>
+					<TouchableOpacity
+						onPress={() => navigation.navigate("SignUp")}
+					>
 						<Text
 							style={{ color: Colors.pink, fontWeight: "bold" }}
 						>
@@ -175,4 +201,14 @@ export default function Login() {
 			</SafeAreaProvider>
 		</ScrollView>
 	);
-}
+};
+const style = StyleSheet.create({
+	header: {
+		paddingVertical: 20,
+		flexDirection: "row",
+		alignItems: "center",
+		marginHorizontal: 1,
+		marginTop: 15,
+	},
+});
+export default Login;

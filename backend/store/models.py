@@ -63,8 +63,8 @@ class Return_Items(models.Model):
     Status = models.CharField(max_length=2,choices=STATUS)
     Tracking_ID = models.CharField(max_length=20)
 
-class Return_Items(models.Model):
-    CompletedOrders_ID = models.ForeignKey(CompletedOrders,on_delete=models.CASCADE)
+class Completed_Return_Items(models.Model):
+    Return_Items_ID = models.ForeignKey(Return_Items,on_delete=models.CASCADE)
     Pick_up_date = models.DateField()
     Tracking_ID = models.CharField(max_length=20)
     Recived_Date = models.DateField()

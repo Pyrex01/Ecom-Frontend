@@ -3,8 +3,6 @@ import { Text, StyleSheet, View, Image, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "../../Configs/Colors/Colors";
 import { PrimaryButton } from "../Sub Components/Button";
-import { Styling } from "../../Configs/Style/Style";
-import { ImageBackground } from "react-native";
 
 const OnBoardScreen = ({ navigation }) => {
 	return (

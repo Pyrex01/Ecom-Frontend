@@ -4,38 +4,27 @@ import uuid
 
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, First_Name,Second_Name,Email,is_admin ,Gender ,Photo, password):
+    def create_user(self, **kwargs):
         """
         Creates and saves a User with the given name, date of
         birth and password.
         """
         if not First_Name:
             raise ValueError('Users must have an name First Name')
-        user = self.model(
-            First_Name=First_Name,
-            Second_Name=Second_Name,
-            Email=Email,
-            is_admin=is_admin,
-            Gender=Gender,
-            Photo=Photo
-        )
+        user = self.model(**kwargs)
         user.set_password(password)
         user.save(using=self._db)
         return user
-    def create_superuser(self, First_Name,Second_Name,Email , password):
+    def create_superuser(self, **kwargs):
         """
         Creates and saves a superuser with the given name, date of
         birth and password.
         """
-        user = self.model(
-            First_Name=First_Name,
-            Second_Name=Second_Name,
-            Email=Email,
-        )
+        user = self.model(**kwargs)
         user.is_superuser =True
         user.is_admin = True
         user.is_staff = True
-        user.set_password(password)
+        user.set_password(kwargs["password"])
         user.save(using=self._db)
         return user
 
@@ -53,9 +42,10 @@ class Users(AbstractBaseUser,PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     Gender = models.ForeignKey(Gender,on_delete=models.SET_NULL,null=True)
     Photo = models.TextField(null=True,blank=True)
+    Phone = models.CharField(max_length=13)
     objects = MyUserManager()
     USERNAME_FIELD = 'Email'
-    REQUIRED_FIELDS = ['First_Name','Second_Name',]
+    REQUIRED_FIELDS = ['First_Name','Second_Name','Phone']
     def __str__(self):
         return self.First_Name + ":" + self.Email
 
@@ -71,7 +61,8 @@ class UnVerifiedUser(models.Model):
     Photo = models.TextField()
     password = models.CharField(max_length=128)
     OTP = models.CharField(max_length=6)
-    Generated_Date = models.DateField(auto_now_add=True)
+    Generated_Date = models.DateTimeField(auto_now_add=True)
+    Phone = models.CharField(max_length=13)
     
     def __str__(self):
         return self.First_Name

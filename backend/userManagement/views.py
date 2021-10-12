@@ -16,9 +16,11 @@ def signup(request):
         request.data["Gender"] = Gender.objects.get(pk=request.data["Gender"])
         user = UnVerifiedUser(**request.data)
         user.OTP=random.randint(99999,999999)
+        print("------------------------------------ OTP:",user.OTP,"----------------------------")
         user.save()
-        print(user.id)
         return Response(data={"signup_token":str(user.id)},status=status.HTTP_201_CREATED)
+    except KeyError:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
@@ -31,9 +33,8 @@ def confirmOTP(request):
         cuser.save()
         user.delete()
         return Response(status=status.HTTP_202_ACCEPTED)
-    except Exception as e:
-        print("execpiton",e)
-        return Response(data={"wrong info"},status=status.HTTP_404_NOT_FOUND)
+    except KeyError as e:
+        return Response(data={"wrong info"},status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(["POST"])
 def login(request):
@@ -46,3 +47,6 @@ def login(request):
 
     except Exception as E:
         return Response(data="wrong info",status=status.HTTP_403_FORBIDDEN)
+
+    except KeyError as E:
+        return Response(status=status.HTTP_400_BAD_REQUEST)

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "react-native-gesture-handler";
-import {} from "react-native-gesture-handler";
-import Joi from "joi";
+import { } from "react-native-gesture-handler";
 import {
 	SafeAreaView,
 	View,
@@ -16,11 +15,20 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
 
+
 const SignUp = ({ navigation }) => {
 	let [name, setName] = useState("");
 	let [email, setEmail] = useState("");
 	let [password, setPass] = useState("");
 	let [Cpass, setCPass] = useState("");
+	let [NameMsg, setNameMsg] = useState("");
+
+	let vriable = {
+		name,email,password,Cpass
+	}
+	let callbackfunctions = {
+		setNameMsg
+	}
 	return (
 		<ScrollView>
 			<SafeAreaView
@@ -101,6 +109,7 @@ const SignUp = ({ navigation }) => {
 							onChangeText={(text) => setName(text)}
 							style={STYLES.input}
 						/>
+						<Text >{NameMsg}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -114,6 +123,7 @@ const SignUp = ({ navigation }) => {
 							onChangeText={(text) => setEmail(text)}
 							style={STYLES.input}
 						/>
+						<Text ></Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -144,7 +154,7 @@ const SignUp = ({ navigation }) => {
 						/>
 					</View>
 					<TouchableOpacity
-						onPress={() => submit(name, email, password, Cpass)}
+						onPress={() => submit(vriable,callbackfunctions)}
 					>
 						<View style={STYLES.btnPrimary}>
 							<Text
@@ -256,16 +266,13 @@ const style = StyleSheet.create({
 	},
 });
 
-let schema = Joi.object({
-	name: Joi.string().required().max(15).min(3),
-	email: Joi.string().email({ tlds: { allow: false } }),
-	password: Joi.string().required().alphanum().min(8).max(30),
-	Cpass: Joi.ref("password"),
-});
 
-function submit(name, email, password, Cpass) {
-	let result = schema.validate({ name, email, password, Cpass });
-	console.log(result.error);
+function submit(varialbles, callback) {
+	if(varialbles.name == "") {
+		callback.setNameMsg("Name cannot be empty")
+	}
+
+	if(length(varialbles.password) < 8)
 }
 
 export default SignUp;

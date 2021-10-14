@@ -12,6 +12,8 @@ frontend/Shortcuts.txt
 
 
 backend/Ecom/__pycache__/
+backend/rest_framework/__pycache__/
+backend/rest_framework/authtoken/__pycache__/
 backend/store/__pycache__/
 backend/store/migrations/__pycache__/
 backend/addressCollection/__pycache__/

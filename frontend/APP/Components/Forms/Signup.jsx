@@ -16,11 +16,13 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
 
+var NameError = React.createRef();
+
 const SignUp = ({ navigation }) => {
 	let [name, setName] = useState("");
 	let [email, setEmail] = useState("");
 	let [password, setPass] = useState("");
-	let [Cpass, setCPass] = useState("");
+	let [ConfirmPass, setConfirmPass] = useState("");
 	return (
 		<ScrollView>
 			<SafeAreaView
@@ -98,9 +100,10 @@ const SignUp = ({ navigation }) => {
 
 						<TextInput
 							placeholder="Name"
-							onChangeText={(text) => setName(text)}
+							onChangeText={text => setName(text)}
 							style={STYLES.input}
 						/>
+						<Text ref={NameError}> </Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -111,7 +114,7 @@ const SignUp = ({ navigation }) => {
 						/>
 						<TextInput
 							placeholder="Email"
-							onChangeText={(text) => setEmail(text)}
+							onChangeText={text => setEmail(text)}
 							style={STYLES.input}
 						/>
 					</View>
@@ -126,7 +129,7 @@ const SignUp = ({ navigation }) => {
 							placeholder="Password"
 							style={STYLES.input}
 							secureTextEntry
-							onChangeText={(text) => setPass(text)}
+							onChangeText={text => setPass(text)}
 						/>
 					</View>
 					<View style={STYLES.inputContainer}>
@@ -140,11 +143,13 @@ const SignUp = ({ navigation }) => {
 							placeholder="Comfirm Password"
 							style={STYLES.input}
 							secureTextEntry
-							onChangeText={(text) => setCPass(text)}
+							onChangeText={text => setConfirmPass(text)}
 						/>
 					</View>
 					<TouchableOpacity
-						onPress={() => submit(name, email, password, Cpass)}
+						onPress={() =>
+							submit(name, email, password, ConfirmPass)
+						}
 					>
 						<View style={STYLES.btnPrimary}>
 							<Text
@@ -260,11 +265,11 @@ let schema = Joi.object({
 	name: Joi.string().required().max(15).min(3),
 	email: Joi.string().email({ tlds: { allow: false } }),
 	password: Joi.string().required().alphanum().min(8).max(30),
-	Cpass: Joi.ref("password"),
+	ConfirmPass: Joi.ref("password"),
 });
 
-function submit(name, email, password, Cpass) {
-	let result = schema.validate({ name, email, password, Cpass });
+function submit(name, email, password, ConfirmPass) {
+	let result = schema.validate({ name, email, password, ConfirmPass });
 	console.log(result.error);
 }
 

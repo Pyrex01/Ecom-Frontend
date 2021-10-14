@@ -6,7 +6,7 @@ import Colors from "../../Configs/Colors/Colors";
 import HomeScreen from "../Screens/HomeScreen";
 import CartScreen from "../Screens/CartScreen";
 import { NavigationContainer } from "@react-navigation/native";
-import SignUp from "../Forms/Signup";
+import SignUp from "../Forms/SignUp";
 
 const Tab = createBottomTabNavigator();
 

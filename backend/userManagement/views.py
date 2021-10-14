@@ -1,6 +1,7 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view , authentication_classes
 from rest_framework.response import Response
 from django.contrib.auth.hashers import make_password
+from rest_framework.authentication import TokenAuthentication
 from rest_framework import status
 from .models import *
 from rest_framework.authtoken.models import Token
@@ -49,4 +50,15 @@ def login(request):
         return Response(data="wrong info",status=status.HTTP_403_FORBIDDEN)
 
     except KeyError as E:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@authentication_classes((TokenAuthentication,))
+def logout(request):
+    print(request)
+    try:
+        token = Token.objects.get(user = request.user).delete()
+        return Response(status=status.HTTP_200_OK)
+    except Exception as E:
         return Response(status=status.HTTP_400_BAD_REQUEST)

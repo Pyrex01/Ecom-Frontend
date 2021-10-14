@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "react-native-gesture-handler";
-import {} from "react-native-gesture-handler";
-import Joi from "joi";
+import { } from "react-native-gesture-handler";
 import {
 	SafeAreaView,
 	View,
@@ -16,13 +15,28 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
 
+<<<<<<< HEAD
 var NameError = React.createRef();
+=======
+>>>>>>> 333a9102ad9075e79ec0a259093b365a28b681d0
 
 const SignUp = ({ navigation }) => {
 	let [name, setName] = useState("");
 	let [email, setEmail] = useState("");
 	let [password, setPass] = useState("");
+<<<<<<< HEAD
 	let [ConfirmPass, setConfirmPass] = useState("");
+=======
+	let [Cpass, setCPass] = useState("");
+	let [NameMsg, setNameMsg] = useState("");
+
+	let vriable = {
+		name,email,password,Cpass
+	}
+	let callbackfunctions = {
+		setNameMsg
+	}
+>>>>>>> 333a9102ad9075e79ec0a259093b365a28b681d0
 	return (
 		<ScrollView>
 			<SafeAreaView
@@ -103,7 +117,11 @@ const SignUp = ({ navigation }) => {
 							onChangeText={text => setName(text)}
 							style={STYLES.input}
 						/>
+<<<<<<< HEAD
 						<Text ref={NameError}> </Text>
+=======
+						<Text >{NameMsg}</Text>
+>>>>>>> 333a9102ad9075e79ec0a259093b365a28b681d0
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -117,6 +135,7 @@ const SignUp = ({ navigation }) => {
 							onChangeText={text => setEmail(text)}
 							style={STYLES.input}
 						/>
+						<Text ></Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -147,9 +166,13 @@ const SignUp = ({ navigation }) => {
 						/>
 					</View>
 					<TouchableOpacity
+<<<<<<< HEAD
 						onPress={() =>
 							submit(name, email, password, ConfirmPass)
 						}
+=======
+						onPress={() => submit(vriable,callbackfunctions)}
+>>>>>>> 333a9102ad9075e79ec0a259093b365a28b681d0
 					>
 						<View style={STYLES.btnPrimary}>
 							<Text
@@ -261,6 +284,7 @@ const style = StyleSheet.create({
 	},
 });
 
+<<<<<<< HEAD
 let schema = Joi.object({
 	name: Joi.string().required().max(15).min(3),
 	email: Joi.string().email({ tlds: { allow: false } }),
@@ -271,6 +295,15 @@ let schema = Joi.object({
 function submit(name, email, password, ConfirmPass) {
 	let result = schema.validate({ name, email, password, ConfirmPass });
 	console.log(result.error);
+=======
+
+function submit(varialbles, callback) {
+	if(varialbles.name == "") {
+		callback.setNameMsg("Name cannot be empty")
+	}
+
+	if(length(varialbles.password) < 8)
+>>>>>>> 333a9102ad9075e79ec0a259093b365a28b681d0
 }
 
 export default SignUp;

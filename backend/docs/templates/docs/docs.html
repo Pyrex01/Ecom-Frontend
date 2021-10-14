@@ -205,6 +205,61 @@
       </div>
     </div>
 </div>
+<!-- ---------------------------------------------------------------------------------------------------------------- -->
+  <div class="row">
+    <div class="card lime lighten-5">
+      <div class="card-content white-text">
+        <span class="card-title blue-grey-text text-darken-4 "> {{path}} /user/logout/</span>
+        <div class="card-action"></div>
+        <table class="blue-grey-text text-darken-4 highlight ">
+            <tr>
+                <th>Method</th>
+                <th>Header</th>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                  <td>
+                      
+                      <p class="waves-effect waves-light red darken-3 btn white-text">POST</p>
+                  </td>
+                  <td> Authorization : Token followed_by_random_login_token_string
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      
+                      <p class="waves-effect waves-light teal darken-4 btn white-text">GET</p>
+          
+                  </td>
+                  <td> <span class="red-text">ERROR</span>
+                    </td>
+              </tr>                    
+          </table>
+          <div class="card-action"></div>
+        <div class="card-action"></div>
+        <table class="blue-grey-text text-darken-4 highlight ">
+            <tr>
+                <th >STATUS</th>
+                <th >RESPONSE</th>
+            </tr>
+            <tr>
+                <td class="blue-text bold">200</td>
+                <td>no response will be given meaning loged out</td>
+            </tr>
+            
+            <tr>
+                <td class="blue-text bold">401</td>
+                <td>{"detail":"Invalid token."} this will come when token is wrong</td>
+            </tr>
+
+
+        </table>
+        <div class="card-action"></div>
+        <p class="blue-grey-text text-darken-4">sent Authorization header with value as Token plus space plus token in header and responses will come as followe
+      </div>
+    </div>
+</div>
 
 
 

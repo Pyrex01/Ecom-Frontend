@@ -2,11 +2,16 @@ from rest_framework.decorators import api_view , authentication_classes
 from rest_framework.response import Response
 from django.contrib.auth.hashers import make_password
 from rest_framework.authentication import TokenAuthentication
-from rest_framework import status
-from .models import *
 from rest_framework.authtoken.models import Token
+from rest_framework import status
+from django.core import mail
+from django.conf.global_settings import EMAIL_HOST_USER
+from .models import *
 import random
 import datetime
+
+
+
 @api_view(['POST'])
 def signup(request):
     try:
@@ -18,6 +23,8 @@ def signup(request):
         user = UnVerifiedUser(**request.data)
         user.OTP=random.randint(99999,999999)
         print("------------------------------------ OTP:",user.OTP,"----------------------------")
+        email = mail.EmailMessage(subject="Django Otp verification",body=f"you have signed up to shoping bazar here is your otp {user.OTP}",from_email=EMAIL_HOST_USER,to=[user.Email])
+        email.send(fail_silently=False)
         user.save()
         return Response(data={"signup_token":str(user.id)},status=status.HTTP_201_CREATED)
     except KeyError:
@@ -62,3 +69,6 @@ def logout(request):
         return Response(status=status.HTTP_200_OK)
     except Exception as E:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+
+# mail.EmailMessage(subject="Django Otp verification",body='''<div style="flex:inline;"><h1>you have requested otp</h1> <div style="width:10px; height:10px;background:rgb(202, 235, 16);text:white"> 99999 </div> </div>''',from_email=EMAIL_HOST_USER,to=["khanshafique.ahamed@gmail.com"])

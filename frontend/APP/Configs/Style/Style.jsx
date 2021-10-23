@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import Colors from "../Colors/Colors.jsx";
 import { Platform } from "react-native";
-// we are goin to write all the CSS in JSON form here!!!
+// we are going to write all the CSS in JSON form here!!!
 /* 
 
 example "  <View style={basic.container}>  " 

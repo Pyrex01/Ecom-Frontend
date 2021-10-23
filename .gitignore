@@ -11,6 +11,7 @@ frontend/*.mobileprovision
 frontend/*.orig.*
 frontend/web-build/
 frontend/Shortcuts.txt
+frontend/Test/
 
 
 backend/Ecom/__pycache__/

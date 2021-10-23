@@ -16,7 +16,7 @@ export default function AppTextInput({ Icons, ...otherProps }) {
 				/>
 			)}
 
-			<TextInput style={STYLES.input} {...otherProps} />
+			<TextInput style={STYLES.input} {...otherProps}></TextInput>
 		</View>
 	);
 }

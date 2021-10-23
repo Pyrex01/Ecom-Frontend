@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+
 import "react-native-gesture-handler";
 import {} from "react-native-gesture-handler";
-import config from "../../../config.json";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import {
 	SafeAreaView,
 	View,
@@ -12,18 +13,24 @@ import {
 	StyleSheet,
 	TouchableOpacity,
 } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
+
+import useForm from "../Forms/FormComponents/UseForm";
+// import config from "../../../config.json";
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
+import validate from "./../Forms/FormComponents/Validateinfo";
 
-var NameError = React.createRef();
-
-const SignUp = ({ navigation }) => {
-	let [name, setName] = useState("");
+const Test2 = ({ navigation }) => {
+	let [first_name, setFirstName] = useState("");
+	let [last_name, setLastName] = useState("");
+	let [phone, setPhone] = useState("");
 	let [email, setEmail] = useState("");
+	let [gender, setGender] = useState("");
 	let [password, setPass] = useState("");
 	let [ConfirmPass, setConfirmPass] = useState("");
-	// alert(config.Signup);
+
+	const { handleChange, values, errors, handleSubmit } = useForm(validate);
+
 	return (
 		<ScrollView>
 			<SafeAreaView
@@ -100,11 +107,13 @@ const SignUp = ({ navigation }) => {
 						/>
 
 						<TextInput
+							name="first_name"
 							placeholder="First Name"
-							onChangeText={text => setName(text)}
+							onChangeText={handleChange}
+							values={values.first_name}
 							style={STYLES.input}
 						/>
-						<Text ref={NameError}> </Text>
+						{/* <Text ref={NameError}> </Text> */}
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -115,11 +124,13 @@ const SignUp = ({ navigation }) => {
 						/>
 
 						<TextInput
+							name="last_name"
 							placeholder="Last Name"
-							onChangeText={text => setName(text)}
+							onChangeText={handleChange}
+							values={values.last_name}
 							style={STYLES.input}
 						/>
-						<Text ref={NameError}> </Text>
+						{/* <Text ref={NameError}> </Text> */}
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -130,11 +141,13 @@ const SignUp = ({ navigation }) => {
 						/>
 
 						<TextInput
+							name="phone"
 							placeholder="Phone"
-							onChangeText={text => setName(text)}
+							onChangeText={handleChange}
+							values={values.phone}
 							style={STYLES.input}
 						/>
-						<Text ref={NameError}> </Text>
+						{/* <Text ref={NameError}> </Text> */}
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -144,8 +157,10 @@ const SignUp = ({ navigation }) => {
 							style={STYLES.inputIcon}
 						/>
 						<TextInput
+							name="email"
 							placeholder="Email"
-							onChangeText={text => setEmail(text)}
+							onChangeText={handleChange}
+							values={values.email}
 							style={STYLES.input}
 						/>
 						<Text></Text>
@@ -159,10 +174,12 @@ const SignUp = ({ navigation }) => {
 							style={STYLES.inputIcon}
 						/>
 						<TextInput
+							name="password"
 							placeholder="Password"
 							style={STYLES.input}
 							secureTextEntry
-							onChangeText={text => setPass(text)}
+							onChangeText={handleChange}
+							values={values.password}
 						/>
 					</View>
 					<View style={STYLES.inputContainer}>
@@ -173,17 +190,15 @@ const SignUp = ({ navigation }) => {
 							style={STYLES.inputIcon}
 						/>
 						<TextInput
-							placeholder="Comfirm Password"
+							name="confirm_password"
+							placeholder="Confirm Password"
 							style={STYLES.input}
 							secureTextEntry
-							onChangeText={text => setConfirmPass(text)}
+							onChangeText={handleChange}
+							values={values.confirm_password}
 						/>
 					</View>
-					<TouchableOpacity
-						onPress={() =>
-							submit(name, email, password, ConfirmPass)
-						}
-					>
+					<TouchableOpacity>
 						<View style={STYLES.btnPrimary}>
 							<Text
 								style={{
@@ -294,6 +309,55 @@ const style = StyleSheet.create({
 	},
 });
 
-function submit(name, email, password, ConfirmPass) {}
+// function submit(name, email, password, ConfirmPass) {}
+/* function validate(values) {
+	let errors = {};
+	// first name
+	if (!values.first_name.trim()) {
+		errors.first_name = "First Name Required";
+	}
+	// last name
+	if (!values.last_name.trim()) {
+		errors.last_name = "Last Name Required";
+	}
+	// email
+	if (!values.email.trim()) {
+		errors.email = "Email Required";
+	} else if (
+		!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i.test(values.email)
+	) {
+		errors.email = "Email id is invalid";
+	}
+	// Phone
+	if (values.phone) {
+		errors.phone = "Phone number is required";
+	} else if (
+		!/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(
+			values.phone,
+		)
+	) {
+		errors.phone = " Phone Number is not valid";
+	}
+	// gender
+	if (values.gender) {
+		errors.gender = "gender is not valid";
+	}
+	//password
+	if (!values.password.trim()) {
+		errors.password = "Password Required";
+	} else if (values.password.length < 8) {
+		errors.password = "Password needs at least 8 characters";
+	}
+	// confirm password
+	if (values.confirm_password) {
+		errors.confirm_password = "Confirm Password Required";
+	} else if (values.confirm_password !== values.password) {
+		errors.confirm_password = "Password does not match";
+	}
+	// photo
+	if (values.photo) {
+		errors.photo = "Enter your photo here";
+	}
+} */
 
-export default SignUp;
+export default Test2;

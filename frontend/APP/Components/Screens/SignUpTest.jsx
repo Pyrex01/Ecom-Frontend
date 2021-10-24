@@ -15,7 +15,7 @@ import { SignupStyle } from "../../Configs/Style/SignUpStyle";
 import { Device } from "../../Configs/Style/PlatformJson";
 import { AppTextInput, AppButton } from "../Forms/FormComponents";
 import useForm from "../Forms/FormComponents/UseForm";
-import validate from '../Forms/FormComponents/Validateinfo';
+import validate from "../Forms/FormComponents/Validateinfo";
 
 export default function SignUpTest() {
 	// const { handleChange, values, handleSubmit, errors} = useForm(validate);

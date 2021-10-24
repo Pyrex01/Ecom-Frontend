@@ -12,13 +12,12 @@ import {
 	ScrollView,
 	StyleSheet,
 	TouchableOpacity,
+	Picker,
 } from "react-native";
 
-import useForm from "../Forms/FormComponents/UseForm";
-// import config from "../../../config.json";
+// import { mainBackend } from "../../Configs/MainBackend";
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
-import validate from "./../Forms/FormComponents/Validateinfo";
 
 const Test2 = ({ navigation }) => {
 	let [first_name, setFirstName] = useState("");
@@ -26,10 +25,22 @@ const Test2 = ({ navigation }) => {
 	let [phone, setPhone] = useState("");
 	let [email, setEmail] = useState("");
 	let [gender, setGender] = useState("");
-	let [password, setPass] = useState("");
-	let [ConfirmPass, setConfirmPass] = useState("");
-
-	const { handleChange, values, errors, handleSubmit } = useForm(validate);
+	let [password, setPassword] = useState("");
+	let [photo, setPhoto] = useState("");
+	let [confirm_password, setConfirm_Password] = useState("");
+	let [first_namelog, setFirstNameLog] = useState("");
+	let [last_namelog, setLastNameLog] = useState("");
+	let [phonelog, setPhoneLog] = useState("");
+	let [emaillog, setEmailLog] = useState("");
+	let [genderlog, setGenderLog] = useState("");
+	let [passwordlog, setPasswordLog] = useState("");
+	let [confirm_passwordlog, setConfirmPasswordLog] = useState("");
+	// const [selectedValue, setSelectedValue] = useState("1,2,0");
+	let user_Data = {first_name, last_name, phone,email, gender, password,confirm_password,photo};
+	let log_Setters = {
+		setFirstNameLog,setLastNameLog,setPhoneLog,setEmailLog,setGenderLog,setPasswordLog,setConfirmPasswordLog
+	};
+	// const { handleChange, values, errors, handleSubmit } = useForm(validate);
 
 	return (
 		<ScrollView>
@@ -98,6 +109,7 @@ const Test2 = ({ navigation }) => {
 					</Text>
 				</View>
 				<View style={{ marginTop: 20 }}>
+					
 					<View style={STYLES.inputContainer}>
 						<Icon
 							name="person-outline"
@@ -109,11 +121,14 @@ const Test2 = ({ navigation }) => {
 						<TextInput
 							name="first_name"
 							placeholder="First Name"
-							onChangeText={handleChange}
-							values={values.first_name}
+							onChangeText={text => setFirstName(text)}
+							// values={values.first_name}
 							style={STYLES.input}
 						/>
-						{/* <Text ref={NameError}> </Text> */}
+						
+					</View>
+					<View>
+						<Text >{first_namelog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -126,11 +141,48 @@ const Test2 = ({ navigation }) => {
 						<TextInput
 							name="last_name"
 							placeholder="Last Name"
-							onChangeText={handleChange}
-							values={values.last_name}
+							onChangeText={text => setLastName(text)}
+							// values={values.last_name}
 							style={STYLES.input}
 						/>
 						{/* <Text ref={NameError}> </Text> */}
+					</View>
+					<View>
+						<Text >{last_namelog}</Text>
+					</View>
+					<View style={STYLES.inputContainer}>
+						<Icon
+							name="person-outline"
+							color={Colors.grey}
+							size={20}
+							style={STYLES.inputIcon}
+						/>
+						
+						<Picker
+							selectedValue={gender}
+							style={{ height: 50, width: 150 }}
+							onValueChange={(itemValue, itemIndex) =>
+								setGender(itemValue)
+							}
+						>
+							<Picker.Item label="Select" value="" />
+							<Picker.Item label="Male" value="1" />
+							<Picker.Item label="Female" value="2" />
+							<Picker.Item label="Others" value="0" />
+						</Picker>
+						
+
+						{/* <TextInput
+							name="gender"
+							placeholder="Gender"
+							onChangeText={text => setGender(text)}
+							// values={values.last_name}
+							style={STYLES.input}
+						/>
+						<Text ref={NameError}> </Text> */}
+					</View>
+					<View>
+						<Text >{genderlog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -143,11 +195,14 @@ const Test2 = ({ navigation }) => {
 						<TextInput
 							name="phone"
 							placeholder="Phone"
-							onChangeText={handleChange}
-							values={values.phone}
+							onChangeText={text => setPhone(text)}
+							// values={values.phone}
 							style={STYLES.input}
 						/>
-						{/* <Text ref={NameError}> </Text> */}
+						
+					</View>
+					<View>
+						<Text >{phonelog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -159,13 +214,15 @@ const Test2 = ({ navigation }) => {
 						<TextInput
 							name="email"
 							placeholder="Email"
-							onChangeText={handleChange}
-							values={values.email}
+							onChangeText={text => setEmail(text)}
+							// values={values.email}
 							style={STYLES.input}
 						/>
-						<Text></Text>
+						
 					</View>
-
+<View>
+						<Text >{emaillog}</Text>
+					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
 							name="lock-outline"
@@ -178,9 +235,12 @@ const Test2 = ({ navigation }) => {
 							placeholder="Password"
 							style={STYLES.input}
 							secureTextEntry
-							onChangeText={handleChange}
-							values={values.password}
+							onChangeText={text => setPassword(text)}
+							// values={values.password}
 						/>
+					</View>
+					<View>
+						<Text >{passwordlog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -194,9 +254,12 @@ const Test2 = ({ navigation }) => {
 							placeholder="Confirm Password"
 							style={STYLES.input}
 							secureTextEntry
-							onChangeText={handleChange}
-							values={values.confirm_password}
+							onChangeText={text => setConfirm_Password(text)}
+							// values={values.confirm_password}
 						/>
+					</View>
+					<View>
+						<Text >{confirm_passwordlog}</Text>
 					</View>
 					<TouchableOpacity>
 						<View style={STYLES.btnPrimary}>
@@ -206,6 +269,9 @@ const Test2 = ({ navigation }) => {
 									fontWeight: "bold",
 									fontSize: 20,
 								}}
+								onPress={() =>
+									submit(user_Data, log_Setters)
+								}
 							>
 								Sign Up
 							</Text>
@@ -310,54 +376,97 @@ const style = StyleSheet.create({
 });
 
 // function submit(name, email, password, ConfirmPass) {}
-/* function validate(values) {
-	let errors = {};
-	// first name
-	if (!values.first_name.trim()) {
-		errors.first_name = "First Name Required";
+function validation(values) {
+	let result = {};
+	result.is_error = false;
+	let phone_pattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+	let email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+	// !first name
+	if (values.first_name == "") {
+		result.is_error = true;
+		result.first_namelog = "First Name Required";
 	}
-	// last name
-	if (!values.last_name.trim()) {
-		errors.last_name = "Last Name Required";
+	// !last name
+	if (values.last_name == "") {
+				result.is_error = true;
+		result.last_namelog = "Last Name Required";
 	}
-	// email
-	if (!values.email.trim()) {
-		errors.email = "Email Required";
-	} else if (
-		!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i.test(values.email)
+	// !gender
+	if (values.gender == "") {
+				result.is_error = true;
+		result.genderlog = "Please select the gender";
+	} /* else if (
+		!values.gender == 1 ||
+		!values.gender == 2 ||
+		!values.gender == 0
 	) {
-		errors.email = "Email id is invalid";
+	} */
+	// !Phone
+	if (values.phone == "") {
+		result.is_error = true;
+		result.phonelog = "Phone number is required";
 	}
-	// Phone
-	if (values.phone) {
-		errors.phone = "Phone number is required";
-	} else if (
-		!/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(
-			values.phone,
-		)
-	) {
-		errors.phone = " Phone Number is not valid";
+	else if (!phone_pattern.test(values.phone)) 
+	{result.is_error = true;
+		result.phonelog = " Phone Number is not valid";
 	}
-	// gender
-	if (values.gender) {
-		errors.gender = "gender is not valid";
+	// !email
+	if (!email_pattern.test(values.email)) {
+		result.is_error = true;
+		result.emaillog = "Email id is invalid";
 	}
-	//password
-	if (!values.password.trim()) {
-		errors.password = "Password Required";
-	} else if (values.password.length < 8) {
-		errors.password = "Password needs at least 8 characters";
+
+	/* // !password */
+	if (values.password == "") {
+		result.is_error = true;
+		result.passwordlog = "Password Required";
 	}
-	// confirm password
-	if (values.confirm_password) {
-		errors.confirm_password = "Confirm Password Required";
-	} else if (values.confirm_password !== values.password) {
-		errors.confirm_password = "Password does not match";
+	else if (values.password.length < 8) {
+		result.is_error = true;
+		result.passwordlog = "Password needs at least 8 characters";
 	}
-	// photo
-	if (values.photo) {
-		errors.photo = "Enter your photo here";
+	// !confirm password
+	if (values.confirm_password == "") {
+		result.is_error = true;
+		result.confirm_passwordlog = "Confirm Password Required";
+	} 
+	else if (values.confirm_password !== values.password) {
+		result.is_error = true;
+		result.confirm_passwordlog = "Password does not match";
 	}
-} */
+	
+	/* // !photo
+	if (values.photo == "") {
+		result.photo = "Enter your photo here";
+	} */
+	return result;
+}
+
+function submit(user_Data, log_Setters) 
+{
+	let result = validation(user_Data);
+	console.log(result);
+	if (result.is_error){
+		log_Setters.setFirstNameLog(result.first_namelog)
+		log_Setters.setLastNameLog(result.last_namelog)
+		log_Setters.setEmailLog(result.emaillog)
+		log_Setters.setPhoneLog(result.phonelog)
+		log_Setters.setGenderLog(result.genderlog)
+		log_Setters.setPasswordLog(result.passwordlog)
+		log_Setters.setConfirmPasswordLog(result.confirm_passwordlog)
+	}
+	else{
+		log_Setters.setFirstNameLog("")
+		log_Setters.setLastNameLog("")
+		log_Setters.setEmailLog("")
+		log_Setters.setPhoneLog("")
+		log_Setters.setGenderLog("")
+		log_Setters.setPasswordLog("")
+		log_Setters.setConfirmPasswordLog("")
+		
+		// mainBackend
+	}
+	
+}
 
 export default Test2;

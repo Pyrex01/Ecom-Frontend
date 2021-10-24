@@ -1,6 +1,6 @@
-import axios from 'axios';
+import * as axios from 'axios';
 import config from '../../config.json'
 
-var mainBackend = axios(config.baseUrl);
+var mainBackend = axios.create({ baseUrl: String(config.baseUrl) })
 
-export {mainBackend};
+export { mainBackend };

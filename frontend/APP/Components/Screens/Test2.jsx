@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import "react-native-gesture-handler";
-import {} from "react-native-gesture-handler";
+import { } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {
 	SafeAreaView,
@@ -13,9 +13,12 @@ import {
 	StyleSheet,
 	TouchableOpacity,
 	Picker,
+	Alert
 } from "react-native";
+import * as axios from 'axios';
 
-// import { mainBackend } from "../../Configs/MainBackend";
+import { mainBackend } from "../../Configs/MainBackend";
+import config from "../../../config.json"
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
 
@@ -36,9 +39,24 @@ const Test2 = ({ navigation }) => {
 	let [passwordlog, setPasswordLog] = useState("");
 	let [confirm_passwordlog, setConfirmPasswordLog] = useState("");
 	// const [selectedValue, setSelectedValue] = useState("1,2,0");
-	let user_Data = {first_name, last_name, phone,email, gender, password,confirm_password,photo};
+	let user_Data = {
+		first_name,
+		last_name,
+		phone,
+		email,
+		gender,
+		password,
+		confirm_password,
+		photo,
+	};
 	let log_Setters = {
-		setFirstNameLog,setLastNameLog,setPhoneLog,setEmailLog,setGenderLog,setPasswordLog,setConfirmPasswordLog
+		setFirstNameLog,
+		setLastNameLog,
+		setPhoneLog,
+		setEmailLog,
+		setGenderLog,
+		setPasswordLog,
+		setConfirmPasswordLog,
 	};
 	// const { handleChange, values, errors, handleSubmit } = useForm(validate);
 
@@ -109,7 +127,6 @@ const Test2 = ({ navigation }) => {
 					</Text>
 				</View>
 				<View style={{ marginTop: 20 }}>
-					
 					<View style={STYLES.inputContainer}>
 						<Icon
 							name="person-outline"
@@ -125,10 +142,9 @@ const Test2 = ({ navigation }) => {
 							// values={values.first_name}
 							style={STYLES.input}
 						/>
-						
 					</View>
 					<View>
-						<Text >{first_namelog}</Text>
+						<Text>{first_namelog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -148,7 +164,7 @@ const Test2 = ({ navigation }) => {
 						{/* <Text ref={NameError}> </Text> */}
 					</View>
 					<View>
-						<Text >{last_namelog}</Text>
+						<Text>{last_namelog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -157,7 +173,7 @@ const Test2 = ({ navigation }) => {
 							size={20}
 							style={STYLES.inputIcon}
 						/>
-						
+
 						<Picker
 							selectedValue={gender}
 							style={{ height: 50, width: 150 }}
@@ -170,7 +186,6 @@ const Test2 = ({ navigation }) => {
 							<Picker.Item label="Female" value="2" />
 							<Picker.Item label="Others" value="0" />
 						</Picker>
-						
 
 						{/* <TextInput
 							name="gender"
@@ -182,7 +197,7 @@ const Test2 = ({ navigation }) => {
 						<Text ref={NameError}> </Text> */}
 					</View>
 					<View>
-						<Text >{genderlog}</Text>
+						<Text>{genderlog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -198,11 +213,12 @@ const Test2 = ({ navigation }) => {
 							onChangeText={text => setPhone(text)}
 							// values={values.phone}
 							style={STYLES.input}
+							autoCompleteType="tel"
+							keyboardType="number-pad"
 						/>
-						
 					</View>
 					<View>
-						<Text >{phonelog}</Text>
+						<Text>{phonelog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -217,11 +233,15 @@ const Test2 = ({ navigation }) => {
 							onChangeText={text => setEmail(text)}
 							// values={values.email}
 							style={STYLES.input}
+							keyboardType="email-address"
+							autoCompleteType="email"
+							autoCorrect={false}
+							autoCapitalize="none"
+							textContentType="emailAddress"
 						/>
-						
 					</View>
-<View>
-						<Text >{emaillog}</Text>
+					<View>
+						<Text>{emaillog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -237,10 +257,14 @@ const Test2 = ({ navigation }) => {
 							secureTextEntry
 							onChangeText={text => setPassword(text)}
 							// values={values.password}
+							autoCorrect={false}
+							autoCapitalize="none"
+							textContentType="Password"
+							autoCompleteType="password"
 						/>
 					</View>
 					<View>
-						<Text >{passwordlog}</Text>
+						<Text>{passwordlog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -256,10 +280,14 @@ const Test2 = ({ navigation }) => {
 							secureTextEntry
 							onChangeText={text => setConfirm_Password(text)}
 							// values={values.confirm_password}
+							autoCorrect={false}
+							autoCapitalize="none"
+							textContentType="Password"
+							autoCompleteType="password"
 						/>
 					</View>
 					<View>
-						<Text >{confirm_passwordlog}</Text>
+						<Text>{confirm_passwordlog}</Text>
 					</View>
 					<TouchableOpacity>
 						<View style={STYLES.btnPrimary}>
@@ -269,9 +297,7 @@ const Test2 = ({ navigation }) => {
 									fontWeight: "bold",
 									fontSize: 20,
 								}}
-								onPress={() =>
-									submit(user_Data, log_Setters)
-								}
+								onPress={() => submit(user_Data, log_Setters)}
 							>
 								Sign Up
 							</Text>
@@ -379,7 +405,7 @@ const style = StyleSheet.create({
 function validation(values) {
 	let result = {};
 	result.is_error = false;
-	let phone_pattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+	let phone_pattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 	let email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 	// !first name
 	if (values.first_name == "") {
@@ -388,12 +414,12 @@ function validation(values) {
 	}
 	// !last name
 	if (values.last_name == "") {
-				result.is_error = true;
+		result.is_error = true;
 		result.last_namelog = "Last Name Required";
 	}
 	// !gender
 	if (values.gender == "") {
-				result.is_error = true;
+		result.is_error = true;
 		result.genderlog = "Please select the gender";
 	} /* else if (
 		!values.gender == 1 ||
@@ -405,9 +431,8 @@ function validation(values) {
 	if (values.phone == "") {
 		result.is_error = true;
 		result.phonelog = "Phone number is required";
-	}
-	else if (!phone_pattern.test(values.phone)) 
-	{result.is_error = true;
+	} else if (!phone_pattern.test(values.phone)) {
+		result.is_error = true;
 		result.phonelog = " Phone Number is not valid";
 	}
 	// !email
@@ -420,8 +445,7 @@ function validation(values) {
 	if (values.password == "") {
 		result.is_error = true;
 		result.passwordlog = "Password Required";
-	}
-	else if (values.password.length < 8) {
+	} else if (values.password.length < 8) {
 		result.is_error = true;
 		result.passwordlog = "Password needs at least 8 characters";
 	}
@@ -429,12 +453,11 @@ function validation(values) {
 	if (values.confirm_password == "") {
 		result.is_error = true;
 		result.confirm_passwordlog = "Confirm Password Required";
-	} 
-	else if (values.confirm_password !== values.password) {
+	} else if (values.confirm_password !== values.password) {
 		result.is_error = true;
 		result.confirm_passwordlog = "Password does not match";
 	}
-	
+
 	/* // !photo
 	if (values.photo == "") {
 		result.photo = "Enter your photo here";
@@ -442,31 +465,45 @@ function validation(values) {
 	return result;
 }
 
-function submit(user_Data, log_Setters) 
-{
+function submit(user_Data, log_Setters) {
 	let result = validation(user_Data);
 	console.log(result);
-	if (result.is_error){
-		log_Setters.setFirstNameLog(result.first_namelog)
-		log_Setters.setLastNameLog(result.last_namelog)
-		log_Setters.setEmailLog(result.emaillog)
-		log_Setters.setPhoneLog(result.phonelog)
-		log_Setters.setGenderLog(result.genderlog)
-		log_Setters.setPasswordLog(result.passwordlog)
-		log_Setters.setConfirmPasswordLog(result.confirm_passwordlog)
+	if (result.is_error) {
+		log_Setters.setFirstNameLog(result.first_namelog);
+		log_Setters.setLastNameLog(result.last_namelog);
+		log_Setters.setEmailLog(result.emaillog);
+		log_Setters.setPhoneLog(result.phonelog);
+		log_Setters.setGenderLog(result.genderlog);
+		log_Setters.setPasswordLog(result.passwordlog);
+		log_Setters.setConfirmPasswordLog(result.confirm_passwordlog);
+	} else {
+		log_Setters.setFirstNameLog("");
+		log_Setters.setLastNameLog("");
+		log_Setters.setEmailLog("");
+		log_Setters.setPhoneLog("");
+		log_Setters.setGenderLog("");
+		log_Setters.setPasswordLog("");
+		log_Setters.setConfirmPasswordLog("");
+
+		axios.post(String(config.baseURL) + "/user/signup/", {
+			First_Name: user_Data.first_name,
+			Second_Name: user_Data.last_name,
+			Email: user_Data.email,
+			Gender: user_Data.gender,
+			Photo: "-",
+			password: user_Data.password,
+			Phone: user_Data.phone
+		}).then(function (response) {
+			console.log(response.status == 201);
+			if (response.status == 201) {
+				Alert.alert("signup success")
+				console.log(response.data)
+			}
+			if (response.status >= 400 && response.status < 500) {
+				Alert.alert("bad request")
+			}
+		})
 	}
-	else{
-		log_Setters.setFirstNameLog("")
-		log_Setters.setLastNameLog("")
-		log_Setters.setEmailLog("")
-		log_Setters.setPhoneLog("")
-		log_Setters.setGenderLog("")
-		log_Setters.setPasswordLog("")
-		log_Setters.setConfirmPasswordLog("")
-		
-		// mainBackend
-	}
-	
-}
+}Async
 
 export default Test2;

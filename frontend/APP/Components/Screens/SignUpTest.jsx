@@ -13,7 +13,7 @@ import {
 import STYLES from "../../Configs/Style/formStyles";
 import { SignupStyle } from "../../Configs/Style/SignUpStyle";
 import { Device } from "../../Configs/Style/PlatformJson";
-import { AppTextInput, AppButton } from "../Forms/FormComponents";
+import { AppTextInput } from "../Forms/FormComponents";
 import useForm from "../Forms/FormComponents/UseForm";
 import validate from "../Forms/FormComponents/Validateinfo";
 
@@ -38,33 +38,33 @@ export default function SignUpTest() {
 						name="first_name"
 						id="first_name"
 						placeholder="First Name*"
-						autoCompleteType="name"
 						onChangeText={handleChange}
 						values={values.first_name}
 						// onBlur={() => setFieldTouched("first_name")}
 						Icons="person-outline"
+						autoCompleteType="name"
 						keyboardType="name-prefix"
 					/>
 					<AppTextInput
 						name="last_name"
 						id="last_name"
 						placeholder="Last Name*"
-						autoCompleteType="name"
 						onChangeText={handleChange}
 						values={values.last_name}
 						// onBlur={() => setFieldTouched("last_name")}
 						Icons="person-outline"
+						autoCompleteType="name"
 						keyboardType="name-suffix"
 					/>
 					<AppTextInput
 						name="phone"
 						id="phone"
 						placeholder="phone*"
-						autoCompleteType="phone"
 						onChangeText={handleChange}
 						values={values.phone}
 						// onBlur={() => setFieldTouched("phone")}
 						Icons="phone"
+						autoCompleteType="phone"
 						keyboardType="number-pad"
 					/>
 					<AppTextInput
@@ -83,11 +83,11 @@ export default function SignUpTest() {
 						name="email"
 						id="email"
 						placeholder="Email*"
-						keyboardType="email-address"
-						autoCompleteType="email"
 						onChangeText={handleChange}
 						values={values.email}
 						// onBlur={() => setFieldTouched("email")}
+						keyboardType="email-address"
+						autoCompleteType="email"
 						autoCorrect={false}
 						autoCapitalize="none"
 						textContentType="emailAddress"
@@ -99,13 +99,13 @@ export default function SignUpTest() {
 						id="password"
 						placeholder="Password*"
 						secureTextEntry
-						autoCompleteType="password"
 						onChangeText={handleChange}
 						values={values.password}
 						// onBlur={() => setFieldTouched("password")}
 						autoCorrect={false}
 						autoCapitalize="none"
 						textContentType="Password"
+						autoCompleteType="password"
 						Icons="lock-outline"
 					/>
 

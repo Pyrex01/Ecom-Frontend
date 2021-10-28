@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "react-native-gesture-handler";
 import { } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import AsyncStorage from '@react-native-community/async-storage';
 import {
 	SafeAreaView,
 	View,
@@ -12,8 +13,11 @@ import {
 	ScrollView,
 	StyleSheet,
 	TouchableOpacity,
+	Alert,
 	Picker,
-	Alert
+	Modal,
+	Button
+	
 } from "react-native";
 import * as axios from 'axios';
 
@@ -21,6 +25,7 @@ import { mainBackend } from "../../Configs/MainBackend";
 import config from "../../../config.json"
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
+
 
 const Test2 = ({ navigation }) => {
 	let [first_name, setFirstName] = useState("");
@@ -38,6 +43,9 @@ const Test2 = ({ navigation }) => {
 	let [genderlog, setGenderLog] = useState("");
 	let [passwordlog, setPasswordLog] = useState("");
 	let [confirm_passwordlog, setConfirmPasswordLog] = useState("");
+	let [otp,SetOtp] = useState("");
+	let [otpwarning,Setotpwarning] = useState("");
+	let [isVisible,SetIsVisible] = useState(false);
 	// const [selectedValue, setSelectedValue] = useState("1,2,0");
 	let user_Data = {
 		first_name,
@@ -57,10 +65,12 @@ const Test2 = ({ navigation }) => {
 		setGenderLog,
 		setPasswordLog,
 		setConfirmPasswordLog,
+		SetIsVisible
 	};
 	// const { handleChange, values, errors, handleSubmit } = useForm(validate);
 
 	return (
+		<>
 		<ScrollView>
 			<SafeAreaView
 				style={{
@@ -387,10 +397,24 @@ const Test2 = ({ navigation }) => {
 						</Text>
 					</TouchableOpacity>
 				</View>
+		<View>
+			<Modal visible={isVisible} >
+				<Text >Enter Your Six digit Code here!</Text>
+				<TextInput placeholder="######" 
+				onChangeText={ text => SetOtp(text) } />
+				<Text >{otpwarning}</Text>
+				<TouchableOpacity onPress={()=>otpSubmit(otp,Setotpwarning)}>
+					<Text style={{ color: Colors.secondary, fontSize: 18,fontWeight: "bold",}}>Submit</Text>
+				</TouchableOpacity>
+			</Modal>
+		</View>
 			</SafeAreaView>
 		</ScrollView>
+		</>
 	);
 };
+
+
 const style = StyleSheet.create({
 	header: {
 		paddingVertical: 20,
@@ -401,6 +425,30 @@ const style = StyleSheet.create({
 	},
 });
 
+
+function otpSubmit(otp,setotpwarning){
+	if(isNaN(otp)) {
+		setotpwarning("please enter valid number")
+		return;
+	}
+	AsyncStorage.getItem("signup_token",(err,result)=>{
+		mainBackend.post("/user/confirm/",{token:result,otp:otp})
+		.then(function(response){
+			switch(response.status){
+				case 202:
+					alert("signup success")
+					break;
+				case 410:
+					alert("otp time expired try again")
+				case 400:
+					alert("oops something went wrong!")
+			}
+		})
+	});
+	
+
+}
+
 // function submit(name, email, password, ConfirmPass) {}
 function validation(values) {
 	let result = {};
@@ -409,7 +457,7 @@ function validation(values) {
 	let email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 	// !first name
 	if (values.first_name == "") {
-		result.is_error = true;
+		result.is_error = true
 		result.first_namelog = "First Name Required";
 	}
 	// !last name
@@ -467,7 +515,6 @@ function validation(values) {
 
 function submit(user_Data, log_Setters) {
 	let result = validation(user_Data);
-	console.log(result);
 	if (result.is_error) {
 		log_Setters.setFirstNameLog(result.first_namelog);
 		log_Setters.setLastNameLog(result.last_namelog);
@@ -485,7 +532,7 @@ function submit(user_Data, log_Setters) {
 		log_Setters.setPasswordLog("");
 		log_Setters.setConfirmPasswordLog("");
 
-		axios.post(String(config.baseURL) + "/user/signup/", {
+		mainBackend.post("/user/signup/", {
 			First_Name: user_Data.first_name,
 			Second_Name: user_Data.last_name,
 			Email: user_Data.email,
@@ -494,16 +541,15 @@ function submit(user_Data, log_Setters) {
 			password: user_Data.password,
 			Phone: user_Data.phone
 		}).then(function (response) {
-			console.log(response.status == 201);
+			console.log(response.status)
 			if (response.status == 201) {
-				Alert.alert("signup success")
-				console.log(response.data)
+				if(AsyncStorage.setItem("signup_token",response.data.signup_token))
+				{log_Setters.SetIsVisible(true);}
 			}
-			if (response.status >= 400 && response.status < 500) {
-				Alert.alert("bad request")
-			}
+			if (response.status >= 400 && response.status < 500) 
+			{Alert.alert("oops! something went wrong")}
 		})
 	}
-}Async
+}
 
 export default Test2;

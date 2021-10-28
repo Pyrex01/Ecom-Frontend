@@ -20,6 +20,7 @@ def signup(request):
     except Users.DoesNotExist:
         request.data["password"]= make_password(request.data["password"])
         request.data["Gender"] = Gender.objects.get(pk=request.data["Gender"])
+        
         user = UnVerifiedUser(**request.data)
         user.OTP=random.randint(99999,999999)
         print("------------------------------------ OTP:",user.OTP,"----------------------------")
@@ -35,8 +36,8 @@ def signup(request):
 def confirmOTP(request):
     try:
         user = UnVerifiedUser.objects.get(id=request.data["token"],OTP=request.data["otp"])
-        if datetime.datetime(minute=5)>datetime.now()-user.Generated_Date:
-            return Response(status=status.HTTP_410_GONE)
+        # if datetime.datetime(minute=5)>datetime.now()-user.Generated_Date:
+        #     return Response(status=status.HTTP_410_GONE)
         cuser = Users(First_Name=user.First_Name,Second_Name=user.Second_Name,Email=user.Email,Gender=user.Gender,Photo=user.Photo,password=user.password)
         cuser.save()
         user.delete()
@@ -65,10 +66,10 @@ def login(request):
 def logout(request):
     print(request)
     try:
-        token = Token.objects.get(user = request.user).delete()
+        Token.objects.get(user = request.user).delete()
         return Response(status=status.HTTP_200_OK)
     except Exception as E:
         return Response(status=status.HTTP_400_BAD_REQUEST)
         
 
-# mail.EmailMessage(subject="Django Otp verification",body='''<div style="flex:inline;"><h1>you have requested otp</h1> <div style="width:10px; height:10px;background:rgb(202, 235, 16);text:white"> 99999 </div> </div>''',from_email=EMAIL_HOST_USER,to=["khanshafique.ahamed@gmail.com"])
+# mail.EmailMessage(subject="Django Otp verification",body='''<div style="flex:inline;"><h1>you have requested otp</h1> <div style="width:10px; height:10px;background:rgb(202, 235, 16);text:white"> 99999 </div> </div>''',from_email=EMAIL_HOST_USER,to=["khanshafique.ahamed@gmail.com"]).send(fail_silently=False)

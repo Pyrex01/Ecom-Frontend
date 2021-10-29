@@ -58,7 +58,7 @@ class UnVerifiedUser(models.Model):
     Email = models.EmailField()
     is_admin = models.BooleanField(default=False)
     Gender = models.ForeignKey(Gender,on_delete=models.CASCADE)
-    Photo = models.TextField()
+    Photo = models.TextField(null=True)
     password = models.CharField(max_length=128)
     OTP = models.CharField(max_length=6)
     Generated_Date = models.DateTimeField(auto_now_add=True)

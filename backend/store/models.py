@@ -5,17 +5,24 @@ from addressCollection.models import Address
 
 class Categorie(models.Model):
     Type = models.CharField(max_length=30)
+    def __str__(self):
+        return self.Type
 
 class Belongs(models.Model):
     Categorie_ID = models.ForeignKey(Categorie, on_delete=models.CASCADE)
     Sub_Categorie = models.CharField(max_length=50)
+    def __str__(self):
+        return self.Sub_Categorie
 
 class Items(models.Model):
     Name = models.CharField(max_length=60)
     Price = models.CharField(max_length=10)
+    Display_Image = models.TextField()
     Belongs_ID = models.ForeignKey(Belongs,on_delete=models.SET_NULL,null=True)
     Product_details = models.JSONField()
     Quantity = models.IntegerField()
+    def __str__(self):
+        return self.Name
 
 
 class Cart(models.Model):

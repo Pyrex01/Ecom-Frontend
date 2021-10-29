@@ -1,6 +1,10 @@
 import * as axios from 'axios';
 import config from '../../config.json'
-
-var mainBackend = axios.create({ baseURL: String(config.baseURL)  })
+import AsyncStorage from '@react-native-community/async-storage';
+let login_token="";
+AsyncStorage.getItem("login_token",(err,result)=>{
+    login_token = result;
+})
+var mainBackend = axios.create({ baseURL: String(config.baseURL),Headers: (login_token=="" ? null:login_token) })
 
 export { mainBackend };

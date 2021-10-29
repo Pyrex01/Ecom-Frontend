@@ -117,6 +117,7 @@ function loginSubmit(value,SetLog){
 					for(let key in response.data){
 						AsyncStorage.setItem(key,response.data[key])
 					}
+					AsyncStorage.setItem("isLogedin",true)
 					alert("login success")
 					break;
 				case 403:

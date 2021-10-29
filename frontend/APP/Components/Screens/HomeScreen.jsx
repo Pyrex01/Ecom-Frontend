@@ -20,11 +20,24 @@ import Colors from "../../Configs/Colors/Colors";
 import categories from "../Sub Components/categories";
 import Products from "../Sub Components/Products";
 import { SecondaryButton } from "../Sub Components/Button";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const { width } = Dimensions.get("screen");
 const cardWidth = width / 2 - 20;
 
+
+
 const HomeScreen = ({ navigation }) => {
+	let name;
+	AsyncStorage.getItem("login_token",(err,result)=>{
+		if(err)
+		{return;}
+		else {
+			AsyncStorage.getItem("First_name",(er,res)=>{
+				name = res;
+			})
+		}
+	})
 	const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
 
 	const ListCategories = () => {
@@ -137,7 +150,7 @@ const HomeScreen = ({ navigation }) => {
 			<View style={style.header}>
 				<View>
 					<View style={{ flexDirection: "row" }}>
-						<Text style={{ fontSize: 25 }}>Hello,</Text>
+						<Text style={{ fontSize: 25 }}>Hello</Text>
 						<Text
 							style={{
 								fontSize: 25,
@@ -145,7 +158,7 @@ const HomeScreen = ({ navigation }) => {
 								marginLeft: 10,
 							}}
 						>
-							Tazeen
+							{(name!==null?","+name:"")}
 						</Text>
 					</View>
 					<Text

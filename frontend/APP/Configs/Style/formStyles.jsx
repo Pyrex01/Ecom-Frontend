@@ -2,7 +2,13 @@ import { StyleSheet } from "react-native";
 import Colors from "../Colors/Colors";
 
 const STYLES = StyleSheet.create({
-	inputContainer: { flexDirection: "row", marginTop: 20 },
+	inputContainer: {
+		flexDirection: "row",
+		marginTop: 20,
+		flex: 1,
+		alignItems: "center",
+	},
+	otpinputContainer: { flexDirection: "col", marginTop: 20 },
 	input: {
 		color: Colors.black,
 		paddingLeft: 30,

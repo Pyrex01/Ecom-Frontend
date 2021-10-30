@@ -19,11 +19,14 @@ import {
 	Button,
 } from "react-native";
 import * as axios from "axios";
+import { NativeBaseProvider, Center } from "native-base";
 
 import { mainBackend } from "../../Configs/MainBackend";
 import config from "../../../config.json";
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
+import  OtpModal  from './../Sub Components/OtpModal';
+import ModalTester from "./Modal";
 
 const Test2 = ({ navigation }) => {
 	let [first_name, setFirstName] = useState("");
@@ -383,7 +386,7 @@ const Test2 = ({ navigation }) => {
 					</Text>
 				</TouchableOpacity>
 			</View>
-			<View style={STYLES.otpinputContainer}>
+		{/* 	<View style={STYLES.otpinputContainer}>
 				<Modal visible={isVisible}>
 					<Text>Enter Your Six digit OTP here!</Text>
 					<TextInput
@@ -405,7 +408,15 @@ const Test2 = ({ navigation }) => {
 						</Text>
 					</TouchableOpacity>
 				</Modal>
-			</View>
+			</View> */}
+			{/* <NativeBaseProvider >
+			<Center flex={1} px='3' >
+				<OtpModal Style={{positon: 'absolute', padding:10}}/>
+			</Center>
+		</NativeBaseProvider> */}
+		<SafeAreaView>
+		<View><ModalTester/></View>
+		</SafeAreaView>
 		</SafeAreaView>
 	);
 };
@@ -424,7 +435,7 @@ function otpSubmit(otp, setotpwarning) {
 	if (isNaN(otp)) {
 		setotpwarning("please enter valid number");
 		return;
-	}
+	}	
 	AsyncStorage.getItem("signup_token", (err, result) => {
 		mainBackend
 			.post("/user/confirm/", { token: result, otp: otp })

@@ -3,17 +3,17 @@ import {
 	Button,
 	Modal,
 	FormControl,
-	Input,
+	
 	Center,
 	NativeBaseProvider,
 } from "native-base";
-import { Text, TextInput } from "react-native"; 
+import { Text, TextInput } from "react-native";
 
 import config from "../../../config.json";
 import Colors from "../../Configs/Colors/Colors";
 
 export const OtpModal = () => {
-	const [showModal, setShowModal] = useState(false);
+	const [showModal, setShowModal] = useState(true);
 	let [otp, setOtp] = useState("");
 	let [otperr, setOtpErr] = useState("");
 
@@ -22,7 +22,7 @@ export const OtpModal = () => {
 
 	return (
 		<>
-			<Button onPress={() => setShowModal(true)}>Button</Button>
+			{/* <Button onPress={() => setShowModal(true)}>Button</Button> */}
 			<Modal isOpen={showModal} onClose={() => setShowModal(false)}>
 				<Modal.Content maxWidth='400px'>
 					<Modal.CloseButton />
@@ -59,7 +59,7 @@ export const OtpModal = () => {
 function validation(otp) {
 	let result = {};
 	result.is_error = false;
-	if (otp == "") {
+	if (isNan(otp) == "") {
 		result.is_error = true;
 		result.otperr = "Enter OTP";
 	} else if (!otp.length == 6 && otp == 1 - 9) {
@@ -103,7 +103,9 @@ function submit(user_Data, log_Setters) {
 setShowModal(false)
 } */
 
-export default () => {
+export default OtpModal;
+
+/* () => {
 	return (
 		<NativeBaseProvider>
 			<Center flex={1} px='3'>
@@ -111,4 +113,4 @@ export default () => {
 			</Center>
 		</NativeBaseProvider>
 	);
-};
+}; */

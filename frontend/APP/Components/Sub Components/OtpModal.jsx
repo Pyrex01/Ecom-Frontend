@@ -7,7 +7,7 @@ import {
 	Center,
 	NativeBaseProvider,
 } from "native-base";
-import { Text, TextInput } from "react-native";
+import { Text, TextInput } from "react-native"; 
 
 import config from "../../../config.json";
 import Colors from "../../Configs/Colors/Colors";

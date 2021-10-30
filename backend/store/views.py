@@ -1,12 +1,29 @@
-from django.shortcuts import render
-from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.generics import ListAPIView
 from store.pagination import ListPage
-from store.models import Items
+from store.models import *
+from rest_framework.decorators import api_view
 from store.serializer import ItemsInList
 
 class getItems(ListAPIView):
     queryset = Items.objects.all()
     serializer_class = ItemsInList
     pagination_class = ListPage
+
+class getSortItems(ListAPIView):
+    queryset = Items.objects.all()
+    serializer_class = ItemsInList
+    pagination_class = ListPage
+    def get_queryset(self):
+        queryset = Items.objects.all()
+        data = self.request.GET
+        if "categories" in data.keys():
+            sub = Belongs.objects.get(Categorie_ID=data["categories"])
+            queryset = queryset.filter(Belongs_ID__in=sub)
+        if "sub_categorie"in data.keys():
+            queryset = queryset.filter(Belongs_ID=data["sub_categorie"])
+        if "by_price" in data.keys():
+            if data["by_price"]==1:
+                queryset = queryset.order_by("Price")
+            if data["by_price"]==0:
+                queryset = queryset.order_by("-Price")
+        return queryset

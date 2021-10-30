@@ -20,12 +20,12 @@ const App = () => {
 		<NavigationContainer>
 			<StatusBar backgroundColor={Colors.white} barStyle="dark-content" />
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
-				{/* <Stack.Screen name="BoardScreen" component={OnBoardScreen} />
+				<Stack.Screen name="BoardScreen" component={OnBoardScreen} />
 				<Stack.Screen name="Home" component={BottomNavigator} />
 				<Stack.Screen name="SignUp" component={SignUp} />
 				<Stack.Screen name="LogIn" component={Login} />
-				<Stack.Screen name="DetailsScreen" component={DetailsScreen} /> */}
-				<Stack.Screen name="DetailsScreen" component={OtpModal} />
+				<Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+			{/* 	<Stack.Screen name="DetailsScreen" component={OtpModal} /> */}
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

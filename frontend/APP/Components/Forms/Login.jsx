@@ -14,7 +14,7 @@ import STYLES from "../../Configs/Style/formStyles";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import {mainBackend} from "../../Configs/MainBackend"
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const style = StyleSheet.create({
 	header: {
 		paddingVertical: 20,

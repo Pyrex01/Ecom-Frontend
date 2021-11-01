@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator();
 const BottomNavigator = () => {
 	return (
 		<Tab.Navigator
-			tabBarOptions={{
+		screenOptions={{
 				style: {
 					height: 55,
 					borderTopWidth: 0,
@@ -62,15 +62,15 @@ const BottomNavigator = () => {
 		</Tab.Navigator>
 	);
 };
-{
-	("tabBarActiveTintColor");
-	"#fc5c65", "tabBarShowLabel";
-	false, "tabBarStyle";
-	[
-		{
-			display: "flex",
-		},
-		null,
-	];
-}
+// {
+// 	("tabBarActiveTintColor");
+// 	"#fc5c65", "tabBarShowLabel";
+// 	false, "tabBarStyle";
+// 	[
+// 		{
+// 			display: "flex",
+// 		},
+// 		null,
+// 	];
+// }
 export default BottomNavigator;

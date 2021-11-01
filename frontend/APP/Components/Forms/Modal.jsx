@@ -1,17 +1,20 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import { Text, View, TextInput, StyleSheet,TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
-import AsyncStorage from "@react-native-community/async-storage";
-
 import { mainBackend } from "../../Configs/MainBackend";
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
 
-function ModalTester() {
+function ModalTester(porps) {
     
+<<<<<<< HEAD
 const [isModalVisible, setModalVisible] = useState(false);
+=======
+>>>>>>> 0da4ed5a1547633d987f49e7c69f4f75cefa971d
 
     let [otp, setOtp] = useState("");
+
 	let [otpwarning, Setotpwarning] = useState("");	   
     return (
     <View style={styles.container}>
@@ -45,14 +48,14 @@ function otpSubmit(otp, setotpwarning) {
 				switch (response.status) {
 					case 202:
 						alert("signup success");
-						Alert.alert("signup success");
+						AsyncStorage.clear()
 						break;
 					case 410:
 						alert("otp time expired try again");
-						Alert.alert("otp time expired try again");
+						break;
 					case 400:
 						alert("oops something went wrong!");
-						Alert.alert("oops something went wrong!");
+						break;
 				}
 			});
 	});

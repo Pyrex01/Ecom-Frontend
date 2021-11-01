@@ -11,7 +11,7 @@ import SignUp from "./APP/Components/Forms/Signup";
 import Login from "./APP/Components/Forms/Login";
 import Colors from "./APP/Configs/Colors/Colors";
 import HomeScreen from "./APP/Components/Screens/HomeScreen"
-import OtpModal from "./APP/Components/Sub Components/OtpModal";
+
 import ProfilePage from './APP/Components/Screens/ProfilePage';
 
 const Stack = createStackNavigator();

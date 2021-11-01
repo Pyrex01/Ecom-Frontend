@@ -1,39 +1,36 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
-import { Text, View, TextInput, StyleSheet,TouchableOpacity } from "react-native";
+import { Text, View, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
+import AsyncStorage from "@react-native-community/async-storage";
+
 import { mainBackend } from "../../Configs/MainBackend";
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
 
-function ModalTester(porps) {
-    
-<<<<<<< HEAD
-const [isModalVisible, setModalVisible] = useState(false);
-=======
->>>>>>> 0da4ed5a1547633d987f49e7c69f4f75cefa971d
+function ModalTester() {
 
-    let [otp, setOtp] = useState("");
+	const [isModalVisible, setModalVisible] = useState(false);
 
-	let [otpwarning, Setotpwarning] = useState("");	   
-    return (
-    <View style={styles.container}>
-            <Modal isVisible={isModalVisible} style={styles.container } backdropColor ="white" backdropOpacity = "0.80" deviceHeight="100" >
-                <View style={{ flex: 2, padding:400, paddingHorizontal: 500,  }}>
-                    <TextInput onChangeText={text => setOtp(text)} placeholder='Enter the OTP' />
-			        <Text style={{ color: Colors.danger   }}>{otpwarning}</Text>                    
-                    
-            <TouchableOpacity>
-				<View style={STYLES.btnPrimary}>
-					<Text style={{	color: "#fff",	fontWeight: "bold",	fontSize: 20,}} onPress={() => otpSubmit(otp, Setotpwarning)}>
-						Sign Up
-					</Text>
+	let [otp, setOtp] = useState("");
+	let [otpwarning, Setotpwarning] = useState("");
+	return (
+		<View style={styles.container}>
+			<Modal isVisible={isModalVisible} style={styles.container} backdropColor="white" backdropOpacity="0.80" deviceHeight="100" >
+				<View style={{ flex: 2, padding: 400, paddingHorizontal: 500, }}>
+					<TextInput onChangeText={text => setOtp(text)} placeholder='Enter the OTP' />
+					<Text style={{ color: Colors.danger }}>{otpwarning}</Text>
+
+					<TouchableOpacity>
+						<View style={STYLES.btnPrimary}>
+							<Text style={{ color: "#fff", fontWeight: "bold", fontSize: 20, }} onPress={() => otpSubmit(otp, Setotpwarning)}>
+								Sign Up
+							</Text>
+						</View>
+					</TouchableOpacity>
 				</View>
-			</TouchableOpacity>
-                </View>
-            </Modal>
-        </View>
-    );
+			</Modal>
+		</View>
+	);
 }
 
 function otpSubmit(otp, setotpwarning) {
@@ -48,24 +45,24 @@ function otpSubmit(otp, setotpwarning) {
 				switch (response.status) {
 					case 202:
 						alert("signup success");
-						AsyncStorage.clear()
+						Alert.alert("signup success");
 						break;
 					case 410:
 						alert("otp time expired try again");
-						break;
+						Alert.alert("otp time expired try again");
 					case 400:
 						alert("oops something went wrong!");
-						break;
+						Alert.alert("oops something went wrong!");
 				}
 			});
 	});
 }
 
 const styles = StyleSheet.create({
-    container: {
-    marginTop: 150,
-    },
-    
+	container: {
+		marginTop: 150,
+	},
+
 });
 export default ModalTester;
 

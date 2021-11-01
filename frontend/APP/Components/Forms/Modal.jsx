@@ -1,27 +1,31 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
-import { Button, Text, View, TextInput, StyleSheet } from "react-native";
+import { Text, View, TextInput, StyleSheet,TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
 import { mainBackend } from "../../Configs/MainBackend";
 import Colors from "../../Configs/Colors/Colors";
+import STYLES from "../../Configs/Style/formStyles";
 
 function ModalTester(porps) {
     
 
     let [otp, setOtp] = useState("");
-	let [otpwarning, Setotpwarning] = useState("");
 
-    const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-    };
-
+	let [otpwarning, Setotpwarning] = useState("");	   
     return (
     <View style={styles.container}>
-            <Modal isVisible={porps.isVisible} style={styles.container } backdropColor ="black" backdropOpacity = "0.90" deviceHeight="1" >
-                <View style={{ flex: 1 }}>
+            <Modal isVisible={isModalVisible} style={styles.container } backdropColor ="white" backdropOpacity = "0.80" deviceHeight="100" >
+                <View style={{ flex: 2, padding:400, paddingHorizontal: 500,  }}>
                     <TextInput onChangeText={text => setOtp(text)} placeholder='Enter the OTP' />
-				    <Text style={{ color: Colors.danger   }}>{otpwarning}</Text>
-                    <Button title="Submit" onPress={() => otpSubmit(otp, Setotpwarning)} />
+			        <Text style={{ color: Colors.danger   }}>{otpwarning}</Text>                    
+                    
+            <TouchableOpacity>
+				<View style={STYLES.btnPrimary}>
+					<Text style={{	color: "#fff",	fontWeight: "bold",	fontSize: 20,}} onPress={() => otpSubmit(otp, Setotpwarning)}>
+						Sign Up
+					</Text>
+				</View>
+			</TouchableOpacity>
                 </View>
             </Modal>
         </View>
@@ -68,3 +72,7 @@ const styles = StyleSheet.create({
     
 });
 export default ModalTester;
+
+
+
+{/* <Button title="Hide modal" onPress={() => otpSubmit(otp, Setotpwarning)} /> */}

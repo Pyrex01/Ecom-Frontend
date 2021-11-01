@@ -9,7 +9,7 @@ import STYLES from "../../Configs/Style/formStyles";
 
 function ModalTester() {
     
-const [isModalVisible, setModalVisible] = useState(true);
+const [isModalVisible, setModalVisible] = useState(false);
 
     let [otp, setOtp] = useState("");
 	let [otpwarning, Setotpwarning] = useState("");	   
@@ -62,18 +62,9 @@ const styles = StyleSheet.create({
     container: {
     marginTop: 150,
     },
-    bigBlue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
-    },
-    red: {
-    color: 'red',
-    },
     
 });
 export default ModalTester;
 
 
 
-{/* <Button title="Hide modal" onPress={() => otpSubmit(otp, Setotpwarning)} /> */}

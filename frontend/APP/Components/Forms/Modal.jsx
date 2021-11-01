@@ -1,18 +1,15 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import { Button, Text, View, TextInput, StyleSheet } from "react-native";
 import Modal from "react-native-modal";
-
+import { mainBackend } from "../../Configs/MainBackend";
 import Colors from "../../Configs/Colors/Colors";
 
-function ModalTester() {
+function ModalTester(porps) {
     
-const [isModalVisible, setModalVisible] = useState(true);
 
     let [otp, setOtp] = useState("");
 	let [otpwarning, Setotpwarning] = useState("");
-
-	let user_Data = { otp };
-	let log_Setters = { Setotpwarning };
 
     const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -20,11 +17,11 @@ const [isModalVisible, setModalVisible] = useState(true);
 
     return (
     <View style={styles.container}>
-            <Modal isVisible={isModalVisible} style={styles.container } backdropColor ="white" backdropOpacity = "0.80" deviceHeight="1" >
+            <Modal isVisible={porps.isVisible} style={styles.container } backdropColor ="black" backdropOpacity = "0.90" deviceHeight="1" >
                 <View style={{ flex: 1 }}>
                     <TextInput onChangeText={text => setOtp(text)} placeholder='Enter the OTP' />
 				    <Text style={{ color: Colors.danger   }}>{otpwarning}</Text>
-                    <Button title="Hide modal" onPress={() => otpSubmit(otp, Setotpwarning)} />
+                    <Button title="Submit" onPress={() => otpSubmit(otp, Setotpwarning)} />
                 </View>
             </Modal>
         </View>
@@ -43,14 +40,14 @@ function otpSubmit(otp, setotpwarning) {
 				switch (response.status) {
 					case 202:
 						alert("signup success");
-						Alert.alert("signup success");
+						AsyncStorage.clear()
 						break;
 					case 410:
 						alert("otp time expired try again");
-						Alert.alert("otp time expired try again");
+						break;
 					case 400:
 						alert("oops something went wrong!");
-						Alert.alert("oops something went wrong!");
+						break;
 				}
 			});
 	});

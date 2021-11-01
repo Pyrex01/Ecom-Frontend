@@ -8,7 +8,6 @@ const STYLES = StyleSheet.create({
 		flex: 1,
 		alignItems: "center",
 	},
-	otpinputContainer: { flexDirection: "col", marginTop: 20 },
 	input: {
 		color: Colors.black,
 		paddingLeft: 30,
@@ -27,7 +26,6 @@ const STYLES = StyleSheet.create({
 		alignItems: "center",
 		marginTop: 50,
 	},
-
 	btnSecondary: {
 		height: 50,
 		borderWidth: 1,
@@ -39,7 +37,6 @@ const STYLES = StyleSheet.create({
 		flexDirection: "row",
 	},
 	btnImage: { width: 20, height: 20, marginLeft: 5 },
-
 	line: { height: 1, width: 30, backgroundColor: "#a5a5a5" },
 });
 

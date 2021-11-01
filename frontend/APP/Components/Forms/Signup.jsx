@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "react-native-gesture-handler";
 import {} from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
 	SafeAreaView,
 	View,
@@ -18,14 +18,10 @@ import {
 	Modal,
 	Button,
 } from "react-native";
-import * as axios from "axios";
-import { NativeBaseProvider, Center } from "native-base";
-
 import { mainBackend } from "../../Configs/MainBackend";
-import config from "../../../config.json";
 import Colors from "../../Configs/Colors/Colors";
 import STYLES from "../../Configs/Style/formStyles";
-import  OtpModal  from './../Sub Components/OtpModal';
+
 import ModalTester from "./Modal";
 
 const Test2 = ({ navigation }) => {
@@ -44,9 +40,7 @@ const Test2 = ({ navigation }) => {
 	let [genderlog, setGenderLog] = useState("");
 	let [passwordlog, setPasswordLog] = useState("");
 	let [confirm_passwordlog, setConfirmPasswordLog] = useState("");
-	let [otp, SetOtp] = useState("");
-	let [otpwarning, Setotpwarning] = useState("");
-	let [isVisible, SetIsVisible] = useState(true);
+	let [isVisible, SetIsVisible] = useState(false);
 	// const [selectedValue, setSelectedValue] = useState("1,2,0");
 	let user_Data = {
 		first_name,
@@ -386,36 +380,8 @@ const Test2 = ({ navigation }) => {
 					</Text>
 				</TouchableOpacity>
 			</View>
-		{/* 	<View style={STYLES.otpinputContainer}>
-				<Modal visible={isVisible}>
-					<Text>Enter Your Six digit OTP here!</Text>
-					<TextInput
-						placeholder='######'
-						onChangeText={text => SetOtp(text)}
-					/>
-					<Text style={{ color: Colors.danger }}>{otpwarning}</Text>
-					<TouchableOpacity
-						onPress={() => otpSubmit(otp, Setotpwarning)}
-					>
-						<Text
-							style={{
-								color: Colors.secondary,
-								fontSize: 18,
-								fontWeight: "bold",
-							}}
-						>
-							Submit
-						</Text>
-					</TouchableOpacity>
-				</Modal>
-			</View> */}
-			{/* <NativeBaseProvider >
-			<Center flex={1} px='3' >
-				<OtpModal Style={{positon: 'absolute', padding:10}}/>
-			</Center>
-		</NativeBaseProvider> */}
 		<SafeAreaView>
-		<View><ModalTester/></View>
+		<View><ModalTester isVisible={isVisible} /></View>
 		</SafeAreaView>
 		</SafeAreaView>
 	);
@@ -431,37 +397,12 @@ const style = StyleSheet.create({
 	},
 });
 
-function otpSubmit(otp, setotpwarning) {
-	if (isNaN(otp)) {
-		setotpwarning("please enter valid number");
-		return;
-	}	
-	AsyncStorage.getItem("signup_token", (err, result) => {
-		mainBackend
-			.post("/user/confirm/", { token: result, otp: otp })
-			.then(function (response) {
-				switch (response.status) {
-					case 202:
-						alert("signup success");
-						Alert.alert("signup success");
-						break;
-					case 410:
-						alert("otp time expired try again");
-						Alert.alert("otp time expired try again");
-					case 400:
-						alert("oops something went wrong!");
-						Alert.alert("oops something went wrong!");
-				}
-			});
-	});
-}
 
 // function submit(name, email, password, ConfirmPass) {}
 function validation(values) {
 	let result = {};
 	result.is_error = false;
-	let phone_pattern =
-		/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+	let phone_pattern =/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 	let email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 	// !first name
 	if (values.first_name == "") {
@@ -553,12 +494,7 @@ function submit(user_Data, log_Setters) {
 			.then(function (response) {
 				console.log(response.status);
 				if (response.status == 201) {
-					if (
-						AsyncStorage.setItem(
-							"signup_token",
-							response.data.signup_token,
-						)
-					) {
+					if (AsyncStorage.setItem("signup_token",response.data.signup_token)) {
 						log_Setters.SetIsVisible(true);
 					}
 				}

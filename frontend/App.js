@@ -12,6 +12,9 @@ import Login from "./APP/Components/Forms/Login";
 import Colors from "./APP/Configs/Colors/Colors";
 import HomeScreen from "./APP/Components/Screens/HomeScreen"
 
+import Android from "./APP/android/navigation.jsx"
+import Web from "./APP/web/navigation.jsx"
+
 import ProfilePage from './APP/Components/Screens/ProfilePage';
 
 const Stack = createStackNavigator();

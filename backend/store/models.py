@@ -16,7 +16,7 @@ class Belongs(models.Model):
 
 class Items(models.Model):
     Name = models.CharField(max_length=60)
-    Price = models.CharField(max_length=10)
+    Price = models.IntegerField()
     Display_Image = models.TextField()
     Belongs_ID = models.ForeignKey(Belongs,on_delete=models.SET_NULL,null=True)
     Product_details = models.JSONField()

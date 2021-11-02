@@ -1,6 +1,6 @@
 import * as axios from 'axios';
 import config from '../../config.json'
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 let login_token="";
 AsyncStorage.getItem("login_token",(err,result)=>{
     login_token = result;

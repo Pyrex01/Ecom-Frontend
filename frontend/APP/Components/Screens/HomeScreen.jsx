@@ -20,7 +20,7 @@ import Colors from "../../Configs/Colors/Colors";
 import categories from "../Sub Components/categories";
 import Products from "../Sub Components/Products";
 import { SecondaryButton } from "../Sub Components/Button";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const { width } = Dimensions.get("screen");
 const cardWidth = width / 2 - 20;
@@ -93,58 +93,58 @@ const HomeScreen = ({ navigation }) => {
 			</SafeAreaView>
 		);
 	};
-	const Card = ({ Products }) => {
-		return (
-			<TouchableHighlight
-				underlayColor={Colors.white}
-				activeOpacity={0.9}
-				onPress={() => navigation.navigate("DetailsScreen", Products)}
-			>
-				<View style={style.card}>
-					<View
-						style={{
-							alignItems: "center",
-							top: -40,
-						}}
-					>
-						<Image
-							source={Products.image}
-							style={{ height: 125, width: 130 }}
-						/>
-					</View>
-					<View style={{ marginHorizontal: 20 }}>
-						<Text style={{ fontSize: 18, fontWeight: "bold" }}>
-							{Products.name}
-						</Text>
-						<Text
+		const Card = ({ Products }) => {
+			return (
+				<TouchableHighlight
+					underlayColor={Colors.white}
+					activeOpacity={0.9}
+					onPress={() => navigation.navigate("DetailsScreen", Products)}
+				>
+					<View style={style.card}>
+						<View
 							style={{
-								fontSize: 14,
-								color: Colors.grey,
-								marginTop: 2,
+								alignItems: "center",
+								top: -40,
 							}}
 						>
-							{Products.discription}
-						</Text>
-					</View>
-					<View
-						style={{
-							marginTop: 8,
-							marginHorizontal: 30,
-							flexDirection: "row",
-							justifyContent: "space-between",
-						}}
-					>
-						<Text style={{ fontSize: 18, fontWeight: "bold" }}>
-							{Products.price}
-						</Text>
-						<View style={style.addToCartBtn}>
-							<Icon name="add" size={20} color={Colors.white} />
+							<Image
+								source={Products.image}
+								style={{ height: 125, width: 130 }}
+							/>
+						</View>
+						<View style={{ marginHorizontal: 20 }}>
+							<Text style={{ fontSize: 18, fontWeight: "bold" }}>
+								{Products.name}
+							</Text>
+							<Text
+								style={{
+									fontSize: 14,
+									color: Colors.grey,
+									marginTop: 2,
+								}}
+							>
+								{Products.discription}
+							</Text>
+						</View>
+						<View
+							style={{
+								marginTop: 8,
+								marginHorizontal: 30,
+								flexDirection: "row",
+								justifyContent: "space-between",
+							}}
+						>
+							<Text style={{ fontSize: 18, fontWeight: "bold" }}>
+								{Products.price}
+							</Text>
+							<View style={style.addToCartBtn}>
+								<Icon name="add" size={20} color={Colors.white} />
+							</View>
 						</View>
 					</View>
-				</View>
-			</TouchableHighlight>
-		);
-	};
+				</TouchableHighlight>
+			);
+		};
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
 			<View style={style.header}>

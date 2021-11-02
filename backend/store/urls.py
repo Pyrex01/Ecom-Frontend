@@ -1,7 +1,7 @@
 from django.urls import path
-from store.views import getItems
-from store import views
+from store.views import *
 
 urlpatterns = [
-    path("getItems/",getItems.as_view())
+    path("getItems/",getItems.as_view()),
+    path("getSortItems/",getSortItems.as_view())
 ]

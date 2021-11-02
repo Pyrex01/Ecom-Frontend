@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, View, Text, Image } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { RouterLink, useNavigate, useParams } from "react-router-dom";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import Colors from "../../Configs/Colors/Colors";
+import Colors from "../../../Configs/Colors/Colors";
 import { SecondaryButton } from "../Sub Components/Button";
 
 const DetailsScreen = ({ navigation, route }) => {

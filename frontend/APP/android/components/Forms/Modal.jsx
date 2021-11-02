@@ -1,21 +1,20 @@
 import React, { useState } from "react";
 import { Text, View, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { mainBackend } from "../../Configs/MainBackend";
-import Colors from "../../Configs/Colors/Colors";
-import STYLES from "../../Configs/Style/formStyles";
+import { mainBackend } from "../../../Configs/MainBackend";
+import Colors from "../../../Configs/Colors/Colors";
+import STYLES from "../../../Configs/Style/formStyles";
 
-function ModalTester() {
+function ModalTester(porps) {
 
-	const [isModalVisible, setModalVisible] = useState(false);
 
 	let [otp, setOtp] = useState("");
 	let [otpwarning, Setotpwarning] = useState("");
 	return (
 		<View style={styles.container}>
-			<Modal isVisible={isModalVisible} style={styles.container} backdropColor="white" backdropOpacity="0.80" deviceHeight="100" >
+			<Modal isVisible={porps.isVisible} style={styles.container} backdropColor="white" backdropOpacity={0.80} deviceHeight={100} >
 				<View style={{ flex: 2, padding: 400, paddingHorizontal: 500, }}>
 					<TextInput onChangeText={text => setOtp(text)} placeholder='Enter the OTP' />
 					<Text style={{ color: Colors.danger }}>{otpwarning}</Text>

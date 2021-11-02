@@ -18,9 +18,9 @@ import {
 	Modal,
 	Button,
 } from "react-native";
-import { mainBackend } from "../../Configs/MainBackend";
-import Colors from "../../Configs/Colors/Colors";
-import STYLES from "../../Configs/Style/formStyles";
+import { mainBackend } from "../../../Configs/MainBackend";
+import Colors from "../../../Configs/Colors/Colors";
+import STYLES from "../../../Configs/Style/formStyles";
 
 import ModalTester from "./Modal";
 
@@ -238,7 +238,6 @@ const Test2 = ({ navigation }) => {
 						autoCompleteType='email'
 						autoCorrect={false}
 						autoCapitalize='none'
-						textContentType='emailAddress'
 					/>
 				</View>
 				<View>
@@ -260,7 +259,6 @@ const Test2 = ({ navigation }) => {
 						// values={values.password}
 						autoCorrect={false}
 						autoCapitalize='none'
-						textContentType='Password'
 						autoCompleteType='password'
 					/>
 				</View>
@@ -283,7 +281,6 @@ const Test2 = ({ navigation }) => {
 						// values={values.confirm_password}
 						autoCorrect={false}
 						autoCapitalize='none'
-						textContentType='Password'
 						autoCompleteType='password'
 					/>
 				</View>
@@ -330,7 +327,7 @@ const Test2 = ({ navigation }) => {
 								Sign up with
 								<Image
 									style={STYLES.btnImage}
-									source={require("../../assets/facebook.png")}
+									source={require("../../../assets/facebook.png")}
 								/>
 							</Text>
 						</TouchableOpacity>
@@ -342,7 +339,7 @@ const Test2 = ({ navigation }) => {
 								Sign up with
 								<Image
 									style={STYLES.btnImage}
-									source={require("../../assets/google.png")}
+									source={require("../../../assets/google.png")}
 								/>
 							</Text>
 						</TouchableOpacity>

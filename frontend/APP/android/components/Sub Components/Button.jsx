@@ -7,7 +7,7 @@ import {
 	AppRegistry,
 	Platform,
 } from "react-native";
-import Colors from "../../Configs/Colors/Colors";
+import Colors from "../../../Configs/Colors/Colors";
 
 const PrimaryButton = ({ title, onPress = () => {} }) => {
 	return (

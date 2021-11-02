@@ -9,11 +9,11 @@ import {
 	StyleSheet,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import Colors from "../../Configs/Colors/Colors";
-import STYLES from "../../Configs/Style/formStyles";
+import Colors from "../../../Configs/Colors/Colors";
+import STYLES from "../../../Configs/Style/formStyles";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { mainBackend } from "../../Configs/MainBackend"
+import { mainBackend } from "../../../Configs/MainBackend"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const style = StyleSheet.create({
 	header: {
@@ -73,13 +73,13 @@ const Login = ({ navigation }) => {
 					<View style={{ flexDirection: "row", justifyContent: "space-between", }}>
 						<View style={STYLES.btnSecondary}>
 							<TouchableOpacity onPress={() => ""}>
-								<Text style={{ fontWeight: "bold", fontSize: 18 }}>	Login with <Image style={STYLES.btnImage} source={require("../../assets/facebook.png")} /></Text>
+								<Text style={{ fontWeight: "bold", fontSize: 18 }}>	Login with <Image style={STYLES.btnImage} source={require("../../../assets/facebook.png")} /></Text>
 							</TouchableOpacity>
 						</View>
 						<View style={{ width: 10 }}></View>
 						<View style={STYLES.btnSecondary}>
 							<TouchableOpacity onPress={() => "Home"}>
-								<Text style={{ fontWeight: "bold", fontSize: 18 }}>	Login with<Image style={STYLES.btnImage} source={require("../../assets/google.png")} /></Text>
+								<Text style={{ fontWeight: "bold", fontSize: 18 }}>	Login with<Image style={STYLES.btnImage} source={require("../../../assets/google.png")} /></Text>
 							</TouchableOpacity>
 						</View>
 					</View>

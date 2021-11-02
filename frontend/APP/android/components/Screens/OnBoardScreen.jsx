@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, StyleSheet, View, Image, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Colors from "../../Configs/Colors/Colors";
+import Colors from "../../../Configs/Colors/Colors";
 import { PrimaryButton } from "../Sub Components/Button";
 
 const OnBoardScreen = ({ navigation }) => {
@@ -16,7 +16,7 @@ const OnBoardScreen = ({ navigation }) => {
 						top: -40,
 						marginTop: 20,
 					}}
-					source={require("../../assets/Logo.png")}
+					source={require("../../../assets/Logo.png")}
 				/>
 			</View>
 			<View style={style.textContainer}>

@@ -16,7 +16,7 @@ import {
 	TouchableOpacity,
 } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import Colors from "../../Configs/Colors/Colors";
+import Colors from "../../../Configs/Colors/Colors";
 import categories from "../Sub Components/categories";
 import Products from "../Sub Components/Products";
 import { SecondaryButton } from "../Sub Components/Button";
@@ -172,7 +172,7 @@ const HomeScreen = ({ navigation }) => {
 					</Text>
 				</View>
 				<Image
-					source={require("../../assets/Avatar.png")}
+					source={require("../../../assets/Avatar.png")}
 					style={{ height: 50, width: 50, borderRadius: 25 }}
 				/>
 			</View>

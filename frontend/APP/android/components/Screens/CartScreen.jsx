@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView, StyleSheet, View, Text, Image } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import Colors from "../../Configs/Colors/Colors";
+import Colors from "../../../Configs/Colors/Colors";
 import Products from "../Sub Components/Products";
 import { PrimaryButton } from "../Sub Components/Button";
 

@@ -40,7 +40,7 @@ const Test2 = ({ navigation }) => {
 	let [genderlog, setGenderLog] = useState("");
 	let [passwordlog, setPasswordLog] = useState("");
 	let [confirm_passwordlog, setConfirmPasswordLog] = useState("");
-	let [isVisible, SetIsVisible] = useState(false);
+	let [isVisible, SetIsVisible] = useState(true);
 	// const [selectedValue, setSelectedValue] = useState("1,2,0");
 	let user_Data = {
 		first_name,
@@ -65,14 +65,9 @@ const Test2 = ({ navigation }) => {
 	// const { handleChange, values, errors, handleSubmit } = useForm(validate);
 
 	return (
-		<SafeAreaView
-			style={{
-				paddingHorizontal: 40,
-				flex: 1,
-				backgroundColor: Colors.white,
-			}}
+		<SafeAreaView			style={{				paddingHorizontal: 40,				flex: 1,				backgroundColor: Colors.white,			}}
 		>
-			<SafeAreaView style={{ backgroundColor: Colors.white, flex: 1 }}>
+			<View style={{ backgroundColor: Colors.white, flex: 1 }}>
 				<View style={style.header}>
 					<Icon
 						name='arrow-back-ios'
@@ -83,7 +78,7 @@ const Test2 = ({ navigation }) => {
 						SignUp
 					</Text>
 				</View>
-			</SafeAreaView>
+			</View>
 			<View style={{ flexDirection: "row", marginTop: 60 }}>
 				<Text
 					style={{
@@ -148,20 +143,9 @@ const Test2 = ({ navigation }) => {
 					<Text>{first_namelog}</Text>
 				</View>
 				<View style={STYLES.inputContainer}>
-					<Icon
-						name='person-outline'
-						color={Colors.grey}
-						size={20}
-						style={STYLES.inputIcon}
-					/>
+					<Icon name='person-outline'	color={Colors.grey}	size={20} style={STYLES.inputIcon}/>
 
-					<TextInput
-						name='last_name'
-						placeholder='Last Name'
-						onChangeText={text => setLastName(text)}
-						// values={values.last_name}
-						style={STYLES.input}
-					/>
+					<TextInput	name='last_name' placeholder='Last Name' onChangeText={text => setLastName(text)}style={STYLES.input}/>
 					{/* <Text ref={NameError}> </Text> */}
 				</View>
 				<View>

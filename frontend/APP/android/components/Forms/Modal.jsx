@@ -14,8 +14,8 @@ function ModalTester(porps) {
 	let [otpwarning, Setotpwarning] = useState("");
 	return (
 		<View style={styles.container}>
-			<Modal isVisible={porps.isVisible} style={styles.container} backdropColor="white" backdropOpacity={0.80} deviceHeight={100} >
-				<View style={{ flex: 2, padding: 400, paddingHorizontal: 500, }}>
+			<Modal isVisible={porps.isVisible} style={styles.container} backdropColor="black" backdropOpacity={0.80} deviceHeight={100} >
+				<View style={{ flex: 2, padding: 10, paddingHorizontal: 10, }}>
 					<TextInput onChangeText={text => setOtp(text)} placeholder='Enter the OTP' />
 					<Text style={{ color: Colors.danger }}>{otpwarning}</Text>
 
@@ -60,7 +60,7 @@ function otpSubmit(otp, setotpwarning) {
 
 const styles = StyleSheet.create({
 	container: {
-		marginTop: 150,
+		marginTop: 200,
 	},
 
 });

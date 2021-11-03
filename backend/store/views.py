@@ -2,7 +2,8 @@ from rest_framework.generics import ListAPIView
 from store.pagination import ListPage
 from store.models import *
 from rest_framework.decorators import api_view
-from store.serializer import ItemsInList
+from rest_framework.response import Response
+from store.serializer import ItemsInList , SingleItem
 
 class getItems(ListAPIView):
     queryset = Items.objects.all()
@@ -27,3 +28,12 @@ class getSortItems(ListAPIView):
             if data["by_price"]==0:
                 queryset = queryset.order_by("-Price")
         return queryset
+
+@api_view(['GET'])
+def getItem(request):
+    try:
+        item = Items.objects.get(pk=request.GET["product_ID"])
+        item = SingleItem(item)
+        return Response(data=item.data,status=200)
+    except Items.DoesNotExist as E:
+        return Response(status=404)

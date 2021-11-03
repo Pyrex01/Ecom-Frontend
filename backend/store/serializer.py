@@ -12,4 +12,4 @@ class ItemsInList(ModelSerializer):
 class SingleItem(ModelSerializer):
     class Meta:
         model = Items
-        fields =["Name","Price","Display_Image","Product_details"]
+        fields = "__all__"

@@ -43,7 +43,7 @@ class Orders(models.Model):
     ]
     Items_ID = models.ForeignKey(Items,on_delete=models.CASCADE)
     Customers_ID = models.ForeignKey(Users,on_delete=models.CASCADE)
-    Status = models.CharField(max_length=2,choices=STATUS)
+    Status = models.CharField(max_length=2,choices=STATUS,default='O')
     Order_date = models.DateField(auto_now_add=True)
     Quantity = models.IntegerField()
     Tracking_ID = models.CharField(max_length=20)

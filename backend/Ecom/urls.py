@@ -19,5 +19,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("user/",include("userManagement.urls")),
     path("docs/",include("docs.urls")),
-    path("",include("store.urls"))
+    path("",include("store.urls")),
+    path("",include("addressCollection.urls"))
 ]

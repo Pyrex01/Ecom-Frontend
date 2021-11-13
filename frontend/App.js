@@ -10,6 +10,8 @@ const App = () => {
 	switch(Platform.OS){
 		case "android":
 			return <Android/>
+		case "web":
+			return <Android/>
 	}
 };
 

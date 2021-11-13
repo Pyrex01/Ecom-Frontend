@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import "react-native-gesture-handler";
-import {} from "react-native-gesture-handler";
+import { } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
@@ -40,7 +40,7 @@ const Test2 = ({ navigation }) => {
 	let [genderlog, setGenderLog] = useState("");
 	let [passwordlog, setPasswordLog] = useState("");
 	let [confirm_passwordlog, setConfirmPasswordLog] = useState("");
-	let [isVisible, SetIsVisible] = useState(false);
+	let [isVisible, SetIsVisible] = useState(true);
 	// const [selectedValue, setSelectedValue] = useState("1,2,0");
 	let user_Data = {
 		first_name,
@@ -72,314 +72,307 @@ const Test2 = ({ navigation }) => {
 				backgroundColor: Colors.white,
 			}}
 		>
-			<SafeAreaView style={{ backgroundColor: Colors.white, flex: 1 }}>
-				<View style={style.header}>
-					<Icon
-						name='arrow-back-ios'
-						size={28}
-						onPress={navigation.goBack}
-					/>
-					<Text style={{ fontSize: 20, fontWeight: "bold" }}>
-						SignUp
+			<ScrollView>
+				<SafeAreaView style={{ backgroundColor: Colors.white, flex: 1 }}>
+
+					<View style={style.header}>
+						<Icon
+							name='arrow-back-ios'
+							size={28}
+							onPress={navigation.goBack}
+						/>
+						<Text style={{ fontSize: 20, fontWeight: "bold" }}>
+							SignUp
+						</Text>
+					</View>
+				</SafeAreaView>
+				<View style={{ flexDirection: "row", marginTop: 60 }}>
+					<Text
+						style={{
+							fontWeight: "bold",
+							fontSize: 32,
+							color: Colors.dark,
+						}}
+					>
+						Shopping
+					</Text>
+					<Text
+						style={{
+							fontWeight: "bold",
+							fontSize: 32,
+							color: Colors.secondary,
+						}}
+					>
+						Bazaar
 					</Text>
 				</View>
-			</SafeAreaView>
-			<View style={{ flexDirection: "row", marginTop: 60 }}>
-				<Text
-					style={{
-						fontWeight: "bold",
-						fontSize: 32,
-						color: Colors.dark,
-					}}
-				>
-					Shopping
-				</Text>
-				<Text
-					style={{
-						fontWeight: "bold",
-						fontSize: 32,
-						color: Colors.secondary,
-					}}
-				>
-					Bazaar
-				</Text>
-			</View>
-
-			<View style={{ marginTop: 40 }}>
-				<Text
-					style={{
-						fontSize: 42,
-						textAlign: "center",
-						fontWeight: "bold",
-						color: Colors.dark,
-					}}
-				>
-					Welcome...
-				</Text>
-				<Text
-					style={{
-						fontSize: 19,
-						textAlign: "center",
-						fontWeight: "bold",
-						color: Colors.grey,
-					}}
-				>
-					Sign up to continue
-				</Text>
-			</View>
-			<View style={{ marginTop: 20 }}>
-				<View style={STYLES.inputContainer}>
-					<Icon
-						name='person-outline'
-						color={Colors.grey}
-						size={20}
-						style={STYLES.inputIcon}
-					/>
-
-					<TextInput
-						name='first_name'
-						placeholder='First Name'
-						onChangeText={text => setFirstName(text)}
-						// values={values.first_name}
-						style={STYLES.input}
-					/>
-				</View>
-				<View>
-					<Text>{first_namelog}</Text>
-				</View>
-				<View style={STYLES.inputContainer}>
-					<Icon
-						name='person-outline'
-						color={Colors.grey}
-						size={20}
-						style={STYLES.inputIcon}
-					/>
-
-					<TextInput
-						name='last_name'
-						placeholder='Last Name'
-						onChangeText={text => setLastName(text)}
-						// values={values.last_name}
-						style={STYLES.input}
-					/>
-					{/* <Text ref={NameError}> </Text> */}
-				</View>
-				<View>
-					<Text>{last_namelog}</Text>
-				</View>
-				<View style={STYLES.inputContainer}>
-					<Icon
-						name='person-outline'
-						color={Colors.grey}
-						size={20}
-						style={STYLES.inputIcon}
-					/>
-
-					<Picker
-						selectedValue={gender}
-						style={{ height: 50, width: 150 }}
-						onValueChange={(itemValue, itemIndex) =>
-							setGender(itemValue)
-						}
+				<View style={{ marginTop: 40 }}>
+					<Text
+						style={{
+							fontSize: 42,
+							textAlign: "center",
+							fontWeight: "bold",
+							color: Colors.dark,
+						}}
 					>
-						<Picker.Item label='Select' value='' />
-						<Picker.Item label='Male' value='1' />
-						<Picker.Item label='Female' value='2' />
-						<Picker.Item label='Others' value='0' />
-					</Picker>
-
-					{/* <TextInput
-							name="gender"
-							placeholder="Gender"
-							onChangeText={text => setGender(text)}
+						Welcome...
+					</Text>
+					<Text
+						style={{
+							fontSize: 19,
+							textAlign: "center",
+							fontWeight: "bold",
+							color: Colors.grey,
+						}}
+					>
+						Sign up to continue
+					</Text>
+				</View>
+				<View style={{ marginTop: 20 }}>
+					<View style={STYLES.inputContainer}>
+						<Icon
+							name='person-outline'
+							color={Colors.grey}
+							size={20}
+							style={STYLES.inputIcon}
+						/>
+						<TextInput
+							name='first_name'
+							placeholder='First Name'
+							onChangeText={text => setFirstName(text)}
+							// values={values.first_name}
+							style={STYLES.input}
+						/>
+					</View>
+					<View>
+						<Text style={{ color: Colors.danger, fontWeight: "bold", fontSize: 15 }}>{first_namelog}</Text>
+					</View>
+					<View style={STYLES.inputContainer}>
+						<Icon
+							name='person-outline'
+							color={Colors.grey}
+							size={20}
+							style={STYLES.inputIcon}
+						/>
+						<TextInput
+							name='last_name'
+							placeholder='Last Name'
+							onChangeText={text => setLastName(text)}
 							// values={values.last_name}
 							style={STYLES.input}
 						/>
-						<Text ref={NameError}> </Text> */}
-				</View>
-				<View>
-					<Text>{genderlog}</Text>
-				</View>
-				<View style={STYLES.inputContainer}>
-					<Icon
-						name='phone'
-						color={Colors.grey}
-						size={20}
-						style={STYLES.inputIcon}
-					/>
+						{/* <Text ref={NameError}> </Text> */}
+					</View>
+					<View>
+						<Text style={{ color: Colors.danger, fontWeight: "bold", fontSize: 15 }}>{last_namelog}</Text>
+					</View>
+					<View style={STYLES.inputContainer} >
+						<Icon
+							name='person-outline'
+							color={Colors.grey}
+							size={20}
+							style={STYLES.inputIcon}
+						/>
+						<View style={{ paddingHorizontal: 30, height: 35 }}>
+							<Picker
 
-					<TextInput
-						name='phone'
-						placeholder='Phone'
-						onChangeText={text => setPhone(text)}
-						// values={values.phone}
-						style={STYLES.input}
-						autoCompleteType='tel'
-						keyboardType='number-pad'
-					/>
-				</View>
-				<View>
-					<Text>{phonelog}</Text>
-				</View>
-				<View style={STYLES.inputContainer}>
-					<Icon
-						name='mail-outline'
-						color={Colors.grey}
-						size={20}
-						style={STYLES.inputIcon}
-					/>
-					<TextInput
-						name='email'
-						placeholder='Email'
-						onChangeText={text => setEmail(text)}
-						// values={values.email}
-						style={STYLES.input}
-						keyboardType='email-address'
-						autoCompleteType='email'
-						autoCorrect={false}
-						autoCapitalize='none'
-					/>
-				</View>
-				<View>
-					<Text>{emaillog}</Text>
-				</View>
-				<View style={STYLES.inputContainer}>
-					<Icon
-						name='lock-outline'
-						color={Colors.grey}
-						size={20}
-						style={STYLES.inputIcon}
-					/>
-					<TextInput
-						name='password'
-						placeholder='Password'
-						style={STYLES.input}
-						secureTextEntry
-						onChangeText={text => setPassword(text)}
-						// values={values.password}
-						autoCorrect={false}
-						autoCapitalize='none'
-						autoCompleteType='password'
-					/>
-				</View>
-				<View>
-					<Text>{passwordlog}</Text>
-				</View>
-				<View style={STYLES.inputContainer}>
-					<Icon
-						name='lock-outline'
-						color={Colors.grey}
-						size={20}
-						style={STYLES.inputIcon}
-					/>
-					<TextInput
-						name='confirm_password'
-						placeholder='Confirm Password'
-						style={STYLES.input}
-						secureTextEntry
-						onChangeText={text => setConfirm_Password(text)}
-						// values={values.confirm_password}
-						autoCorrect={false}
-						autoCapitalize='none'
-						autoCompleteType='password'
-					/>
-				</View>
-				<View>
-					<Text>{confirm_passwordlog}</Text>
-				</View>
-				<TouchableOpacity>
-					<View style={STYLES.btnPrimary}>
-						<Text
-							style={{
-								color: "#fff",
-								fontWeight: "bold",
-								fontSize: 20,
-							}}
-							onPress={() => submit(user_Data, log_Setters)}
-						>
-							Sign Up
+								selectedValue={gender}
+								style={{ height: 30, width: 80 }}
+								onValueChange={(itemValue, itemIndex) =>
+									setGender(itemValue)
+								}
+							>
+								<Picker.Item label='Select' value='' />
+								<Picker.Item label='Male' value='1' />
+								<Picker.Item label='Female' value='2' />
+								<Picker.Item label='Others' value='0' />
+							</Picker>
+						</View>
+
+						<View>
+							<Text style={{ color: Colors.danger, fontWeight: "bold", fontSize: 15 }}>{genderlog}</Text>
+						</View>
+					</View>
+					<View style={{ height: 0.5, backgroundColor: Colors.grey, top: 10 }} />
+					<View style={STYLES.inputContainer}>
+						<Icon
+							name='phone'
+							color={Colors.grey}
+							size={20}
+							style={STYLES.inputIcon}
+						/>
+						<TextInput
+							name='phone'
+							placeholder='Phone'
+							onChangeText={text => setPhone(text)}
+							// values={values.phone}
+							style={STYLES.input}
+							autoCompleteType='tel'
+							keyboardType='number-pad'
+						/>
+					</View>
+					<View>
+						<Text style={{ color: Colors.danger, fontWeight: "bold", fontSize: 15 }}>{phonelog}</Text>
+					</View>
+					<View style={STYLES.inputContainer}>
+						<Icon
+							name='mail-outline'
+							color={Colors.grey}
+							size={20}
+							style={STYLES.inputIcon}
+						/>
+						<TextInput
+							name='email'
+							placeholder='Email'
+							onChangeText={text => setEmail(text)}
+							// values={values.email}
+							style={STYLES.input}
+							keyboardType='email-address'
+							autoCompleteType='email'
+							autoCorrect={false}
+							autoCapitalize='none'
+						/>
+					</View>
+					<View>
+						<Text style={{ color: Colors.danger, fontWeight: "bold", fontSize: 15 }}>{emaillog}</Text>
+					</View>
+					<View style={STYLES.inputContainer}>
+						<Icon
+							name='lock-outline'
+							color={Colors.grey}
+							size={20}
+							style={STYLES.inputIcon}
+						/>
+						<TextInput
+							name='password'
+							placeholder='Password'
+							style={STYLES.input}
+							secureTextEntry
+							onChangeText={text => setPassword(text)}
+							// values={values.password}
+							autoCorrect={false}
+							autoCapitalize='none'
+							autoCompleteType='password'
+						/>
+					</View>
+					<View>
+						<Text style={{ color: Colors.danger, fontWeight: "bold", fontSize: 15 }}>{passwordlog}</Text>
+					</View>
+					<View style={STYLES.inputContainer}>
+						<Icon
+							name='lock-outline'
+							color={Colors.grey}
+							size={20}
+							style={STYLES.inputIcon}
+						/>
+						<TextInput
+							name='confirm_password'
+							placeholder='Confirm Password'
+							style={STYLES.input}
+							secureTextEntry
+							onChangeText={text => setConfirm_Password(text)}
+							// values={values.confirm_password}
+							autoCorrect={false}
+							autoCapitalize='none'
+							autoCompleteType='password'
+						/>
+					</View>
+					<View>
+						<Text style={{ color: Colors.danger, fontWeight: "bold", fontSize: 15 }}>{confirm_passwordlog}</Text>
+					</View>
+					<TouchableOpacity>
+						<View style={STYLES.btnPrimary}>
+							<Text
+								style={{
+									color: "#fff",
+									fontWeight: "bold",
+									fontSize: 20,
+								}}
+								onPress={() => submit(user_Data, log_Setters)}
+							>
+								Sign Up
+							</Text>
+						</View>
+					</TouchableOpacity>
+					<View
+						style={{
+							marginVertical: 20,
+							flexDirection: "row",
+							justifyContent: "center",
+							alignItems: "center",
+						}}
+					>
+						<View style={STYLES.line}></View>
+						<Text style={{ marginHorizontal: 5, fontWeight: "bold" }}>
+							OR
 						</Text>
+						<View style={STYLES.line}></View>
 					</View>
-				</TouchableOpacity>
+					<View
+						style={{
+							flexDirection: "row",
+							justifyContent: "space-between",
+						}}
+					>
+						<View style={STYLES.btnSecondary}>
+							<TouchableOpacity onPress={() => ""}>
+								<Text style={{ fontWeight: "bold", fontSize: 18 }}>
+									Sign up with
+									<Image
+										style={STYLES.btnImage}
+										source={require("../../../assets/facebook.png")}
+									/>
+								</Text>
+							</TouchableOpacity>
+						</View>
+						<View style={{ width: 10 }}></View>
+						<View style={STYLES.btnSecondary}>
+							<TouchableOpacity onPress={() => ""}>
+								<Text style={{ fontWeight: "bold", fontSize: 18 }}>
+									Sign up with
+									<Image
+										style={STYLES.btnImage}
+										source={require("../../../assets/google.png")}
+									/>
+								</Text>
+							</TouchableOpacity>
+						</View>
+					</View>
+				</View>
 				<View
 					style={{
-						marginVertical: 20,
 						flexDirection: "row",
+						alignItems: "flex-end",
 						justifyContent: "center",
-						alignItems: "center",
+						marginTop: 40,
+						marginBottom: 20,
 					}}
 				>
-					<View style={STYLES.line}></View>
-					<Text style={{ marginHorizontal: 5, fontWeight: "bold" }}>
-						OR
-					</Text>
-					<View style={STYLES.line}></View>
-				</View>
-				<View
-					style={{
-						flexDirection: "row",
-						justifyContent: "space-between",
-					}}
-				>
-					<View style={STYLES.btnSecondary}>
-						<TouchableOpacity onPress={() => ""}>
-							<Text style={{ fontWeight: "bold", fontSize: 18 }}>
-								Sign up with
-								<Image
-									style={STYLES.btnImage}
-									source={require("../../../assets/facebook.png")}
-								/>
-							</Text>
-						</TouchableOpacity>
-					</View>
-					<View style={{ width: 10 }}></View>
-					<View style={STYLES.btnSecondary}>
-						<TouchableOpacity onPress={() => ""}>
-							<Text style={{ fontWeight: "bold", fontSize: 18 }}>
-								Sign up with
-								<Image
-									style={STYLES.btnImage}
-									source={require("../../../assets/google.png")}
-								/>
-							</Text>
-						</TouchableOpacity>
-					</View>
-				</View>
-			</View>
-
-			<View
-				style={{
-					flexDirection: "row",
-					alignItems: "flex-end",
-					justifyContent: "center",
-					marginTop: 40,
-					marginBottom: 20,
-				}}
-			>
-				<Text
-					style={{
-						color: Colors.grey,
-						fontSize: 18,
-						fontWeight: "bold",
-					}}
-				>
-					Already have an account ?
-				</Text>
-				<TouchableOpacity onPress={() => navigation.navigate("LogIn")}>
 					<Text
 						style={{
-							color: Colors.black,
+							color: Colors.grey,
 							fontSize: 18,
 							fontWeight: "bold",
 						}}
 					>
-						Login
+						Already have an account ?
 					</Text>
-				</TouchableOpacity>
-			</View>
-		<SafeAreaView>
-		<View><ModalTester isVisible={isVisible} /></View>
-		</SafeAreaView>
+					<TouchableOpacity onPress={() => navigation.navigate("LogIn")}>
+						<Text
+							style={{
+								color: Colors.black,
+								fontSize: 18,
+								fontWeight: "bold",
+							}}
+						>
+							Login
+						</Text>
+					</TouchableOpacity>
+				</View>
+				<SafeAreaView>
+					<View><ModalTester isVisible={isVisible} /></View>
+				</SafeAreaView>
+			</ScrollView>
 		</SafeAreaView>
 	);
 };
@@ -399,7 +392,7 @@ const style = StyleSheet.create({
 function validation(values) {
 	let result = {};
 	result.is_error = false;
-	let phone_pattern =/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+	let phone_pattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 	let email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 	// !first name
 	if (values.first_name == "") {
@@ -491,7 +484,7 @@ function submit(user_Data, log_Setters) {
 			.then(function (response) {
 				console.log(response.status);
 				if (response.status == 201) {
-					if (AsyncStorage.setItem("signup_token",response.data.signup_token)) {
+					if (AsyncStorage.setItem("signup_token", response.data.signup_token)) {
 						log_Setters.SetIsVisible(true);
 					}
 				}

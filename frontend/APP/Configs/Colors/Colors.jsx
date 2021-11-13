@@ -10,5 +10,6 @@ const Colors = {
 	dark: "#0c0c0c",
 	danger: "#ff5252",
 	rgba: "rgba(255, 129, 126, 0.5)",
+	profile: "rgba(153, 222, 240,1)"
 };
 export default Colors;

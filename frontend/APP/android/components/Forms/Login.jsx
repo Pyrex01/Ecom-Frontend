@@ -29,6 +29,7 @@ const Login = ({ navigation }) => {
 	let [email, SetEmail] = useState("");
 	let [password, SetPassword] = useState("");
 	let [log, SetLog] = useState("");
+	let [passlog, SetPassLog] = useState("");
 	let values = { email, password };
 	return (
 		<ScrollView>
@@ -54,12 +55,17 @@ const Login = ({ navigation }) => {
 						<Icon name="mail-outline" color={Colors.grey} size={20} style={STYLES.inputIcon} />
 						<TextInput placeholder="Email" onChangeText={text => SetEmail(text)} type="email" style={STYLES.input} />
 					</View>
+					<View>
+						<Text style={{ color: Colors.danger, fontWeight: "bold", fontSize: 15 }}>{log}</Text>
+					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon name="lock-outline" color={Colors.grey} size={20} style={STYLES.inputIcon} />
 						<TextInput placeholder="Password" onChangeText={text => SetPassword(text)} style={STYLES.input} secureTextEntry />
-						<Text>{log}</Text>
 					</View>
-					<TouchableOpacity onPress={() => loginSubmit(values, SetLog)}>
+					<View>
+						<Text style={{ color: Colors.danger, fontWeight: "bold", fontSize: 15 }}>{passlog}</Text>
+					</View>
+					<TouchableOpacity onPress={() => loginSubmit(values, SetLog, SetPassLog)}>
 						<View style={STYLES.btnPrimary}>
 							<Text style={{ color: "#fff", fontWeight: "bold", fontSize: 20, }}	>Log In	</Text>
 						</View>
@@ -96,14 +102,14 @@ const Login = ({ navigation }) => {
 	);
 }
 
-function loginSubmit(value, SetLog) {
+function loginSubmit(value, SetLog, SetPassLog) {
 	let email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 	if (!email_pattern.test(value.email)) {
 		SetLog("Please enter proper Email");
 		return;
 	}
 	if (value.password == "") {
-		SetLog("enter password please");
+		SetPassLog("Enter password please");
 		return;
 	}
 	else {

@@ -6,6 +6,7 @@ import { Platform } from "react-native";
 
 
 const App = () => {
+	return <Android/>
 	let component;
 	switch(Platform.OS){
 		case "android":

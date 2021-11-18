@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Text, View, TextInput, StyleSheet, TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { mainBackend } from "../../../Configs/MainBackend";
 import Colors from "../../../Configs/Colors/Colors";

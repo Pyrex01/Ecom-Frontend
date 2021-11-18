@@ -3,37 +3,6 @@ frontend/.expo/
 frontend/.expo-shared/
 frontend/.vscode/
 frontend/npm-debug.*
-frontend/*.jks
-frontend/*.p8
-frontend/*.p12
-frontend/*.key
-frontend/*.mobileprovision
-frontend/*.orig.*
-frontend/web-build/
-frontend/Shortcuts.txt
-frontend/Test/
-
-
-backend/Ecom/__pycache__/
-backend/rest_framework/__pycache__/
-backend/rest_framework/utils/__pycache__/
-backend/docs/migrations/__pycache__/
-backemd/rest_framework/schemas/__pycache__/
-backend/rest_framework/templatetags/__pycache__/
-backend/docs/__pycache__/
-backend/rest_framework/authtoken/__pycache__/
-backend/store/__pycache__/
-backend/store/migrations/__pycache__/
-backend/addressCollection/__pycache__/
-backend/addressCollection/migrations/__pycache__/
-backend/userManagement/__pycache__/
-backend/userManagement/migrations/__pycache__/
-
-node_modules
-
-#ignore __pycache__
-*.pyc
-.pyc
 
 # macOS
 frontend/DS_Store

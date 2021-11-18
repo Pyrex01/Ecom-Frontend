@@ -1,8 +1,9 @@
 import React from "react";
-import { StyleSheet, Image, StatusBar, View, FlatList, SafeAreaView, TouchableOpacity, Text, TouchableHighlight } from "react-native";
+import { Image, View, SafeAreaView, TouchableOpacity, Text, TouchableHighlight } from "react-native";
 import Constants from "expo-constants";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Icons from "react-native-vector-icons/AntDesign";
+import Iconss from "react-native-vector-icons/Ionicons";
 
 
 import Avataar from "../../../assets/Avatar.png"
@@ -16,22 +17,22 @@ const ProfilePage = (props) => {
         <SafeAreaView>
             <TouchableHighlight>
                 <View style={ProfileStyle.container}>
-                    <TouchableOpacity>
-                        <View style={STYLES.inputContainer}>
-                            <Image source={Avataar} style={{ height: 80, width: 100 }} />
-                            <Text style={{ fontsize: 40, fontWeight: "bold", paddingHorizontal: 20 }}>User's Name</Text>
-                        </View>
-                    </TouchableOpacity>
+                    <View style={ProfileStyle.View}>
+                        <Image source={Avataar} style={ProfileStyle.ProfileImage} />
+                        <TouchableOpacity>
+                            <Text style={[ProfileStyle.Font, ProfileStyle.FontSpace, ProfileStyle.ProfileName]}>User's Name</Text>
+                        </TouchableOpacity>
+                    </View>
 
                     <View style={ProfileStyle.Line} />
 
                     <TouchableOpacity>
-                        <View style={STYLES.inputContainer}>
-                            <Icon
-                                name='place'
+                        <View style={ProfileStyle.View}>
+                            <Iconss
+                                name='location-outline'
                                 color={Colors.grey}
                                 size={40}
-                                style={STYLES.inputIcon, ProfileStyle.IconSpace}
+                                style={ProfileStyle.IconSpace}
                             />
                             <Text style={[ProfileStyle.Font, ProfileStyle.FontSpace]} >Address</Text>
                         </View>
@@ -40,12 +41,12 @@ const ProfilePage = (props) => {
                     <View style={ProfileStyle.Line} />
 
                     <TouchableOpacity>
-                        <View style={STYLES.inputContainer}>
+                        <View style={ProfileStyle.View}>
                             <Icon
                                 name='favorite-border'
                                 color={Colors.grey}
                                 size={40}
-                                style={STYLES.inputIcon, ProfileStyle.IconSpace}
+                                style={ProfileStyle.IconSpace}
                             />
                             <Text style={[ProfileStyle.Font, ProfileStyle.FontSpace]} >Wish list</Text>
                         </View>
@@ -54,12 +55,12 @@ const ProfilePage = (props) => {
                     <View style={ProfileStyle.Line} />
 
                     <TouchableOpacity>
-                        <View style={STYLES.inputContainer}>
+                        <View style={ProfileStyle.View}>
                             <Icon
                                 name='shopping-cart'
                                 color={Colors.grey}
                                 size={40}
-                                style={STYLES.inputIcon, ProfileStyle.IconSpace}
+                                style={ProfileStyle.IconSpace}
                             />
                             <Text style={[ProfileStyle.Font, ProfileStyle.FontSpace]} >Orders</Text>
                         </View>
@@ -68,12 +69,12 @@ const ProfilePage = (props) => {
                     <View style={ProfileStyle.Line} />
 
                     <TouchableOpacity>
-                        <View style={STYLES.inputContainer}>
+                        <View style={ProfileStyle.View}>
                             <Icons
                                 name='customerservice'
                                 color={Colors.grey}
                                 size={40}
-                                style={STYLES.inputIcon, ProfileStyle.IconSpace}
+                                style={ProfileStyle.IconSpace}
                             />
                             <Text style={[ProfileStyle.Font, ProfileStyle.FontSpace]} >Complain</Text>
                         </View>

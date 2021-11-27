@@ -4,7 +4,7 @@ import {
 	Image,
 	SafeAreaView,
 	StyleSheet,
-	Text,
+	Text, 
 	View,
 	Platform,
 } from "react-native";

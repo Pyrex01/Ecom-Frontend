@@ -9,7 +9,8 @@ import BottomNavigator from "./Navigation/BotomNavigator";
 import SignUp from "./Forms/Signup";
 import Login from "./Forms/Login";
 import Colors from "../../Configs/Colors/Colors"
-import ProfilePage from './Screens/ProfilePage';
+import ProfilePage from './Screens/Profile/ProfilePage';
+import Address from './Screens/Profile/Address';
 
 const Stack = createStackNavigator();
 
@@ -21,12 +22,13 @@ export default function Android() {
 			<NavigationContainer>
 				<StatusBar backgroundColor={Colors.white} barStyle="dark-content" />
 				<Stack.Navigator screenOptions={{ headerShown: false }}>
-					{/* <Stack.Screen name="BoardScreen" component={OnBoardScreen} />
+					<Stack.Screen name="BoardScreen" component={OnBoardScreen} />
 					<Stack.Screen name="Home" component={BottomNavigator} />
 					<Stack.Screen name="LogIn" component={Login} />
 					<Stack.Screen name="DetailsScreen" component={DetailsScreen} />
-					<Stack.Screen name="SignUp" component={SignUp} /> */}
+					<Stack.Screen name="SignUp" component={SignUp} /> 
 					<Stack.Screen name="Profile" component={ProfilePage} />
+					<Stack.Screen name="Address" component={Address} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import "react-native-gesture-handler";
 import {} from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -147,7 +146,7 @@ const Test2 = ({ navigation }) => {
 
 					<TextInput	name='last_name' placeholder='Last Name' onChangeText={text => setLastName(text)}style={STYLES.input}/>
 					{/* <Text ref={NameError}> </Text> */}
-				</View>
+				</View> 
 				<View>
 					<Text>{last_namelog}</Text>
 				</View>
@@ -171,15 +170,6 @@ const Test2 = ({ navigation }) => {
 						<Picker.Item label='Female' value='2' />
 						<Picker.Item label='Others' value='0' />
 					</Picker>
-
-					{/* <TextInput
-							name="gender"
-							placeholder="Gender"
-							onChangeText={text => setGender(text)}
-							// values={values.last_name}
-							style={STYLES.input}
-						/>
-						<Text ref={NameError}> </Text> */}
 				</View>
 				<View>
 					<Text>{genderlog}</Text>

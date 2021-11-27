@@ -6,10 +6,10 @@ import Icons from "react-native-vector-icons/AntDesign";
 import Iconss from "react-native-vector-icons/Ionicons";
 
 
-import Avataar from "../../../assets/Avatar.png"
-import Colors from './../../../Configs/Colors/Colors';
-import STYLES from './../../../Configs/Style/formStyles';
-import ProfileStyle from '../../../Configs/Style/ProfileStyle';
+import Avataar from "../../../../assets/Avatar.png"
+import Colors from '../../../../Configs/Colors/Colors';
+import ProfileStyle from '../../../../Configs/Style/ProfileStyle';
+// import STYLES from '../../../../Configs/Style/formStyles';
 
 
 const ProfilePage = (props) => {

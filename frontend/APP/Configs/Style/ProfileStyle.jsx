@@ -6,9 +6,9 @@ import Colors from "../Colors/Colors";
 const ProfileStyle = StyleSheet.create({
     container: {
 
-        backgroundColor: Colors.profile,
         ...Platform.select({
             android: {
+                backgroundColor: Colors.profile,
                 marginTop: 20,
                 padding: 60,
                 paddingVertical: 80,
@@ -27,12 +27,14 @@ const ProfileStyle = StyleSheet.create({
             },
 
             default: {
+                backgroundColor: Colors.rgba,
                 flex: 1,
-                top: 50,
+                top: 30,
                 padding: 80,
                 paddingTop: 30,
                 paddingVertical: 100,
                 paddingHorizontal: 30,
+                paddingBottom: 150,
                 borderRadius: 30,
                 shadowColor: Colors.black,
                 shadowOffset: {
@@ -43,6 +45,12 @@ const ProfileStyle = StyleSheet.create({
                 shadowOpacity: 0.8,
                 shadowRadius: 40,
                 elevation: 15,
+
+                bottom: 50,
+                left: 250,
+                right: 80,
+                width: "70%",
+
             },
         }),
     },
@@ -50,7 +58,7 @@ const ProfileStyle = StyleSheet.create({
 
         ...Platform.select({
             android: {
-                fontSize: 22,
+                fontSize: 15,
                 // paddingHorizontal: 50,
             },
 
@@ -82,6 +90,7 @@ const ProfileStyle = StyleSheet.create({
             android: {
                 backgroundColor: Colors.black,
                 height: 1,
+                width: "100%",
             },
             default: {
                 backgroundColor: Colors.grey,

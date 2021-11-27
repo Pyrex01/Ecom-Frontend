@@ -3,6 +3,7 @@ frontend/.expo/
 frontend/.expo-shared/
 frontend/.vscode/
 frontend/npm-debug.*
+frontend/personal.txt
 
 # macOS
 frontend/DS_Store

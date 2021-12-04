@@ -16,7 +16,7 @@ export default function ModalTester(props) {
 	let [otpwarning, Setotpwarning] = useState("");
 	return (
 		<View style={styles.container}>
-			<Modal /* isVisible={props.isVisible} */ style={styles.container} backdropColor="white" backdropOpacity="0.80" deviceHeight="100" >
+			<Modal isVisible={props.isVisible} style={styles.container} backdropColor="white" backdropOpacity="0.80" deviceHeight="100" >
 				<View style={styles.View}>
 					<TextInput onChangeText={text => setOtp(text)} placeholder='Enter the OTP' />
 					<Text style={{ color: Colors.danger }}>{otpwarning}</Text>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "react-native-gesture-handler";
-import {} from "react-native-gesture-handler";
+import { } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
@@ -39,7 +39,7 @@ const Test2 = ({ navigation }) => {
 	let [genderlog, setGenderLog] = useState("");
 	let [passwordlog, setPasswordLog] = useState("");
 	let [confirm_passwordlog, setConfirmPasswordLog] = useState("");
-	let [isVisible, SetIsVisible] = useState(true);
+	let [isVisible, SetIsVisible] = useState(false);
 	// const [selectedValue, setSelectedValue] = useState("1,2,0");
 	let user_Data = {
 		first_name,
@@ -64,7 +64,7 @@ const Test2 = ({ navigation }) => {
 	// const { handleChange, values, errors, handleSubmit } = useForm(validate);
 
 	return (
-		<SafeAreaView			style={{				paddingHorizontal: 40,				flex: 1,				backgroundColor: Colors.white,			}}
+		<SafeAreaView style={{ paddingHorizontal: 40, flex: 1, backgroundColor: Colors.white, }}
 		>
 			<View style={{ backgroundColor: Colors.white, flex: 1 }}>
 				<View style={style.header}>
@@ -142,11 +142,11 @@ const Test2 = ({ navigation }) => {
 					<Text>{first_namelog}</Text>
 				</View>
 				<View style={STYLES.inputContainer}>
-					<Icon name='person-outline'	color={Colors.grey}	size={20} style={STYLES.inputIcon}/>
+					<Icon name='person-outline' color={Colors.grey} size={20} style={STYLES.inputIcon} />
 
-					<TextInput	name='last_name' placeholder='Last Name' onChangeText={text => setLastName(text)}style={STYLES.input}/>
+					<TextInput name='last_name' placeholder='Last Name' onChangeText={text => setLastName(text)} style={STYLES.input} />
 					{/* <Text ref={NameError}> </Text> */}
-				</View> 
+				</View>
 				<View>
 					<Text>{last_namelog}</Text>
 				</View>
@@ -351,9 +351,9 @@ const Test2 = ({ navigation }) => {
 					</Text>
 				</TouchableOpacity>
 			</View>
-		<SafeAreaView>
-		<View><ModalTester isVisible={isVisible} /></View>
-		</SafeAreaView>
+			<SafeAreaView>
+				<View><ModalTester isVisible={isVisible} /></View>
+			</SafeAreaView>
 		</SafeAreaView>
 	);
 };
@@ -373,7 +373,7 @@ const style = StyleSheet.create({
 function validation(values) {
 	let result = {};
 	result.is_error = false;
-	let phone_pattern =/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+	let phone_pattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 	let email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 	// !first name
 	if (values.first_name == "") {
@@ -465,7 +465,7 @@ function submit(user_Data, log_Setters) {
 			.then(function (response) {
 				console.log(response.status);
 				if (response.status == 201) {
-					if (AsyncStorage.setItem("signup_token",response.data.signup_token)) {
+					if (AsyncStorage.setItem("signup_token", response.data.signup_token)) {
 						log_Setters.SetIsVisible(true);
 					}
 				}

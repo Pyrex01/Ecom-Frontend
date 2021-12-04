@@ -84,7 +84,7 @@ const AddressStyle = StyleSheet.create({
         })
     },
     addresscol: {
-        top: 10,
+        // top: 10,
         ...Platform.select({
             android: {
 
@@ -111,7 +111,7 @@ const AddressStyle = StyleSheet.create({
         }),
     },
 
-    //! ------------------------Fonts/Text------------------------
+    //!------------------------Fonts/Text------------------------
 
     Font: {
         ...Platform.select({
@@ -134,12 +134,13 @@ const AddressStyle = StyleSheet.create({
             },
             default: {
                 color: Colors.black,
+                backgroundColor: Colors.white,
                 fontSize: 18,
                 fontWeight: "bold",
 
                 borderWidth: 1.5,
                 borderRadius: 5,
-                borderColor: Colors.grey,
+                borderColor: Colors.black,
 
                 paddingVertical: 10,
                 marginVertical: 5,
@@ -177,6 +178,22 @@ const AddressStyle = StyleSheet.create({
                 backgroundColor: Colors.grey,
                 height: 0.5,
                 width: "50%",
+            }
+        })
+    },
+
+    //!------------------------error------------------------
+    errors: {
+        ...Platform.select({
+            android: {
+
+            },
+            default: {
+                color: Colors.danger,
+                fontSize: 18,
+                fontWeight: "bold",
+                top: 10,
+                left: 10,
             }
         })
     },

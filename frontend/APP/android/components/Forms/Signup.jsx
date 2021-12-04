@@ -66,294 +66,296 @@ const Test2 = ({ navigation }) => {
 	return (
 		<SafeAreaView style={{ paddingHorizontal: 40, flex: 1, backgroundColor: Colors.white, }}
 		>
-			<View style={{ backgroundColor: Colors.white, flex: 1 }}>
-				<View style={style.header}>
-					<Icon
-						name='arrow-back-ios'
-						size={28}
-						onPress={navigation.goBack}
-					/>
-					<Text style={{ fontSize: 20, fontWeight: "bold" }}>
-						SignUp
-					</Text>
-				</View>
-			</View>
-			<View style={{ flexDirection: "row", marginTop: 60 }}>
-				<Text
-					style={{
-						fontWeight: "bold",
-						fontSize: 32,
-						color: Colors.dark,
-					}}
-				>
-					Shopping
-				</Text>
-				<Text
-					style={{
-						fontWeight: "bold",
-						fontSize: 32,
-						color: Colors.secondary,
-					}}
-				>
-					Bazaar
-				</Text>
-			</View>
-
-			<View style={{ marginTop: 40 }}>
-				<Text
-					style={{
-						fontSize: 42,
-						textAlign: "center",
-						fontWeight: "bold",
-						color: Colors.dark,
-					}}
-				>
-					Welcome...
-				</Text>
-				<Text
-					style={{
-						fontSize: 19,
-						textAlign: "center",
-						fontWeight: "bold",
-						color: Colors.grey,
-					}}
-				>
-					Sign up to continue
-				</Text>
-			</View>
-			<View style={{ marginTop: 20 }}>
-				<View style={STYLES.inputContainer}>
-					<Icon
-						name='person-outline'
-						color={Colors.grey}
-						size={20}
-						style={STYLES.inputIcon}
-					/>
-
-					<TextInput
-						name='first_name'
-						placeholder='First Name'
-						onChangeText={text => setFirstName(text)}
-						// values={values.first_name}
-						style={STYLES.input}
-					/>
-				</View>
-				<View>
-					<Text>{first_namelog}</Text>
-				</View>
-				<View style={STYLES.inputContainer}>
-					<Icon name='person-outline' color={Colors.grey} size={20} style={STYLES.inputIcon} />
-
-					<TextInput name='last_name' placeholder='Last Name' onChangeText={text => setLastName(text)} style={STYLES.input} />
-					{/* <Text ref={NameError}> </Text> */}
-				</View>
-				<View>
-					<Text>{last_namelog}</Text>
-				</View>
-				<View style={STYLES.inputContainer}>
-					<Icon
-						name='person-outline'
-						color={Colors.grey}
-						size={20}
-						style={STYLES.inputIcon}
-					/>
-
-					<Picker
-						selectedValue={gender}
-						style={{ height: 50, width: 150 }}
-						onValueChange={(itemValue, itemIndex) =>
-							setGender(itemValue)
-						}
-					>
-						<Picker.Item label='Select' value='' />
-						<Picker.Item label='Male' value='1' />
-						<Picker.Item label='Female' value='2' />
-						<Picker.Item label='Others' value='0' />
-					</Picker>
-				</View>
-				<View>
-					<Text>{genderlog}</Text>
-				</View>
-				<View style={STYLES.inputContainer}>
-					<Icon
-						name='phone'
-						color={Colors.grey}
-						size={20}
-						style={STYLES.inputIcon}
-					/>
-
-					<TextInput
-						name='phone'
-						placeholder='Phone'
-						onChangeText={text => setPhone(text)}
-						// values={values.phone}
-						style={STYLES.input}
-						autoCompleteType='tel'
-						keyboardType='number-pad'
-					/>
-				</View>
-				<View>
-					<Text>{phonelog}</Text>
-				</View>
-				<View style={STYLES.inputContainer}>
-					<Icon
-						name='mail-outline'
-						color={Colors.grey}
-						size={20}
-						style={STYLES.inputIcon}
-					/>
-					<TextInput
-						name='email'
-						placeholder='Email'
-						onChangeText={text => setEmail(text)}
-						// values={values.email}
-						style={STYLES.input}
-						keyboardType='email-address'
-						autoCompleteType='email'
-						autoCorrect={false}
-						autoCapitalize='none'
-					/>
-				</View>
-				<View>
-					<Text>{emaillog}</Text>
-				</View>
-				<View style={STYLES.inputContainer}>
-					<Icon
-						name='lock-outline'
-						color={Colors.grey}
-						size={20}
-						style={STYLES.inputIcon}
-					/>
-					<TextInput
-						name='password'
-						placeholder='Password'
-						style={STYLES.input}
-						secureTextEntry
-						onChangeText={text => setPassword(text)}
-						// values={values.password}
-						autoCorrect={false}
-						autoCapitalize='none'
-						autoCompleteType='password'
-					/>
-				</View>
-				<View>
-					<Text>{passwordlog}</Text>
-				</View>
-				<View style={STYLES.inputContainer}>
-					<Icon
-						name='lock-outline'
-						color={Colors.grey}
-						size={20}
-						style={STYLES.inputIcon}
-					/>
-					<TextInput
-						name='confirm_password'
-						placeholder='Confirm Password'
-						style={STYLES.input}
-						secureTextEntry
-						onChangeText={text => setConfirm_Password(text)}
-						// values={values.confirm_password}
-						autoCorrect={false}
-						autoCapitalize='none'
-						autoCompleteType='password'
-					/>
-				</View>
-				<View>
-					<Text>{confirm_passwordlog}</Text>
-				</View>
-				<TouchableOpacity>
-					<View style={STYLES.btnPrimary}>
-						<Text
-							style={{
-								color: "#fff",
-								fontWeight: "bold",
-								fontSize: 20,
-							}}
-							onPress={() => submit(user_Data, log_Setters)}
-						>
-							Sign Up
+			<ScrollView>
+				<View style={{ backgroundColor: Colors.white, flex: 1 }}>
+					<View style={style.header}>
+						<Icon
+							name='arrow-back-ios'
+							size={28}
+							onPress={navigation.goBack}
+						/>
+						<Text style={{ fontSize: 20, fontWeight: "bold" }}>
+							SignUp
 						</Text>
 					</View>
-				</TouchableOpacity>
-				<View
-					style={{
-						marginVertical: 20,
-						flexDirection: "row",
-						justifyContent: "center",
-						alignItems: "center",
-					}}
-				>
-					<View style={STYLES.line}></View>
-					<Text style={{ marginHorizontal: 5, fontWeight: "bold" }}>
-						OR
-					</Text>
-					<View style={STYLES.line}></View>
 				</View>
-				<View
-					style={{
-						flexDirection: "row",
-						justifyContent: "space-between",
-					}}
-				>
-					<View style={STYLES.btnSecondary}>
-						<TouchableOpacity onPress={() => ""}>
-							<Text style={{ fontWeight: "bold", fontSize: 18 }}>
-								Sign up with
-								<Image
-									style={STYLES.btnImage}
-									source={require("../../../assets/facebook.png")}
-								/>
-							</Text>
-						</TouchableOpacity>
-					</View>
-					<View style={{ width: 10 }}></View>
-					<View style={STYLES.btnSecondary}>
-						<TouchableOpacity onPress={() => ""}>
-							<Text style={{ fontWeight: "bold", fontSize: 18 }}>
-								Sign up with
-								<Image
-									style={STYLES.btnImage}
-									source={require("../../../assets/google.png")}
-								/>
-							</Text>
-						</TouchableOpacity>
-					</View>
-				</View>
-			</View>
-
-			<View
-				style={{
-					flexDirection: "row",
-					alignItems: "flex-end",
-					justifyContent: "center",
-					marginTop: 40,
-					marginBottom: 20,
-				}}
-			>
-				<Text
-					style={{
-						color: Colors.grey,
-						fontSize: 18,
-						fontWeight: "bold",
-					}}
-				>
-					Already have an account ?
-				</Text>
-				<TouchableOpacity onPress={() => navigation.navigate("LogIn")}>
+				<View style={{ flexDirection: "row", marginTop: 60 }}>
 					<Text
 						style={{
-							color: Colors.black,
+							fontWeight: "bold",
+							fontSize: 32,
+							color: Colors.dark,
+						}}
+					>
+						Shopping
+					</Text>
+					<Text
+						style={{
+							fontWeight: "bold",
+							fontSize: 32,
+							color: Colors.secondary,
+						}}
+					>
+						Bazaar
+					</Text>
+				</View>
+
+				<View style={{ marginTop: 40 }}>
+					<Text
+						style={{
+							fontSize: 42,
+							textAlign: "center",
+							fontWeight: "bold",
+							color: Colors.dark,
+						}}
+					>
+						Welcome...
+					</Text>
+					<Text
+						style={{
+							fontSize: 19,
+							textAlign: "center",
+							fontWeight: "bold",
+							color: Colors.grey,
+						}}
+					>
+						Sign up to continue
+					</Text>
+				</View>
+				<View style={{ marginTop: 20 }}>
+					<View style={STYLES.inputContainer}>
+						<Icon
+							name='person-outline'
+							color={Colors.grey}
+							size={20}
+							style={STYLES.inputIcon}
+						/>
+
+						<TextInput
+							name='first_name'
+							placeholder='First Name'
+							onChangeText={text => setFirstName(text)}
+							// values={values.first_name}
+							style={STYLES.input}
+						/>
+					</View>
+					<View>
+						<Text>{first_namelog}</Text>
+					</View>
+					<View style={STYLES.inputContainer}>
+						<Icon name='person-outline' color={Colors.grey} size={20} style={STYLES.inputIcon} />
+
+						<TextInput name='last_name' placeholder='Last Name' onChangeText={text => setLastName(text)} style={STYLES.input} />
+						{/* <Text ref={NameError}> </Text> */}
+					</View>
+					<View>
+						<Text>{last_namelog}</Text>
+					</View>
+					<View style={STYLES.inputContainer}>
+						<Icon
+							name='person-outline'
+							color={Colors.grey}
+							size={20}
+							style={STYLES.inputIcon}
+						/>
+
+						<Picker
+							selectedValue={gender}
+							style={{ height: 50, width: 150 }}
+							onValueChange={(itemValue, itemIndex) =>
+								setGender(itemValue)
+							}
+						>
+							<Picker.Item label='Select' value='' />
+							<Picker.Item label='Male' value='1' />
+							<Picker.Item label='Female' value='2' />
+							<Picker.Item label='Others' value='0' />
+						</Picker>
+					</View>
+					<View>
+						<Text>{genderlog}</Text>
+					</View>
+					<View style={STYLES.inputContainer}>
+						<Icon
+							name='phone'
+							color={Colors.grey}
+							size={20}
+							style={STYLES.inputIcon}
+						/>
+
+						<TextInput
+							name='phone'
+							placeholder='Phone'
+							onChangeText={text => setPhone(text)}
+							// values={values.phone}
+							style={STYLES.input}
+							autoCompleteType='tel'
+							keyboardType='number-pad'
+						/>
+					</View>
+					<View>
+						<Text>{phonelog}</Text>
+					</View>
+					<View style={STYLES.inputContainer}>
+						<Icon
+							name='mail-outline'
+							color={Colors.grey}
+							size={20}
+							style={STYLES.inputIcon}
+						/>
+						<TextInput
+							name='email'
+							placeholder='Email'
+							onChangeText={text => setEmail(text)}
+							// values={values.email}
+							style={STYLES.input}
+							keyboardType='email-address'
+							autoCompleteType='email'
+							autoCorrect={false}
+							autoCapitalize='none'
+						/>
+					</View>
+					<View>
+						<Text>{emaillog}</Text>
+					</View>
+					<View style={STYLES.inputContainer}>
+						<Icon
+							name='lock-outline'
+							color={Colors.grey}
+							size={20}
+							style={STYLES.inputIcon}
+						/>
+						<TextInput
+							name='password'
+							placeholder='Password'
+							style={STYLES.input}
+							secureTextEntry
+							onChangeText={text => setPassword(text)}
+							// values={values.password}
+							autoCorrect={false}
+							autoCapitalize='none'
+							autoCompleteType='password'
+						/>
+					</View>
+					<View>
+						<Text>{passwordlog}</Text>
+					</View>
+					<View style={STYLES.inputContainer}>
+						<Icon
+							name='lock-outline'
+							color={Colors.grey}
+							size={20}
+							style={STYLES.inputIcon}
+						/>
+						<TextInput
+							name='confirm_password'
+							placeholder='Confirm Password'
+							style={STYLES.input}
+							secureTextEntry
+							onChangeText={text => setConfirm_Password(text)}
+							// values={values.confirm_password}
+							autoCorrect={false}
+							autoCapitalize='none'
+							autoCompleteType='password'
+						/>
+					</View>
+					<View>
+						<Text>{confirm_passwordlog}</Text>
+					</View>
+					<TouchableOpacity>
+						<View style={STYLES.btnPrimary}>
+							<Text
+								style={{
+									color: "#fff",
+									fontWeight: "bold",
+									fontSize: 20,
+								}}
+								onPress={() => submit(user_Data, log_Setters)}
+							>
+								Sign Up
+							</Text>
+						</View>
+					</TouchableOpacity>
+					<View
+						style={{
+							marginVertical: 20,
+							flexDirection: "row",
+							justifyContent: "center",
+							alignItems: "center",
+						}}
+					>
+						<View style={STYLES.line}></View>
+						<Text style={{ marginHorizontal: 5, fontWeight: "bold" }}>
+							OR
+						</Text>
+						<View style={STYLES.line}></View>
+					</View>
+					<View
+						style={{
+							flexDirection: "row",
+							justifyContent: "space-between",
+						}}
+					>
+						<View style={STYLES.btnSecondary}>
+							<TouchableOpacity onPress={() => ""}>
+								<Text style={{ fontWeight: "bold", fontSize: 18 }}>
+									Sign up with
+									<Image
+										style={STYLES.btnImage}
+										source={require("../../../assets/facebook.png")}
+									/>
+								</Text>
+							</TouchableOpacity>
+						</View>
+						<View style={{ width: 10 }}></View>
+						<View style={STYLES.btnSecondary}>
+							<TouchableOpacity onPress={() => ""}>
+								<Text style={{ fontWeight: "bold", fontSize: 18 }}>
+									Sign up with
+									<Image
+										style={STYLES.btnImage}
+										source={require("../../../assets/google.png")}
+									/>
+								</Text>
+							</TouchableOpacity>
+						</View>
+					</View>
+				</View>
+
+				<View
+					style={{
+						flexDirection: "row",
+						alignItems: "flex-end",
+						justifyContent: "center",
+						marginTop: 40,
+						marginBottom: 20,
+					}}
+				>
+					<Text
+						style={{
+							color: Colors.grey,
 							fontSize: 18,
 							fontWeight: "bold",
 						}}
 					>
-						Login
+						Already have an account ?
 					</Text>
-				</TouchableOpacity>
-			</View>
-			<SafeAreaView>
-				<View><ModalTester isVisible={isVisible} /></View>
-			</SafeAreaView>
+					<TouchableOpacity onPress={() => navigation.navigate("LogIn")}>
+						<Text
+							style={{
+								color: Colors.black,
+								fontSize: 18,
+								fontWeight: "bold",
+							}}
+						>
+							Login
+						</Text>
+					</TouchableOpacity>
+				</View>
+				<SafeAreaView>
+					<View><ModalTester isVisible={isVisible} /></View>
+				</SafeAreaView>
+			</ScrollView>
 		</SafeAreaView>
 	);
 };

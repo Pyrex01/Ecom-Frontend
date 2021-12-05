@@ -427,11 +427,6 @@ function validation(values) {
 		result.is_error = true;
 		result.confirm_passwordlog = "Password does not match";
 	}
-
-	/* // !photo
-	if (values.photo == "") {
-		result.photo = "Enter your photo here";
-	} */
 	return result;
 }
 

@@ -22,7 +22,14 @@ export default function Address({ navigation }) {
     let [last_namelog, setLastNameLog] = useState("");
     let [phonelog, setPhoneLog] = useState("");
     let [emaillog, setEmailLog] = useState("");
-    let [genderlog, setGenderLog] = useState("");
+    let [homelog, setHomeLog] = useState("");
+    let [arealog, setAreaLog] = useState("");
+    let [landmarklog, setLandmarkLog] = useState("");
+    let [citylog, setCityLog] = useState("");
+    let [ziplog, setZipLog] = useState("");
+    let [statelog, setStateLog] = useState("");
+    let [addressTypelog, setAddressTypeLog] = useState("");
+
 
     let user_Data = {
         first_name,
@@ -36,6 +43,7 @@ export default function Address({ navigation }) {
         state,
         addressType,
         zip
+
     };
 
     let log_Setters = {
@@ -43,7 +51,14 @@ export default function Address({ navigation }) {
         setLastNameLog,
         setPhoneLog,
         setEmailLog,
-        setGenderLog
+        setHomeLog,
+        setAreaLog,
+        setCityLog,
+        setLandmarkLog,
+        setStateLog,
+        setAddressTypeLog,
+        setZipLog
+
     };
 
     return (
@@ -59,6 +74,7 @@ export default function Address({ navigation }) {
                                 onChangeText={text => setFirstName(text)}
                                 style={AddressStyle.Text}
                             />
+                            <Text style={AddressStyle.errors}>{first_namelog}</Text>
                         </View>
                         <View style={AddressStyle.addresscol}>
                             <Text style={AddressStyle.addresslabel}>Last Name</Text>
@@ -66,6 +82,7 @@ export default function Address({ navigation }) {
                                 name='last_name'
                                 onChangeText={text => setLastName(text)}
                                 style={AddressStyle.Text} />
+                            <Text style={AddressStyle.errors}>{last_namelog}</Text>
                         </View>
                     </View>
                     {/* //! --------------------------email/phone---------------------------- */}
@@ -77,6 +94,7 @@ export default function Address({ navigation }) {
                                 onChangeText={text => setPhone(text)}
                                 style={AddressStyle.Text}
                             />
+                            <Text style={AddressStyle.errors}>{phonelog}</Text>
                         </View>
                         <View style={AddressStyle.addresscol}>
                             <Text style={AddressStyle.addresslabel}>Email</Text>
@@ -84,6 +102,7 @@ export default function Address({ navigation }) {
                                 name='email'
                                 onChangeText={text => setEmail(text)}
                                 style={AddressStyle.Text} />
+                            <Text style={AddressStyle.errors}>{emaillog}</Text>
                         </View>
                     </View>
                     {/* //! --------------------------home/area------------------------------------ */}
@@ -94,6 +113,7 @@ export default function Address({ navigation }) {
                                 name='address'
                                 onChangeText={text => setHome(text)}
                                 style={AddressStyle.Text} />
+                            <Text style={AddressStyle.errors}>{homelog}</Text>
                         </View>
                     </View>
                     <View style={AddressStyle.SingleAddress}>
@@ -103,6 +123,7 @@ export default function Address({ navigation }) {
                                 name='address'
                                 onChangeText={text => setArea(text)}
                                 style={AddressStyle.Text} />
+                            <Text style={AddressStyle.errors}>{arealog}</Text>
                         </View>
                     </View>
                     {/* //!--------------------------landmark/town---------------------------- */}
@@ -114,6 +135,7 @@ export default function Address({ navigation }) {
                                 onChangeText={text => setLandmark(text)}
                                 style={AddressStyle.Text}
                             />
+                            <Text style={AddressStyle.errors}>{landmarklog}</Text>
                         </View>
                         <View style={AddressStyle.addresscol}>
                             <Text style={AddressStyle.addresslabel}>Town/City</Text>
@@ -121,6 +143,7 @@ export default function Address({ navigation }) {
                                 name='email'
                                 onChangeText={text => setCity(text)}
                                 style={AddressStyle.Text} />
+                            <Text style={AddressStyle.errors}>{citylog}</Text>
                         </View>
                     </View>
                     {/* //!--------------------------state/pincode---------------------------- */}
@@ -131,6 +154,7 @@ export default function Address({ navigation }) {
                                 name='email'
                                 onChangeText={text => setZip(text)}
                                 style={AddressStyle.Text} />
+                            <Text style={AddressStyle.errors}>{ziplog}</Text>
                         </View>
                         <View style={AddressStyle.addresscol}>
                             <Text style={AddressStyle.addresslabel}>State / Province / Region</Text>
@@ -146,6 +170,7 @@ export default function Address({ navigation }) {
                                 <Picker.Item label='ANDHRA PRADESH' value='ANDHRA PRADESH' />
                                 <Picker.Item label='ARUNACHAL PRADESH' value='ARUNACHAL PRADESH' />
                             </Picker>
+                            <Text style={AddressStyle.errors}>{statelog}</Text>
                         </View>
                     </View>
                     {/* //! --------------------------address types---------------------------- */}
@@ -163,48 +188,111 @@ export default function Address({ navigation }) {
                                 <Picker.Item label='Home/Residence ( 7am - 9pm delivery )' value='Home' />
                                 <Picker.Item label='Office/Commercial ( 10am - 6pm delivery )' value='Office' />
                             </Picker>
+                            <Text style={AddressStyle.errors}>{addressTypelog}</Text>
                         </View>
+                    </View>
+                    <View style={AddressStyle.address}>
+                        <TouchableOpacity style={[AddressStyle.button]} onPress={() => submit(user_Data, log_Setters)} >
+                            <Text style={AddressStyle.buttonText}
+                            >Save Address</Text>
+                        </TouchableOpacity>
                     </View>
                 </ScrollView>
             </View>
+
         </SafeAreaView>
     );
 }
-
-
 function validation(values) {
     let result = {};
     result.is_error = false;
     let phone_pattern = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
     let email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    // !first name
-    if (values.first_name == "") {
+    if (values.first_name === "") {
         result.is_error = true;
-        result.first_namelog = "First Name Required";
+        result.first_name = "First name is required";
     }
-    // !last name
-    if (values.last_name == "") {
+    if (values.last_name === "") {
         result.is_error = true;
-        result.last_namelog = "Last Name Required";
+        result.last_name = "Last name is required";
     }
-    // !gender
-    if (values.gender == "") {
+    if (values.phone === "") {
         result.is_error = true;
-        result.genderlog = "Please select the gender";
+        result.phone = "Phone is required";
     }
-    // !Phone
-    if (values.phone == "") {
+    if (values.email === "") {
         result.is_error = true;
-        result.phonelog = "Phone number is required";
-    } else if (!phone_pattern.test(values.phone)) {
-        result.is_error = true;
-        result.phonelog = " Phone Number is not valid";
+        result.email = "Email is required";
     }
-    // !email
-    if (!email_pattern.test(values.email)) {
+    if (values.email !== "" && !email_pattern.test(values.email)) {
         result.is_error = true;
-        result.emaillog = "Email id is invalid";
+        result.email = "Email is not valid";
+    }
+    if (values.phone !== "" && !phone_pattern.test(values.phone)) {
+        result.is_error = true;
+        result.phone = "Phone number is not valid";
+    }
+    if (values.home === "") {
+        result.is_error = true;
+        result.home = "Field required";
+    }
+    if (values.area === "") {
+
+        result.is_error = true;
+        result.area = "Field required";
+    }
+    if (values.city === "") {
+        result.is_error = true;
+        result.city = "City is required";
+    }
+    if (values.zip === "") {
+        result.is_error = true;
+        result.zip = "Pincode is required";
+    }
+    if (values.state === "") {
+        result.is_error = true;
+        result.state = "State is required";
+    }
+    if (values.addressType === "") {
+        result.is_error = true;
+        result.addressType = "Address type is required";
+    }
+    if (values.landmark === "") {
+        result.is_error = true;
+        result.landmark = "Landmark is required";
     }
 
     return result;
+}
+
+function submit(user_Data, log_Setters) {
+    let result = validation(user_Data);
+    if (result.is_error) {
+        log_Setters.setAreaLog(result.area);
+        log_Setters.setAddressTypeLog(result.addressType);
+        log_Setters.setCityLog(result.city);
+        log_Setters.setEmailLog(result.email);
+        log_Setters.setFirstNameLog(result.first_name);
+        log_Setters.setHomeLog(result.home);
+        log_Setters.setLandmarkLog(result.landmark);
+        log_Setters.setLastNameLog(result.last_name);
+        log_Setters.setPhoneLog(result.phone);
+        log_Setters.setStateLog(result.state);
+        log_Setters.setZipLog(result.zip);
+
+    } else {
+        log_Setters.setAreaLog("");
+        log_Setters.setAddressTypeLog("");
+        log_Setters.setCityLog("");
+        log_Setters.setEmailLog("");
+        log_Setters.setFirstNameLog("");
+        log_Setters.setHomeLog("");
+        log_Setters.setLandmarkLog("");
+        log_Setters.setLastNameLog("");
+        log_Setters.setPhoneLog("");
+        log_Setters.setStateLog("");
+        log_Setters.setZipLog("");
+        console.log("success");
+
+    }
 }

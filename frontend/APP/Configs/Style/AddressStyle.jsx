@@ -168,7 +168,7 @@ const AddressStyle = StyleSheet.create({
             }
         })
     },
-
+    //!------------------------Line------------------------
     Line: {
         top: 10,
         ...Platform.select({
@@ -190,10 +190,58 @@ const AddressStyle = StyleSheet.create({
             },
             default: {
                 color: Colors.danger,
+                fontSize: 15,
+                fontWeight: "bold",
+                top: 10,
+                left: 10,
+            }
+        })
+    },
+    //!------------------------Buttons------------------------
+    buttonText: {
+        ...Platform.select({
+            android: {
+            },
+            default: {
+                color: Colors.white,
                 fontSize: 18,
                 fontWeight: "bold",
                 top: 10,
                 left: 10,
+            }
+        })
+    },
+    button: {
+        ...Platform.select({
+            android: {
+            },
+            default: {
+                flexDirection: "row",
+                justifyContent: "left",
+                alignItems: "left",
+                backgroundColor: Colors.primary,
+                borderColor: Colors.black,
+                borderRadius: 10,
+                borderWidth: 1,
+                paddingTop: 20,
+                paddingRight: 80,
+                paddingLeft: 80,
+                paddingBottom: 20,
+                bottom: 10,
+                /*  
+                marginVertical: 5,
+                paddingHorizontal: 50,
+                marginHorizontal: 10,               
+                left: 10, 
+                paddingVertical: 10,
+                paddingTop: 20,
+                paddingRight: 80,
+                paddingLeft: 80,
+                paddingBottom: 80,
+                padding: 10,
+                */
+                /* left: 20,
+                right: 80, */
             }
         })
     },

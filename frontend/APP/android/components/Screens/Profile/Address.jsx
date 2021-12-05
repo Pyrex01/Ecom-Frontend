@@ -112,7 +112,10 @@ export default function Address({ navigation }) {
                             <TextInput
                                 name='address'
                                 onChangeText={text => setHome(text)}
-                                style={AddressStyle.Text} />
+                                style={AddressStyle.Text}
+                                multiline={true}
+                                returnKeyType="next"
+                            />
                             <Text style={AddressStyle.errors}>{homelog}</Text>
                         </View>
                     </View>
@@ -122,7 +125,9 @@ export default function Address({ navigation }) {
                             <TextInput
                                 name='address'
                                 onChangeText={text => setArea(text)}
-                                style={AddressStyle.Text} />
+                                style={AddressStyle.Text}
+                                multiline={true}
+                            />
                             <Text style={AddressStyle.errors}>{arealog}</Text>
                         </View>
                     </View>

@@ -9,11 +9,13 @@ const ProfileStyle = StyleSheet.create({
         ...Platform.select({
             android: {
                 backgroundColor: Colors.profile,
+
                 marginTop: 20,
                 padding: 60,
                 paddingVertical: 80,
                 paddingHorizontal: 20,
                 paddingTop: 50,
+                
                 borderRadius: 50,
                 shadowColor: Colors.black,
                 shadowOffset: {

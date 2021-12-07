@@ -70,7 +70,7 @@ export default function Address({ navigation }) {
                         <View style={AddressStyle.addresscol}>
                             <Text style={AddressStyle.addresslabel}>First Name</Text>
                             <TextInput
-                                name='first_name'
+                                multiline={true} name='first_name'
                                 onChangeText={text => setFirstName(text)}
                                 style={AddressStyle.Text}
                             />
@@ -79,7 +79,7 @@ export default function Address({ navigation }) {
                         <View style={AddressStyle.addresscol}>
                             <Text style={AddressStyle.addresslabel}>Last Name</Text>
                             <TextInput
-                                name='last_name'
+                                multiline={true} name='last_name'
                                 onChangeText={text => setLastName(text)}
                                 style={AddressStyle.Text} />
                             <Text style={AddressStyle.errors}>{last_namelog}</Text>
@@ -90,7 +90,7 @@ export default function Address({ navigation }) {
                         <View style={AddressStyle.addresscol}>
                             <Text style={AddressStyle.addresslabel}>Phone</Text>
                             <TextInput
-                                name='phone'
+                                multiline={true} name='phone'
                                 onChangeText={text => setPhone(text)}
                                 style={AddressStyle.Text}
                             />
@@ -99,7 +99,7 @@ export default function Address({ navigation }) {
                         <View style={AddressStyle.addresscol}>
                             <Text style={AddressStyle.addresslabel}>Email</Text>
                             <TextInput
-                                name='email'
+                                multiline={true} name='email'
                                 onChangeText={text => setEmail(text)}
                                 style={AddressStyle.Text} />
                             <Text style={AddressStyle.errors}>{emaillog}</Text>
@@ -136,7 +136,7 @@ export default function Address({ navigation }) {
                         <View style={AddressStyle.addresscol}>
                             <Text style={AddressStyle.addresslabel}>Landmark</Text>
                             <TextInput
-                                name='phone'
+                                name='landmark'
                                 onChangeText={text => setLandmark(text)}
                                 style={AddressStyle.Text}
                             />
@@ -145,7 +145,7 @@ export default function Address({ navigation }) {
                         <View style={AddressStyle.addresscol}>
                             <Text style={AddressStyle.addresslabel}>Town/City</Text>
                             <TextInput
-                                name='email'
+                                name='city'
                                 onChangeText={text => setCity(text)}
                                 style={AddressStyle.Text} />
                             <Text style={AddressStyle.errors}>{citylog}</Text>
@@ -156,7 +156,7 @@ export default function Address({ navigation }) {
                         <View style={AddressStyle.addresscol}>
                             <Text style={AddressStyle.addresslabel}>PIN code</Text>
                             <TextInput
-                                name='email'
+                                name='zip'
                                 onChangeText={text => setZip(text)}
                                 style={AddressStyle.Text} />
                             <Text style={AddressStyle.errors}>{ziplog}</Text>

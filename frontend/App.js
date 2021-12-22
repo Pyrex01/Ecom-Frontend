@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React from "react";
 // import "react-native-gesture-handler";
 // import * as encoding from "text-encoding";
@@ -65,6 +66,22 @@ const App = () => {
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
+=======
+import React from 'react';
+import "react-native-gesture-handler";
+import * as encoding from "text-encoding";
+import Android from "./APP/android/components/navigation";
+import { Platform } from "react-native";
+
+
+const App = () => {
+	return <Android/>
+	let component;
+	switch(Platform.OS){
+		case "android":
+			return <Android/>
+	}
+>>>>>>> d64283549629e48f57522602acaa388f54063f9c
 };
 
 export default App;

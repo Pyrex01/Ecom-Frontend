@@ -17,7 +17,10 @@ const STYLES = StyleSheet.create({
 		flex: 1,
 		fontSize: 18,
 	},
-	inputIcon: { marginTop: 3, position: "absolute" },
+	inputIcon: {
+		marginTop: 3,
+		position: "absolute"
+	},
 	btnPrimary: {
 		backgroundColor: Colors.primary,
 		height: 50,
@@ -36,8 +39,16 @@ const STYLES = StyleSheet.create({
 		flex: 1,
 		flexDirection: "row",
 	},
-	btnImage: { width: 20, height: 20, marginLeft: 5 },
-	line: { height: 1, width: 30, backgroundColor: "#a5a5a5" },
+	btnImage: {
+		width: 20,
+		height: 20,
+		marginLeft: 5
+	},
+	line: {
+		height: 1,
+		width: 30,
+		backgroundColor: "#a5a5a5"
+	},
 });
 
 export default STYLES;

@@ -4,7 +4,7 @@ import {
 	Image,
 	SafeAreaView,
 	StyleSheet,
-	Text, 
+	Text,
 	View,
 	Platform,
 } from "react-native";
@@ -21,174 +21,96 @@ import categories from "../Sub Components/categories";
 import Products from "../Sub Components/Products";
 import { SecondaryButton } from "../Sub Components/Button";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import {mainBackend} from "../../../Configs/MainBackend"
 const { width } = Dimensions.get("screen");
 const cardWidth = width / 2 - 20;
 
 
+function print(text){
+	return "data:image/png;base64,"+text
+}
+
+
+const Card = ({ Products }) => {
+	return (
+		<TouchableHighlight underlayColor={Colors.white} activeOpacity={0.9} onPress={() => navigation.navigate("DetailsScreen", Products)}>
+			<View style={style.card}>
+				<View style={{ alignItems: "center", top: -40, }}>
+					<Image source={{uri:print(Products.Display_Image)}}  style={{ height: 125, width: 130 }} />
+				</View>
+				<View style={{ marginHorizontal: 20 }}>
+					<Text style={{ fontSize: 18, fontWeight: "bold" }}>
+						{Products.Name}
+					</Text>
+					{/* <Text style={{ fontSize: 14, color: Colors.grey, marginTop: 2, }}	>
+						{Products.discription}
+					</Text> */}
+				</View>
+				<View style={{ marginTop: 8, marginHorizontal: 30, flexDirection: "row", justifyContent: "space-between", }}>
+					<Text style={{ fontSize: 18, fontWeight: "bold" }}>
+						{Products.Price}
+					</Text>
+					<View style={style.addToCartBtn}>
+						<Icon name="add" size={20} color={Colors.white} />
+					</View>
+				</View>
+			</View>
+		</TouchableHighlight>
+	);
+};
 
 const HomeScreen = ({ navigation }) => {
 	let name;
-	AsyncStorage.getItem("login_token",(err,result)=>{
-		if(err)
-		{return;}
+	AsyncStorage.getItem("login_token", (err, result) => {
+		if (err) { return; }
 		else {
-			AsyncStorage.getItem("First_name",(er,res)=>{
+			AsyncStorage.getItem("First_name", (er, res) => {
 				name = res;
 			})
 		}
 	})
+	let [items,setItems] = React.useState([]);
 	const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
 
-	const ListCategories = () => {
-		return (
-			<SafeAreaView>
-				<ScrollView
-					horizontal
-					showsHorizontalScrollIndicator={true}
-					contentContainerStyle={style.categoriesListContainer}
-				>
-					{categories.map((category, index) => (
-						<TouchableOpacity
-							key={index}
-							activeOpacity={0.8}
-							onPress={() => setSelectedCategoryIndex(index)}
-						>
-							<View
-								style={{
-									backgroundColor:
-										selectedCategoryIndex == index
-											? Colors.primary
-											: Colors.secondary,
-									...style.categoryBtn,
-								}}
-							>
-								<View style={style.categoryBtnImgCon}>
-									<Image
-										source={category.image}
-										style={{
-											height: 35,
-											width: 35,
-											resizeMode: "cover",
-										}}
-									/>
-								</View>
-								<Text
-									style={{
-										fontSize: 15,
-										fontWeight: "bold",
-										marginLeft: 10,
-										color:
-											selectedCategoryIndex == index
-												? Colors.white
-												: Colors.primary,
-									}}
-								>
-									{category.name}
-								</Text>
-							</View>
-						</TouchableOpacity>
-					))}
-				</ScrollView>
-			</SafeAreaView>
-		);
-	};
-		const Card = ({ Products }) => {
+		const ListCategories = () => {
 			return (
-				<TouchableHighlight
-					underlayColor={Colors.white}
-					activeOpacity={0.9}
-					onPress={() => navigation.navigate("DetailsScreen", Products)}
-				>
-					<View style={style.card}>
-						<View
-							style={{
-								alignItems: "center",
-								top: -40,
-							}}
-						>
-							<Image
-								source={Products.image}
-								style={{ height: 125, width: 130 }}
-							/>
-						</View>
-						<View style={{ marginHorizontal: 20 }}>
-							<Text style={{ fontSize: 18, fontWeight: "bold" }}>
-								{Products.name}
-							</Text>
-							<Text
-								style={{
-									fontSize: 14,
-									color: Colors.grey,
-									marginTop: 2,
-								}}
-							>
-								{Products.discription}
-							</Text>
-						</View>
-						<View
-							style={{
-								marginTop: 8,
-								marginHorizontal: 30,
-								flexDirection: "row",
-								justifyContent: "space-between",
-							}}
-						>
-							<Text style={{ fontSize: 18, fontWeight: "bold" }}>
-								{Products.price}
-							</Text>
-							<View style={style.addToCartBtn}>
-								<Icon name="add" size={20} color={Colors.white} />
+				<SafeAreaView>
+					<ScrollView horizontal showsHorizontalScrollIndicator={true} contentContainerStyle={style.categoriesListContainer}>
+						{categories.map((category, index) => (<TouchableOpacity key={index} activeOpacity={0.8} onPress={() => setSelectedCategoryIndex(index)}>
+							<View style={{ backgroundColor: selectedCategoryIndex == index ? Colors.primary : Colors.secondary, ...style.categoryBtn, }}>
+								<View style={style.categoryBtnImgCon}>
+									<Image source={category.image} style={{ height: 35, width: 35, resizeMode: "cover", }} />
+								</View>
+								<Text style={{ fontSize: 15, fontWeight: "bold", marginLeft: 10, color: selectedCategoryIndex == index ? Colors.white : Colors.primary, }}>{category.name}</Text>
 							</View>
-						</View>
-					</View>
-				</TouchableHighlight>
+						</TouchableOpacity>))}
+					</ScrollView>
+				</SafeAreaView>
 			);
-		};
+		}
+		React.useState(()=>{
+			mainBackend.get("/store/getItems/").then((response)=>{setItems(response.data.results)})
+		});
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
 			<View style={style.header}>
 				<View>
 					<View style={{ flexDirection: "row" }}>
 						<Text style={{ fontSize: 25 }}>Hello</Text>
-						<Text
-							style={{
-								fontSize: 25,
-								fontWeight: "bold",
-								marginLeft: 10,
-							}}
-						>
-							{(name!==null?","+name:"")}
+						<Text style={{ fontSize: 25, fontWeight: "bold", marginLeft: 10, }}>
+							{(name !== null ? "," + name : "")}
 						</Text>
 					</View>
-					<Text
-						style={{
-							marginTop: 5,
-							fontSize: 20,
-							color: Colors.grey,
-						}}
-					>
+					<Text style={{ marginTop: 5, fontSize: 20, color: Colors.grey, }}>
 						What are you Searching for?
 					</Text>
 				</View>
-				<Image
-					source={require("../../../assets/Avatar.png")}
-					style={{ height: 50, width: 50, borderRadius: 25 }}
-				/>
+				<Image source={require("../../../assets/Avatar.png")} style={{ height: 50, width: 50, borderRadius: 25 }} />
 			</View>
-			<View
-				style={{
-					marginTop: 13,
-					flexDirection: "row",
-					paddingHorizontal: 20,
-				}}
-			>
+			<View style={{ marginTop: 13, flexDirection: "row", paddingHorizontal: 20, }}>
 				<View style={style.inputContainer}>
 					<Icon name="search" size={28} />
-					<TextInput
-						style={{ flex: 1, fontSize: 18 }}
-						placeholder="Search for Varieties"
-					/>
+					<TextInput style={{ flex: 1, fontSize: 18 }} placeholder="Search for Varieties"	/>
 				</View>
 				<View style={style.sortBtn}>
 					<Icon name="tune" size={28} color={Colors.white} />
@@ -197,12 +119,7 @@ const HomeScreen = ({ navigation }) => {
 			<View>
 				<ListCategories />
 			</View>
-			<FlatList
-				showsVerticalScrollIndicator={true}
-				numColumns={2}
-				data={Products}
-				renderItem={({ item }) => <Card Products={item} />}
-			/>
+			<FlatList showsVerticalScrollIndicator={true} numColumns={2} data={items} renderItem={({ item }) => <Card Products={item} />}	/>
 		</SafeAreaView>
 	);
 };

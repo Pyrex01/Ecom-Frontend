@@ -8,12 +8,8 @@
     "eject": "expo eject"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-native-community/async-storage": "^1.12.1",
-=======
     "@react-native-async-storage/async-storage": "^1.15.11",
->>>>>>> d64283549629e48f57522602acaa388f54063f9c
     "@react-native-community/hooks": "^2.6.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "^6.0.5",

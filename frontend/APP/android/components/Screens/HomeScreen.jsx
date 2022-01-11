@@ -1,5 +1,6 @@
 import React from "react";
 import {
+	ActivityIndicator,
 	Dimensions,
 	Image,
 	SafeAreaView,
@@ -70,7 +71,14 @@ const HomeScreen = ({ navigation }) => {
 		}
 	})
 	let [items,setItems] = React.useState([]);
+	let [loading,setloadning] = React.useState(true);
 	const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
+	React.useState(()=>{
+		mainBackend.get("/store/getItems/").then((response)=>{
+			setloadning(false)
+			setItems(response.data.results)
+		})
+	});
 
 		const ListCategories = () => {
 			return (
@@ -88,9 +96,6 @@ const HomeScreen = ({ navigation }) => {
 				</SafeAreaView>
 			);
 		}
-		React.useState(()=>{
-			mainBackend.get("/store/getItems/").then((response)=>{setItems(response.data.results)})
-		});
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
 			<View style={style.header}>
@@ -98,7 +103,7 @@ const HomeScreen = ({ navigation }) => {
 					<View style={{ flexDirection: "row" }}>
 						<Text style={{ fontSize: 25 }}>Hello</Text>
 						<Text style={{ fontSize: 25, fontWeight: "bold", marginLeft: 10, }}>
-							{(name !== null ? "," + name : "")}
+							{(name !== (null||undefined) ? "," + name : "")}
 						</Text>
 					</View>
 					<Text style={{ marginTop: 5, fontSize: 20, color: Colors.grey, }}>
@@ -119,6 +124,7 @@ const HomeScreen = ({ navigation }) => {
 			<View>
 				<ListCategories />
 			</View>
+			<ActivityIndicator size="large" animating={loading} color= {Colors.primary} />
 			<FlatList showsVerticalScrollIndicator={true} numColumns={2} data={items} renderItem={({ item }) => <Card Products={item} />}	/>
 		</SafeAreaView>
 	);

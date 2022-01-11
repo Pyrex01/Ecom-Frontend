@@ -13,11 +13,7 @@ import Colors from "../../../Configs/Colors/Colors";
 import STYLES from "../../../Configs/Style/formStyles";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-<<<<<<< HEAD:frontend/APP/Components/Forms/Login.jsx
-import { mainBackend } from "../../Configs/MainBackend";
-=======
 import { mainBackend } from "../../../Configs/MainBackend"
->>>>>>> d64283549629e48f57522602acaa388f54063f9c:frontend/APP/android/components/Forms/Login.jsx
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const style = StyleSheet.create({
 	header: {
@@ -177,39 +173,13 @@ const Login = ({ navigation }) => {
 					>
 						<View style={STYLES.btnSecondary}>
 							<TouchableOpacity onPress={() => ""}>
-<<<<<<< HEAD:frontend/APP/Components/Forms/Login.jsx
-								<Text
-									style={{ fontWeight: "bold", fontSize: 18 }}
-								>
-									{" "}
-									Login with{" "}
-									<Image
-										style={STYLES.btnImage}
-										source={require("../../assets/facebook.png")}
-									/>
-								</Text>
-=======
 								<Text style={{ fontWeight: "bold", fontSize: 18 }}>	Login with <Image style={STYLES.btnImage} source={require("../../../assets/facebook.png")} /></Text>
->>>>>>> d64283549629e48f57522602acaa388f54063f9c:frontend/APP/android/components/Forms/Login.jsx
 							</TouchableOpacity>
 						</View>
 						<View style={{ width: 10 }}></View>
 						<View style={STYLES.btnSecondary}>
 							<TouchableOpacity onPress={() => "Home"}>
-<<<<<<< HEAD:frontend/APP/Components/Forms/Login.jsx
-								<Text
-									style={{ fontWeight: "bold", fontSize: 18 }}
-								>
-									{" "}
-									Login with
-									<Image
-										style={STYLES.btnImage}
-										source={require("../../assets/google.png")}
-									/>
-								</Text>
-=======
 								<Text style={{ fontWeight: "bold", fontSize: 18 }}>	Login with<Image style={STYLES.btnImage} source={require("../../../assets/google.png")} /></Text>
->>>>>>> d64283549629e48f57522602acaa388f54063f9c:frontend/APP/android/components/Forms/Login.jsx
 							</TouchableOpacity>
 						</View>
 					</View>

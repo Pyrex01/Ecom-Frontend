@@ -299,5 +299,32 @@ function submit(user_Data, log_Setters) {
         log_Setters.setZipLog("");
         console.log("success");
 
+        mainBackend
+            .post("/resident/setAddress", {
+                // first_name: user_Data.first_name,
+                // Second_Name: user_Data.last_name,
+                state: user_Data.state,
+                Phone_number: user_Data.phone,
+                pincode: user_Data.zip,
+                regien: user_Data.area,
+                landmark: user_Data.landmark,
+                town: user_Data.city,
+                address_type: user_Data.addressType,
+                // email: user_Data.email,
+                // home: user_Data.home,
+
+
+            })
+            .then(function (response) {
+                console.log(response.status);
+                if (response.status == 201) {
+                    if (AsyncStorage.setItem("signup_token", response.data.signup_token)) {
+                        log_Setters.SetIsVisible(true);
+                    }
+                }
+                if (response.status >= 400 && response.status < 500) {
+                    Alert.alert("oops! something went wrong");
+                }
+            });
     }
 }

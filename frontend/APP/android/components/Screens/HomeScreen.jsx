@@ -1,5 +1,6 @@
 import React from "react";
 import {
+	Pressable,
 	ActivityIndicator,
 	Dimensions,
 	Image,
@@ -8,6 +9,7 @@ import {
 	Text,
 	View,
 	Platform,
+	Button,
 } from "react-native";
 import {
 	FlatList,
@@ -22,13 +24,13 @@ import categories from "../Sub Components/categories";
 import Products from "../Sub Components/Products";
 import { SecondaryButton } from "../Sub Components/Button";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {mainBackend} from "../../../Configs/MainBackend"
+import { mainBackend } from "../../../Configs/MainBackend"
 const { width } = Dimensions.get("screen");
 const cardWidth = width / 2 - 20;
+import axios from "axios";
 
-
-function print(text){
-	return "data:image/png;base64,"+text
+function print(text) {
+	return "data:image/png;base64," + text
 }
 
 
@@ -37,7 +39,7 @@ const Card = ({ Products }) => {
 		<TouchableHighlight underlayColor={Colors.white} activeOpacity={0.9} onPress={() => navigation.navigate("DetailsScreen", Products)}>
 			<View style={style.card}>
 				<View style={{ alignItems: "center", top: -40, }}>
-					<Image source={{uri:print(Products.Display_Image)}}  style={{ height: 125, width: 130 }} />
+					<Image source={{ uri: print(Products.Display_Image) }} style={{ height: 125, width: 130 }} />
 				</View>
 				<View style={{ marginHorizontal: 20 }}>
 					<Text style={{ fontSize: 18, fontWeight: "bold" }}>
@@ -70,32 +72,47 @@ const HomeScreen = ({ navigation }) => {
 			})
 		}
 	})
-	let [items,setItems] = React.useState([]);
-	let [loading,setloadning] = React.useState(true);
+	let [loading, setloadning] = React.useState(true);
+	let [pagingData, setPagingData] = React.useState(true);
 	const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
-	React.useState(()=>{
-		mainBackend.get("/store/getItems/").then((response)=>{
+	React.useState(() => {
+		mainBackend.get("/store/getItems/").then((response) => {
 			setloadning(false)
-			setItems(response.data.results)
+			setPagingData(response.data)
 		})
 	});
 
-		const ListCategories = () => {
-			return (
-				<SafeAreaView>
-					<ScrollView horizontal showsHorizontalScrollIndicator={true} contentContainerStyle={style.categoriesListContainer}>
-						{categories.map((category, index) => (<TouchableOpacity key={index} activeOpacity={0.8} onPress={() => setSelectedCategoryIndex(index)}>
-							<View style={{ backgroundColor: selectedCategoryIndex == index ? Colors.primary : Colors.secondary, ...style.categoryBtn, }}>
-								<View style={style.categoryBtnImgCon}>
-									<Image source={category.image} style={{ height: 35, width: 35, resizeMode: "cover", }} />
-								</View>
-								<Text style={{ fontSize: 15, fontWeight: "bold", marginLeft: 10, color: selectedCategoryIndex == index ? Colors.white : Colors.primary, }}>{category.name}</Text>
+	function gotoNext(){
+		setloadning(true)
+		axios.get(pagingData.next).then((response)=>{
+			setPagingData(response.data)
+			setloadning(false)
+		})
+	}
+	function gotoPrevious(){
+		setloadning(true)
+		axios.get(pagingData.previous).then((response)=>{
+			setPagingData(response.data)
+			setloadning(false)
+		})
+	}
+
+	const ListCategories = () => {
+		return (
+			<SafeAreaView>
+				<ScrollView horizontal showsHorizontalScrollIndicator={true} contentContainerStyle={style.categoriesListContainer}>
+					{categories.map((category, index) => (<TouchableOpacity key={index} activeOpacity={0.8} onPress={() => setSelectedCategoryIndex(index)}>
+						<View style={{ backgroundColor: selectedCategoryIndex == index ? Colors.primary : Colors.secondary, ...style.categoryBtn, }}>
+							<View style={style.categoryBtnImgCon}>
+								<Image source={category.image} style={{ height: 35, width: 35, resizeMode: "cover", }} />
 							</View>
-						</TouchableOpacity>))}
-					</ScrollView>
-				</SafeAreaView>
-			);
-		}
+							<Text style={{ fontSize: 15, fontWeight: "bold", marginLeft: 10, color: selectedCategoryIndex == index ? Colors.white : Colors.primary, }}>{category.name}</Text>
+						</View>
+					</TouchableOpacity>))}
+				</ScrollView>
+			</SafeAreaView>
+		);
+	}
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
 			<View style={style.header}>
@@ -103,7 +120,7 @@ const HomeScreen = ({ navigation }) => {
 					<View style={{ flexDirection: "row" }}>
 						<Text style={{ fontSize: 25 }}>Hello</Text>
 						<Text style={{ fontSize: 25, fontWeight: "bold", marginLeft: 10, }}>
-							{(name !== (null||undefined) ? "," + name : "")}
+							{(name !== (null || undefined) ? "," + name : "")}
 						</Text>
 					</View>
 					<Text style={{ marginTop: 5, fontSize: 20, color: Colors.grey, }}>
@@ -115,7 +132,7 @@ const HomeScreen = ({ navigation }) => {
 			<View style={{ marginTop: 13, flexDirection: "row", paddingHorizontal: 20, }}>
 				<View style={style.inputContainer}>
 					<Icon name="search" size={28} />
-					<TextInput style={{ flex: 1, fontSize: 18 }} placeholder="Search for Varieties"	/>
+					<TextInput style={{ flex: 1, fontSize: 18 }} placeholder="Search for Varieties" />
 				</View>
 				<View style={style.sortBtn}>
 					<Icon name="tune" size={28} color={Colors.white} />
@@ -124,13 +141,32 @@ const HomeScreen = ({ navigation }) => {
 			<View>
 				<ListCategories />
 			</View>
-			<ActivityIndicator size="large" animating={loading} color= {Colors.primary} />
-			<FlatList showsVerticalScrollIndicator={true} numColumns={2} data={items} renderItem={({ item }) => <Card Products={item} />}	/>
+			<ActivityIndicator size="large" animating={loading} color={Colors.primary} />
+			<View>
+
+			</View>
+			<FlatList showsVerticalScrollIndicator={true} numColumns={2} data={pagingData.results} renderItem={({ item }) => <Card Products={item} />} />
+			<View style={style.paginationContainer}>
+				<Pressable style={{ height: 30, width: 90, backgroundColor:pagingData.previous==null?Colors.grey:Colors.primary , borderRadius: 10, textAlign: "center", margin: 5, alignContent: "center", justifyContent: "center" }} disabled={(pagingData.previous==null?true:false)} onPress={gotoPrevious}>
+					<Text>  Previous</Text>
+				</Pressable>
+				<Pressable style={ { height: 30, width: 20, backgroundColor: pagingData.current?Colors.primary:Colors.grey, borderRadius: 10, textAlign: "center", margin: 5, alignContent: "center", justifyContent: "center" }} >
+					<Text> {pagingData.current}</Text>
+				</Pressable>
+				<Pressable style={{ height: 30, width: 70, backgroundColor: pagingData.next==null?Colors.grey:Colors.primary, borderRadius: 10, textAlign: "center", margin: 5, alignContent: "center", justifyContent: "center" }} disabled={(pagingData.next==null?true:false)} onPress={gotoNext} >
+					<Text>  Next</Text>
+				</Pressable>
+			</View>
+
 		</SafeAreaView>
 	);
 };
 
 const style = StyleSheet.create({
+	paginationPreviousButton: { height: 30, width: 90, backgroundColor:Colors.primary , borderRadius: 10, textAlign: "center", margin: 5, alignContent: "center", justifyContent: "center" },
+	paginationNextButton: { height: 30, width: 70, backgroundColor: Colors.primary, borderRadius: 10, textAlign: "center", margin: 5, alignContent: "center", justifyContent: "center" },
+	paginationButtonCenter: { height: 30, width: 20, backgroundColor: Colors.primary, borderRadius: 10, textAlign: "center", margin: 5, alignContent: "center", justifyContent: "center" },
+	paginationContainer: { alignSelf: "center", alignContent: "center", display: "flex", flexDirection: "row" },
 	header: {
 		marginTop: Platform.OS === "web" ? 5 : 20,
 		flexDirection: "row",

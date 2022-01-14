@@ -5,12 +5,20 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../../Configs/Colors/Colors";
 import HomeScreen from "../Screens/HomeScreen";
 import CartScreen from "../Screens/CartScreen";
-import { NavigationContainer } from "@react-navigation/native";
-import SignUp from "../Forms/Signup";
+import MyAccount from "../Screens/MyAccount";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator();
-
+let comp;
+AsyncStorage.getItem("isLogedin",(err,result)=>{    
+    if(result=="true"){
+        comp = true
+    }
+    if(result!=="true"){
+        comp = false
+    } })
 const BottomNavigator = () => {
+	function  myacc () {return <MyAccount islogedin={comp}/> }
 	return (
 		<Tab.Navigator
 		screenOptions={{
@@ -34,7 +42,7 @@ const BottomNavigator = () => {
 			/>
 			<Tab.Screen
 				name="My Account"
-				component={SignUp}
+				component={myacc} 
 				options={{
 					tabBarIcon: ({ color }) => (
 						<Icon name="account-circle" color={color} size={28} />

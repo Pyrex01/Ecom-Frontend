@@ -15,6 +15,7 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { mainBackend } from "../../../Configs/MainBackend";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { navigationRef } from "./Modal";
 const style = StyleSheet.create({
 	header: {
 		paddingVertical: 20,
@@ -236,7 +237,8 @@ function loginSubmit(value, SetLog) {
 						for (let key in response.data) {
 							AsyncStorage.setItem(key, response.data[key]);
 						}
-						AsyncStorage.setItem("isLogedin", true);
+						AsyncStorage.setItem("isLogedin", "true");
+						navigationRef.navigate("BoardScreen")
 						alert("login success");
 						break;
 					case 403:

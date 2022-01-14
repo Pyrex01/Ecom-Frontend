@@ -94,18 +94,18 @@ const HomeScreen = ({ navigation }) => {
 	}
 	function gotoPrevious(){
 		setloadning(true)
-	
+		
 		axios.get(pagingData.previous).then((response)=>{
 			setPagingData(response.data)
 			setloadning(false)
 		})
 	}
-
-// 	Electronic 1
-// Fashion 2
-// Groceries 3
-// Hygiene 4
-
+	
+	// 	Electronic 1
+	// Fashion 2
+	// Groceries 3
+	// Hygiene 4
+	
 	function getCategorie(id){
 		setloadning(true)
 		mainBackend.get("/store/getSortItems/",{
@@ -114,28 +114,28 @@ const HomeScreen = ({ navigation }) => {
 			}})
 			.then((response)=>{
 				data= response.data
-
+				
 				if(data.next !== null){
 					data.next = data.next +"&categories="+id
 				}
-
+				
 				if(data.previous !== null){
 					data.previous = data.previous +"&categories="+id
 				}
 				setPagingData(data)
 				setloadning(false)
 			})
-	}
-
+		}
+		
 	const ListCategories = () => {
 		return (
 			<SafeAreaView>
 				<ScrollView horizontal showsHorizontalScrollIndicator={true} contentContainerStyle={style.categoriesListContainer}>
 					{categories.map((category, index) => (
-					<TouchableOpacity key={index} activeOpacity={0.8} onPress={() => {
-						setSelectedCategoryIndex(index)
-						getCategorie(category.id)
-					}}>
+						<TouchableOpacity key={index} activeOpacity={0.8} onPress={() => {
+							setSelectedCategoryIndex(index)
+							getCategorie(category.id)
+						}}>
 						<View style={{ backgroundColor: selectedCategoryIndex == index ? Colors.primary : Colors.secondary, ...style.categoryBtn, }}>
 							<View style={style.categoryBtnImgCon}>
 								<Image source={category.image} style={{ height: 35, width: 35, resizeMode: "cover", }} />
@@ -150,27 +150,15 @@ const HomeScreen = ({ navigation }) => {
 	}
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
-			{/* <View style={style.header}>
-				<View>
-					<View style={{ flexDirection: "row" }}>
-						<Text style={{ fontSize: 25 }}>Hello</Text>
-						<Text style={{ fontSize: 25, fontWeight: "bold", marginLeft: 10, }}>
-							{(name !== (null || undefined) ? "," + name : "")}
-						</Text>
-					</View>
-					<Text style={{ marginTop: 5, fontSize: 20, color: Colors.grey, }}>
-						What are you Searching for?
-					</Text>
-				</View>
-				<Image source={require("../../../assets/Avatar.png")} style={{ height: 50, width: 50, borderRadius: 25 }} />
-			</View> */}
 			<View style={{ marginTop: 13, flexDirection: "row", paddingHorizontal: 20, }}>
 				<View style={style.inputContainer}>
 					<Icon name="search" size={28} />
 					<TextInput style={{ flex: 1, fontSize: 18 }} placeholder="Search..." />
 				</View>
 				<View style={style.sortBtn}>
-					<Icon name="" size={28} color={Colors.white} />
+					<Pressable>
+						<Icon name="send" size={28} color={Colors.white} />
+					</Pressable>
 				</View>
 			</View>
 			<View>
@@ -270,3 +258,18 @@ const style = StyleSheet.create({
 });
 
 export default HomeScreen;
+
+{/* <View style={style.header}>
+	<View>
+		<View style={{ flexDirection: "row" }}>
+			<Text style={{ fontSize: 25 }}>Hello</Text>
+			<Text style={{ fontSize: 25, fontWeight: "bold", marginLeft: 10, }}>
+				{(name !== (null || undefined) ? "," + name : "")}
+			</Text>
+		</View>
+		<Text style={{ marginTop: 5, fontSize: 20, color: Colors.grey, }}>
+			What are you Searching for?
+		</Text>
+	</View>
+	<Image source={require("../../../assets/Avatar.png")} style={{ height: 50, width: 50, borderRadius: 25 }} />
+</View> */}

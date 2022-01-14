@@ -13,8 +13,7 @@ import ProfileStyle from '../../../../Configs/Style/ProfileStyle';
 
 
 const ProfilePage = (props) => {
-    return (
-        <SafeAreaView>
+    return ( <SafeAreaView>
             <TouchableHighlight>
                 <View style={ProfileStyle.container}>
                     <View style={ProfileStyle.View}>

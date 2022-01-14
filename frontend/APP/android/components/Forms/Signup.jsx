@@ -23,7 +23,7 @@ import STYLES from "../../../Configs/Style/formStyles";
 
 import ModalTester from "./Modal";
 
-const Test2 = ({ navigation }) => {
+const Signup = ({ navigation }) => {
 	let [first_name, setFirstName] = useState("");
 	let [last_name, setLastName] = useState("");
 	let [phone, setPhone] = useState("");
@@ -64,51 +64,28 @@ const Test2 = ({ navigation }) => {
 	// const { handleChange, values, errors, handleSubmit } = useForm(validate);
 
 	return (
-		<SafeAreaView style={{ paddingHorizontal: 40, flex: 1, backgroundColor: Colors.white, }}
-		>
+		<SafeAreaView style={{ paddingHorizontal: 40, flex: 1, backgroundColor: Colors.white, }}>
 			<ScrollView   showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
 				<View style={{ backgroundColor: Colors.white, flex: 1 }}>
 					<View style={style.header}>
-						<Icon
-							name='arrow-back-ios'
-							size={28}
-							onPress={navigation.goBack}
-						/>
+						<Icon name='arrow-back-ios'	size={28}	onPress={navigation.goBack}	>
 						<Text style={{ fontSize: 20, fontWeight: "bold" }}>
 							SignUp
 						</Text>
+						</Icon>
 					</View>
 				</View>
 				<View style={{ flexDirection: "row", marginTop: 60 }}>
-					<Text
-						style={{
-							fontWeight: "bold",
-							fontSize: 32,
-							color: Colors.dark,
-						}}
-					>
+					<Text style={{	fontWeight: "bold",	fontSize: 32, color: Colors.dark,}}	>
 						Shopping
 					</Text>
-					<Text
-						style={{
-							fontWeight: "bold",
-							fontSize: 32,
-							color: Colors.secondary,
-						}}
-					>
+					<Text style={{	fontWeight: "bold",	fontSize: 32,color: Colors.secondary,}}	>
 						Bazaar
 					</Text>
 				</View>
 
 				<View style={{ marginTop: 40 }}>
-					<Text
-						style={{
-							fontSize: 42,
-							textAlign: "center",
-							fontWeight: "bold",
-							color: Colors.dark,
-						}}
-					>
+					<Text	style={{fontSize: 42,textAlign: "center",fontWeight: "bold",color: Colors.dark,	}}>
 						Welcome...
 					</Text>
 					<Text
@@ -473,4 +450,4 @@ function submit(user_Data, log_Setters) {
 	}
 }
 
-export default Test2;
+export default Signup;

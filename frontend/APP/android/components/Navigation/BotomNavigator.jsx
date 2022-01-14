@@ -24,7 +24,7 @@ const BottomNavigator = () => {
 			}}
 		>
 			<Tab.Screen
-				name="HomeScreen"
+				name="Home "
 				component={HomeScreen}
 				options={{
 					tabBarIcon: ({ color }) => (
@@ -41,7 +41,7 @@ const BottomNavigator = () => {
 					),
 				}}
 			/>
-			<Tab.Screen
+			{/* <Tab.Screen
 				name="Search"
 				component={HomeScreen}
 				options={{
@@ -49,7 +49,7 @@ const BottomNavigator = () => {
 						<Icon name="search" color={color} size={28} />
 					),
 				}}
-			/>
+			/> */}
 			<Tab.Screen
 				name="My Cart"
 				component={CartScreen}

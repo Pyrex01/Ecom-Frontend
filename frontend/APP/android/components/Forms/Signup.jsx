@@ -66,7 +66,7 @@ const Test2 = ({ navigation }) => {
 	return (
 		<SafeAreaView style={{ paddingHorizontal: 40, flex: 1, backgroundColor: Colors.white, }}
 		>
-			<ScrollView>
+			<ScrollView   showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
 				<View style={{ backgroundColor: Colors.white, flex: 1 }}>
 					<View style={style.header}>
 						<Icon
@@ -161,7 +161,7 @@ const Test2 = ({ navigation }) => {
 
 						<Picker
 							selectedValue={gender}
-							style={{ height: 50, width: 150 }}
+							style={{ height: 50, width: 150 ,marginHorizontal:30}}
 							onValueChange={(itemValue, itemIndex) =>
 								setGender(itemValue)
 							}

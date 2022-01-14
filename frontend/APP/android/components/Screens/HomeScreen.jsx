@@ -34,7 +34,7 @@ function print(text) {
 }
 
 
-const Card = ({ Products }) => {
+const Card = ({ Products,navigation }) => {
 	return (
 		<TouchableHighlight underlayColor={Colors.white} activeOpacity={0.9} onPress={() => navigation.navigate("DetailsScreen", Products)}>
 			<View style={style.card}>
@@ -54,7 +54,7 @@ const Card = ({ Products }) => {
 						{Products.Price}
 					</Text>
 					<View style={style.addToCartBtn}>
-						<Icon name="add" size={20} color={Colors.white} />
+						<Icon name="send" size={20} color={Colors.white} />
 					</View>
 				</View>
 			</View>
@@ -74,9 +74,11 @@ const HomeScreen = ({ navigation }) => {
 	})
 	let [loading, setloadning] = React.useState(true);
 	let [pagingData, setPagingData] = React.useState(true);
-	const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
+	const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState();
 	React.useState(() => {
 		mainBackend.get("/store/getItems/").then((response) => {
+
+			
 			setloadning(false)
 			setPagingData(response.data)
 		})
@@ -84,6 +86,7 @@ const HomeScreen = ({ navigation }) => {
 
 	function gotoNext(){
 		setloadning(true)
+		console.log(pagingData.current)
 		axios.get(pagingData.next).then((response)=>{
 			setPagingData(response.data)
 			setloadning(false)
@@ -91,31 +94,63 @@ const HomeScreen = ({ navigation }) => {
 	}
 	function gotoPrevious(){
 		setloadning(true)
+	
 		axios.get(pagingData.previous).then((response)=>{
 			setPagingData(response.data)
 			setloadning(false)
 		})
 	}
 
+// 	Electronic 1
+// Fashion 2
+// Groceries 3
+// Hygiene 4
+
+	function getCategorie(id){
+		setloadning(true)
+		mainBackend.get("/store/getSortItems/",{
+			params: {
+				categories:id
+			}})
+			.then((response)=>{
+				data= response.data
+
+				if(data.next !== null){
+					data.next = data.next +"&categories="+id
+				}
+
+				if(data.previous !== null){
+					data.previous = data.previous +"&categories="+id
+				}
+				setPagingData(data)
+				setloadning(false)
+			})
+	}
+
 	const ListCategories = () => {
 		return (
 			<SafeAreaView>
 				<ScrollView horizontal showsHorizontalScrollIndicator={true} contentContainerStyle={style.categoriesListContainer}>
-					{categories.map((category, index) => (<TouchableOpacity key={index} activeOpacity={0.8} onPress={() => setSelectedCategoryIndex(index)}>
+					{categories.map((category, index) => (
+					<TouchableOpacity key={index} activeOpacity={0.8} onPress={() => {
+						setSelectedCategoryIndex(index)
+						getCategorie(category.id)
+					}}>
 						<View style={{ backgroundColor: selectedCategoryIndex == index ? Colors.primary : Colors.secondary, ...style.categoryBtn, }}>
 							<View style={style.categoryBtnImgCon}>
 								<Image source={category.image} style={{ height: 35, width: 35, resizeMode: "cover", }} />
 							</View>
-							<Text style={{ fontSize: 15, fontWeight: "bold", marginLeft: 10, color: selectedCategoryIndex == index ? Colors.white : Colors.primary, }}>{category.name}</Text>
+							<Text style={{ fontSize: 10, fontWeight: "bold", marginLeft: 10, color: selectedCategoryIndex == index ? Colors.white : Colors.primary, }}>{category.name}</Text>
 						</View>
-					</TouchableOpacity>))}
+					</TouchableOpacity>)
+					)}
 				</ScrollView>
 			</SafeAreaView>
 		);
 	}
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
-			<View style={style.header}>
+			{/* <View style={style.header}>
 				<View>
 					<View style={{ flexDirection: "row" }}>
 						<Text style={{ fontSize: 25 }}>Hello</Text>
@@ -128,24 +163,23 @@ const HomeScreen = ({ navigation }) => {
 					</Text>
 				</View>
 				<Image source={require("../../../assets/Avatar.png")} style={{ height: 50, width: 50, borderRadius: 25 }} />
-			</View>
+			</View> */}
 			<View style={{ marginTop: 13, flexDirection: "row", paddingHorizontal: 20, }}>
 				<View style={style.inputContainer}>
 					<Icon name="search" size={28} />
-					<TextInput style={{ flex: 1, fontSize: 18 }} placeholder="Search for Varieties" />
+					<TextInput style={{ flex: 1, fontSize: 18 }} placeholder="Search..." />
 				</View>
 				<View style={style.sortBtn}>
-					<Icon name="tune" size={28} color={Colors.white} />
+					<Icon name="" size={28} color={Colors.white} />
 				</View>
 			</View>
 			<View>
 				<ListCategories />
-			</View>
 			<ActivityIndicator size="large" animating={loading} color={Colors.primary} />
-			<View>
+	
 
 			</View>
-			<FlatList showsVerticalScrollIndicator={true} numColumns={2} data={pagingData.results} renderItem={({ item }) => <Card Products={item} />} />
+			<FlatList showsVerticalScrollIndicator={true} numColumns={2} data={pagingData.results} renderItem={({ item }) => <Card navigate={navigation} Products={item} />} />
 			<View style={style.paginationContainer}>
 				<Pressable style={{ height: 30, width: 90, backgroundColor:pagingData.previous==null?Colors.grey:Colors.primary , borderRadius: 10, textAlign: "center", margin: 5, alignContent: "center", justifyContent: "center" }} disabled={(pagingData.previous==null?true:false)} onPress={gotoPrevious}>
 					<Text>  Previous</Text>

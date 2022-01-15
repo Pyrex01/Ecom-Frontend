@@ -245,6 +245,8 @@ function loginSubmit(value, SetLog) {
 						SetLog("sorry wrong credentials");
 						break;
 				}
+			}).catch(response=>{
+				console.log(response)
 			});
 	}
 }

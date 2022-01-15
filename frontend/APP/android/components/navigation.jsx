@@ -12,6 +12,8 @@ import Colors from "../../Configs/Colors/Colors"
 import ProfilePage from './Screens/Profile/ProfilePage';
 import Address from './Screens/Profile/Address';
 import {navigationRef} from "./Forms/Modal"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import MainPage from './Screens/MainPage';
 const Stack = createStackNavigator();
 
 
@@ -19,11 +21,13 @@ const Stack = createStackNavigator();
 
 
 export default function Android() {
+
 	return (
 		<>
 			<NavigationContainer ref={navigationRef}>
 				<StatusBar backgroundColor={Colors.white} barStyle="dark-content" />
 				<Stack.Navigator screenOptions={{ headerShown: false }}>
+					{/* <Stack.Screen name="MainPage" component={MainPage} /> */}
 					<Stack.Screen name="BoardScreen" component={OnBoardScreen} />
 					<Stack.Screen name="Home" component={BottomNavigator} />
 					<Stack.Screen name="LogIn" component={Login} />

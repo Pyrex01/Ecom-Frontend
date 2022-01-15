@@ -118,12 +118,12 @@ const ProfilePage = (props) => {
 function logout(){
 
     AsyncStorage.getItem("login_token",(err,res)=>{
+        if(err){
+            console.log("err");
+            return;
+        }
         var x = "Token "+res
-        console.log(x)
-        axios.interceptors.request.use(config=>{
-            config.headers.Authorization = x;
-        })
-        axios.post("http://shopingbazar.sytes.net/user/logout/").then((response)=>{
+        axios.post("http://shopingbazar.sytes.net/user/logout/",{},{headers:{Authorization:x}}).then((response)=>{
 
             switch(response.status){
                 case 400:
@@ -131,13 +131,15 @@ function logout(){
                     navigationRef.navigate("BoardScreen")
                     break;
                 case 200:
-                    alert("logout success")
-                    AsyncStorage.clear()
+                    AsyncStorage.multiRemove(['First_name','Photo','Second_Name','isLogedin','login_token','signup_token'], (err) => {
+                        AsyncStorage.setItem("isLogedin","false")
+                    });
                     navigationRef.navigate("BoardScreen")
                     break;
             }
         })
         .catch((response)=>{
+            console.log(response)
             alert("ooops something went wrong")
         })
     })

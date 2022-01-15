@@ -3,22 +3,22 @@ import { Text, View, TextInput, StyleSheet, TouchableOpacity } from "react-nativ
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Modal from "react-native-modal";
 import { Platform } from "react-native";
-
-
+import { createNavigationContainerRef } from "@react-navigation/native";
 import { mainBackend } from "../../../Configs/MainBackend";
 import Colors from "../../../Configs/Colors/Colors";
 import STYLES from "../../../Configs/Style/formStyles";
-
+export const navigationRef = createNavigationContainerRef()
 export default function ModalTester(props) {
-
+	
+	
 
 	let [otp, setOtp] = useState("");
 	let [otpwarning, Setotpwarning] = useState("");
 	return (
 		<View style={styles.container}>
-			<Modal isVisible={props.isVisible} style={styles.container} backdropColor="white" backdropOpacity="0.80" deviceHeight="100" >
+			<Modal isVisible={props.isVisible} style={styles.container} backdropOpacity={1} backdropColor="white" >
 				<View style={styles.View}>
-					<TextInput onChangeText={text => setOtp(text)} placeholder='Enter the OTP' />
+					<TextInput onChangeText={text => setOtp(text)} style={{alignSelf:"center",fontSize:40}} maxLength={6} placeholder='Enter the OTP' />
 					<Text style={{ color: Colors.danger }}>{otpwarning}</Text>
 
 					<TouchableOpacity>
@@ -46,15 +46,26 @@ function otpSubmit(otp, setotpwarning) {
 				switch (response.status) {
 					case 202:
 						alert("signup success");
-						Alert.alert("signup success");
+						navigationRef.navigate("BoardScreen")
 						break;
 					case 410:
 						alert("otp time expired try again");
 						Alert.alert("otp time expired try again");
+						navigationRef.navigate("BoardScreen")
+						break;
 					case 400:
 						alert("oops something went wrong!");
 						Alert.alert("oops something went wrong!");
+						navigationRef.navigate("BoardScreen")
+						break;
+					case 404:
+						alert("nothing found!");
+						navigationRef.navigate("BoardScreen")
+						break;
 				}
+			}).catch((response)=>{
+				alert("something wrong happened")
+				navigationRef.navigate("BoardScreen")
 			});
 	});
 }

@@ -3,7 +3,7 @@ import { Text, StyleSheet, View, Image, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "../../../Configs/Colors/Colors";
 import { PrimaryButton } from "../Sub Components/Button";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const OnBoardScreen = ({ navigation }) => {
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
@@ -46,7 +46,9 @@ const OnBoardScreen = ({ navigation }) => {
 				</View>
 				<View>
 					<PrimaryButton
-						onPress={() => navigation.navigate("Home")}
+						onPress={() => {
+							navigation.navigate("Home")
+						}}
 						title="Get Started"
 					/>
 				</View>

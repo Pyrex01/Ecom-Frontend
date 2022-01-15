@@ -10,17 +10,32 @@ import Avataar from "../../../../assets/Avatar.png"
 import Colors from '../../../../Configs/Colors/Colors';
 import ProfileStyle from '../../../../Configs/Style/ProfileStyle';
 // import STYLES from '../../../../Configs/Style/formStyles';
-
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {navigationRef} from "../../Forms/Modal"
+import axios from "axios";
+import { mainBackend } from "../../../../Configs/MainBackend";
+// Array [
+//     "First_name",
+//     "Photo",
+//     "Second_Name",
+//     "isLogedin",
+//     "login_token",
+//     "signup_token",
+//   ]
 const ProfilePage = (props) => {
-    return (
-        <SafeAreaView>
+    let [name,setName]=React.useState("")
+    let [photo,setPhoto]=React.useState("")
+    AsyncStorage.multiGet(["First_name","Photo",],(err,res)=>{
+        setName(res[0][1])
+        setPhoto(res[1][1])
+    })
+    return ( <SafeAreaView>
             <TouchableHighlight>
                 <View style={ProfileStyle.container}>
                     <View style={ProfileStyle.View}>
-                        <Image source={Avataar} style={ProfileStyle.ProfileImage} />
+                        <Image source={photo==""?Avataar:{uri:photo}} style={ProfileStyle.ProfileImage} />
                         <TouchableOpacity>
-                            <Text style={[ProfileStyle.Font, ProfileStyle.FontSpace, ProfileStyle.ProfileName]}>User's Name</Text>
+                            <Text style={[ProfileStyle.Font, ProfileStyle.FontSpace, ProfileStyle.ProfileName]}>{name}</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -81,13 +96,54 @@ const ProfilePage = (props) => {
                     </TouchableOpacity>
 
                     <View style={ProfileStyle.Line} />
+                    <TouchableOpacity onPress={logout}>
+                        <View style={ProfileStyle.View}>
+                            <Icons
+                                name='customerservice'
+                                color={Colors.grey}
+                                size={40}
+                                style={ProfileStyle.IconSpace}
+                            />
+                            <Text style={[ProfileStyle.Font, ProfileStyle.FontSpace]} >Log Out</Text>
+                        </View>
+                    </TouchableOpacity>
+
+                    <View style={ProfileStyle.Line} />
                 </View>
             </TouchableHighlight>
         </SafeAreaView >
     );
 };
 
+function logout(){
 
+    AsyncStorage.getItem("login_token",(err,res)=>{
+        if(err){
+            console.log("err");
+            return;
+        }
+        var x = "Token "+res
+        axios.post("http://shopingbazar.sytes.net/user/logout/",{},{headers:{Authorization:x}}).then((response)=>{
+
+            switch(response.status){
+                case 400:
+                    alert("oops something went wrong")
+                    navigationRef.navigate("BoardScreen")
+                    break;
+                case 200:
+                    AsyncStorage.multiRemove(['First_name','Photo','Second_Name','isLogedin','login_token','signup_token'], (err) => {
+                        AsyncStorage.setItem("isLogedin","false")
+                    });
+                    navigationRef.navigate("BoardScreen")
+                    break;
+            }
+        })
+        .catch((response)=>{
+            console.log(response)
+            alert("ooops something went wrong")
+        })
+    })
+}
 
 
 export default ProfilePage;

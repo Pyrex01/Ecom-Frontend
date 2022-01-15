@@ -15,6 +15,7 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { mainBackend } from "../../../Configs/MainBackend";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { navigationRef } from "./Modal";
 const style = StyleSheet.create({
 	header: {
 		paddingVertical: 20,
@@ -25,7 +26,7 @@ const style = StyleSheet.create({
 	},
 });
 
-const Login = ({ navigation }) => {
+const Login = () => {
 	let [email, SetEmail] = useState("");
 	let [password, SetPassword] = useState("");
 	let [log, SetLog] = useState("");
@@ -47,7 +48,7 @@ const Login = ({ navigation }) => {
 						<Icon
 							name="arrow-back-ios"
 							size={28}
-							onPress={navigation.goBack}
+							onPress={navigationRef.goBack}
 						/>
 						<Text style={{ fontSize: 20, fontWeight: "bold" }}>
 							{" "}
@@ -198,7 +199,7 @@ const Login = ({ navigation }) => {
 						Don`t have an account ?
 					</Text>
 					<TouchableOpacity
-						onPress={() => navigation.navigate("SignUp")}
+						onPress={() => navigationRef.navigate("SignUp")}
 					>
 						<Text
 							style={{ color: Colors.pink, fontWeight: "bold" }}
@@ -236,13 +237,16 @@ function loginSubmit(value, SetLog) {
 						for (let key in response.data) {
 							AsyncStorage.setItem(key, response.data[key]);
 						}
-						AsyncStorage.setItem("isLogedin", true);
+						AsyncStorage.setItem("isLogedin", "true");
+						navigationRef.navigate("BoardScreen")
 						alert("login success");
 						break;
 					case 403:
 						SetLog("sorry wrong credentials");
 						break;
 				}
+			}).catch(response=>{
+				console.log(response)
 			});
 	}
 }

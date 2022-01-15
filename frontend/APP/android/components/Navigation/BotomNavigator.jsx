@@ -5,12 +5,20 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../../Configs/Colors/Colors";
 import HomeScreen from "../Screens/HomeScreen";
 import CartScreen from "../Screens/CartScreen";
-import { NavigationContainer } from "@react-navigation/native";
-import SignUp from "../Forms/Signup";
+import MyAccount from "../Screens/MyAccount";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator();
-
 const BottomNavigator = () => {
+	let [comp,setComp] =React.useState()
+	function  myacc () {return <MyAccount islogedin={comp}/> }
+	AsyncStorage.getItem("isLogedin",(err,result)=>{    
+		if(result=="true"){
+			setComp( true)
+		}
+		if(result!=="true"){
+			setComp(false)
+		} })
 	return (
 		<Tab.Navigator
 		screenOptions={{
@@ -24,7 +32,7 @@ const BottomNavigator = () => {
 			}}
 		>
 			<Tab.Screen
-				name="HomeScreen"
+				name="Home "
 				component={HomeScreen}
 				options={{
 					tabBarIcon: ({ color }) => (
@@ -34,14 +42,14 @@ const BottomNavigator = () => {
 			/>
 			<Tab.Screen
 				name="My Account"
-				component={SignUp}
+				component={myacc} 
 				options={{
 					tabBarIcon: ({ color }) => (
 						<Icon name="account-circle" color={color} size={28} />
 					),
 				}}
 			/>
-			<Tab.Screen
+			{/* <Tab.Screen
 				name="Search"
 				component={HomeScreen}
 				options={{
@@ -49,7 +57,7 @@ const BottomNavigator = () => {
 						<Icon name="search" color={color} size={28} />
 					),
 				}}
-			/>
+			/> */}
 			<Tab.Screen
 				name="My Cart"
 				component={CartScreen}

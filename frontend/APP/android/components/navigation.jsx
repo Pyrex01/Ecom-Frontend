@@ -6,27 +6,33 @@ import { StatusBar, SafeAreaView } from "react-native";
 import OnBoardScreen from "./Screens/OnBoardScreen";
 import DetailsScreen from "./Screens/DetailsScreen";
 import BottomNavigator from "./Navigation/BotomNavigator";
-import SignUp from "./Forms/Signup";
+import MyAccount from './Screens/MyAccount';
 import Login from "./Forms/Login";
 import Colors from "../../Configs/Colors/Colors"
 import ProfilePage from './Screens/Profile/ProfilePage';
 import Address from './Screens/Profile/Address';
-
+import {navigationRef} from "./Forms/Modal"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import MainPage from './Screens/MainPage';
 const Stack = createStackNavigator();
 
 
 
+
+
 export default function Android() {
+
 	return (
 		<>
-			<NavigationContainer>
+			<NavigationContainer ref={navigationRef}>
 				<StatusBar backgroundColor={Colors.white} barStyle="dark-content" />
 				<Stack.Navigator screenOptions={{ headerShown: false }}>
+					{/* <Stack.Screen name="MainPage" component={MainPage} /> */}
 					<Stack.Screen name="BoardScreen" component={OnBoardScreen} />
 					<Stack.Screen name="Home" component={BottomNavigator} />
 					<Stack.Screen name="LogIn" component={Login} />
 					<Stack.Screen name="DetailsScreen" component={DetailsScreen} />
-					<Stack.Screen name="SignUp" component={SignUp} />
+					<Stack.Screen name="MyAccount" component={MyAccount} />
 					<Stack.Screen name="Profile" component={ProfilePage} />
 					<Stack.Screen name="Address" component={Address} />
 				</Stack.Navigator>

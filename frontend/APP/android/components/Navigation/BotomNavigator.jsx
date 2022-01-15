@@ -9,16 +9,16 @@ import MyAccount from "../Screens/MyAccount";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator();
-let comp;
-AsyncStorage.getItem("isLogedin",(err,result)=>{    
-    if(result=="true"){
-        comp = true
-    }
-    if(result!=="true"){
-        comp = false
-    } })
 const BottomNavigator = () => {
+	let [comp,setComp] =React.useState()
 	function  myacc () {return <MyAccount islogedin={comp}/> }
+	AsyncStorage.getItem("isLogedin",(err,result)=>{    
+		if(result=="true"){
+			setComp( true)
+		}
+		if(result!=="true"){
+			setComp(false)
+		} })
 	return (
 		<Tab.Navigator
 		screenOptions={{

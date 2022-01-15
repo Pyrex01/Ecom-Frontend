@@ -26,7 +26,7 @@ const style = StyleSheet.create({
 	},
 });
 
-const Login = ({ navigation }) => {
+const Login = () => {
 	let [email, SetEmail] = useState("");
 	let [password, SetPassword] = useState("");
 	let [log, SetLog] = useState("");
@@ -48,7 +48,7 @@ const Login = ({ navigation }) => {
 						<Icon
 							name="arrow-back-ios"
 							size={28}
-							onPress={navigation.goBack}
+							onPress={navigationRef.goBack}
 						/>
 						<Text style={{ fontSize: 20, fontWeight: "bold" }}>
 							{" "}
@@ -199,7 +199,7 @@ const Login = ({ navigation }) => {
 						Don`t have an account ?
 					</Text>
 					<TouchableOpacity
-						onPress={() => navigation.navigate("SignUp")}
+						onPress={() => navigationRef.navigate("SignUp")}
 					>
 						<Text
 							style={{ color: Colors.pink, fontWeight: "bold" }}

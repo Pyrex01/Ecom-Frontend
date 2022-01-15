@@ -22,8 +22,8 @@ import Colors from "../../../Configs/Colors/Colors";
 import STYLES from "../../../Configs/Style/formStyles";
 
 import ModalTester from "./Modal";
-
-const Signup = ({ navigation }) => {
+import { navigationRef } from "./Modal";
+const Signup = () => {
 	let [first_name, setFirstName] = useState("");
 	let [last_name, setLastName] = useState("");
 	let [phone, setPhone] = useState("");
@@ -62,13 +62,18 @@ const Signup = ({ navigation }) => {
 		SetIsVisible,
 	};
 	// const { handleChange, values, errors, handleSubmit } = useForm(validate);
-
+	AsyncStorage.getAllKeys((err,res)=>{
+		AsyncStorage.multiGet(res,(err,re)=>{
+			re.map(item=>console.log(item[0],item[1]))
+		})
+	})
 	return (
+
 		<SafeAreaView style={{ paddingHorizontal: 40, flex: 1, backgroundColor: Colors.white, }}>
 			<ScrollView   showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
 				<View style={{ backgroundColor: Colors.white, flex: 1 }}>
 					<View style={style.header}>
-						<Icon name='arrow-back-ios'	size={28}	onPress={navigation.goBack}	>
+						<Icon name='arrow-back-ios'	size={28}	onPress={navigationRef.goBack}	>
 						<Text style={{ fontSize: 20, fontWeight: "bold" }}>
 							SignUp
 						</Text>
@@ -317,7 +322,7 @@ const Signup = ({ navigation }) => {
 					>
 						Already have an account ?
 					</Text>
-					<TouchableOpacity onPress={() => navigation.navigate("LogIn")}>
+					<TouchableOpacity onPress={() => navigationRef.navigate("LogIn")}>
 						<Text
 							style={{
 								color: Colors.black,

@@ -39,6 +39,7 @@ const Signup = () => {
 	let [genderlog, setGenderLog] = useState("");
 	let [passwordlog, setPasswordLog] = useState("");
 	let [confirm_passwordlog, setConfirmPasswordLog] = useState("");
+	let [backerr, setBackerr] = useState("");
 	let [isVisible, SetIsVisible] = useState(false);
 	// const [selectedValue, setSelectedValue] = useState("1,2,0");
 	let user_Data = {
@@ -60,6 +61,7 @@ const Signup = () => {
 		setPasswordLog,
 		setConfirmPasswordLog,
 		SetIsVisible,
+		setBackerr
 	};
 	// const { handleChange, values, errors, handleSubmit } = useForm(validate);
 	AsyncStorage.getAllKeys((err,res)=>{
@@ -105,6 +107,7 @@ const Signup = () => {
 					</Text>
 				</View>
 				<View style={{ marginTop: 20 }}>
+						<Text style={{color:"rgb(255,0,0)"}}>{backerr}</Text>
 					<View style={STYLES.inputContainer}>
 						<Icon
 							name='person-outline'
@@ -112,7 +115,6 @@ const Signup = () => {
 							size={20}
 							style={STYLES.inputIcon}
 						/>
-
 						<TextInput
 							name='first_name'
 							placeholder='First Name'
@@ -122,7 +124,7 @@ const Signup = () => {
 						/>
 					</View>
 					<View>
-						<Text>{first_namelog}</Text>
+						<Text style={{color:"rgb(255,0,0)"}}>{first_namelog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon name='person-outline' color={Colors.grey} size={20} style={STYLES.inputIcon} />
@@ -131,7 +133,7 @@ const Signup = () => {
 						{/* <Text ref={NameError}> </Text> */}
 					</View>
 					<View>
-						<Text>{last_namelog}</Text>
+						<Text style={{color:"rgb(255,0,0)"}}>{last_namelog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -155,7 +157,7 @@ const Signup = () => {
 						</Picker>
 					</View>
 					<View>
-						<Text>{genderlog}</Text>
+						<Text style={{color:"rgb(255,0,0)"}}>{genderlog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -176,7 +178,7 @@ const Signup = () => {
 						/>
 					</View>
 					<View>
-						<Text>{phonelog}</Text>
+						<Text style={{color:"rgb(255,0,0)"}}>{phonelog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -198,7 +200,7 @@ const Signup = () => {
 						/>
 					</View>
 					<View>
-						<Text>{emaillog}</Text>
+						<Text style={{color:"rgb(255,0,0)"}}>{emaillog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -220,7 +222,7 @@ const Signup = () => {
 						/>
 					</View>
 					<View>
-						<Text>{passwordlog}</Text>
+						<Text style={{color:"rgb(255,0,0)"}}>{passwordlog}</Text>
 					</View>
 					<View style={STYLES.inputContainer}>
 						<Icon
@@ -242,7 +244,7 @@ const Signup = () => {
 						/>
 					</View>
 					<View>
-						<Text>{confirm_passwordlog}</Text>
+						<Text style={{color:"rgb(255,0,0)"}}>{confirm_passwordlog}</Text>
 					</View>
 					<TouchableOpacity>
 						<View style={STYLES.btnPrimary}>
@@ -258,34 +260,19 @@ const Signup = () => {
 							</Text>
 						</View>
 					</TouchableOpacity>
-					<View
-						style={{
-							marginVertical: 20,
-							flexDirection: "row",
-							justifyContent: "center",
-							alignItems: "center",
-						}}
-					>
+					<View	style={{marginVertical: 20,	flexDirection: "row",justifyContent: "center",alignItems: "center",	}}>
 						<View style={STYLES.line}></View>
 						<Text style={{ marginHorizontal: 5, fontWeight: "bold" }}>
 							OR
 						</Text>
 						<View style={STYLES.line}></View>
 					</View>
-					<View
-						style={{
-							flexDirection: "row",
-							justifyContent: "space-between",
-						}}
-					>
+					<View style={{	flexDirection: "row",	justifyContent: "space-between",}}>
 						<View style={STYLES.btnSecondary}>
 							<TouchableOpacity onPress={() => ""}>
 								<Text style={{ fontWeight: "bold", fontSize: 18 }}>
 									Sign up with
-									<Image
-										style={STYLES.btnImage}
-										source={require("../../../assets/facebook.png")}
-									/>
+									<Image	style={STYLES.btnImage}	source={require("../../../assets/facebook.png")}/>
 								</Text>
 							</TouchableOpacity>
 						</View>
@@ -294,25 +281,14 @@ const Signup = () => {
 							<TouchableOpacity onPress={() => ""}>
 								<Text style={{ fontWeight: "bold", fontSize: 18 }}>
 									Sign up with
-									<Image
-										style={STYLES.btnImage}
-										source={require("../../../assets/google.png")}
-									/>
+									<Image	style={STYLES.btnImage}	source={require("../../../assets/google.png")}	/>
 								</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
 				</View>
 
-				<View
-					style={{
-						flexDirection: "row",
-						alignItems: "flex-end",
-						justifyContent: "center",
-						marginTop: 40,
-						marginBottom: 20,
-					}}
-				>
+				<View style={{flexDirection: "row",	alignItems: "flex-end",	justifyContent: "center",	marginTop: 40,	marginBottom: 20,}}	>
 					<Text
 						style={{
 							color: Colors.grey,
@@ -450,6 +426,11 @@ function submit(user_Data, log_Setters) {
 				}
 				if (response.status >= 400 && response.status < 500) {
 					Alert.alert("oops! something went wrong");
+				}
+			})
+			.catch(err =>{
+				if(err.request.status==400){
+					log_Setters("opps something went wrong!")
 				}
 			});
 	}

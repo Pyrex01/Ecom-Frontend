@@ -86,7 +86,6 @@ const HomeScreen = ({ navigation }) => {
 
 	function gotoNext(){
 		setloadning(true)
-		console.log(pagingData.current)
 		axios.get(pagingData.next).then((response)=>{
 			setPagingData(response.data)
 			setloadning(false)

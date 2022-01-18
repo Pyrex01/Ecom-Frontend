@@ -105,6 +105,7 @@ const Login = () => {
 				</View>
 
 				<View style={{ marginTop: 20 }}>
+				<Text style={{color:"rgb(255,0,0)"}} >{log}</Text>
 					<View style={STYLES.inputContainer}>
 						<Icon
 							name="mail-outline"
@@ -132,7 +133,7 @@ const Login = () => {
 							style={STYLES.input}
 							secureTextEntry
 						/>
-						<Text>{log}</Text>
+	
 					</View>
 					<TouchableOpacity
 						onPress={() => loginSubmit(values, SetLog)}
@@ -211,44 +212,46 @@ const Login = () => {
 			</SafeAreaProvider>
 		</ScrollView>
 	);
+	function loginSubmit(value, SetLog) {
+		let email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+		if (!email_pattern.test(value.email)) {
+			SetLog("Please enter proper Email");
+			return;
+		}
+		if (value.password == "") {
+			SetLog("enter password please");
+			return;
+		} else {
+			mainBackend
+				.post("/user/login/", {
+					Email: value.email,
+					password: value.password,
+				})
+				.then(function (response) {
+					switch (response.status) {
+						case 400:
+							alert("oops something went wrong!");
+							break;
+						case 202:
+							for (let key in response.data) {
+								AsyncStorage.setItem(key, response.data[key]);
+							}
+							AsyncStorage.setItem("isLogedin", "true");
+							navigationRef.navigate("BoardScreen")
+							break;
+						case 403:
+							SetLog("sorry wrong credentials");
+							break;
+					}
+				}).catch(err=>{
+					if (err.request.status == 403){
+						SetLog("Email or Password wrong")
+					}
+				});
+		}
+	}
 };
 
-function loginSubmit(value, SetLog) {
-	let email_pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-	if (!email_pattern.test(value.email)) {
-		SetLog("Please enter proper Email");
-		return;
-	}
-	if (value.password == "") {
-		SetLog("enter password please");
-		return;
-	} else {
-		mainBackend
-			.post("/user/login/", {
-				Email: value.email,
-				password: value.password,
-			})
-			.then(function (response) {
-				switch (response.status) {
-					case 400:
-						alert("oops something went wrong!");
-						break;
-					case 202:
-						for (let key in response.data) {
-							AsyncStorage.setItem(key, response.data[key]);
-						}
-						AsyncStorage.setItem("isLogedin", "true");
-						navigationRef.navigate("BoardScreen")
-						alert("login success");
-						break;
-					case 403:
-						SetLog("sorry wrong credentials");
-						break;
-				}
-			}).catch(response=>{
-				console.log(response)
-			});
-	}
-}
+
 
 export default Login;

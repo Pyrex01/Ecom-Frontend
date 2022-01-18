@@ -33,10 +33,9 @@ function print(text) {
 	return "data:image/png;base64," + text
 }
 
-
 const Card = ({ Products,navigation }) => {
 	return (
-		<TouchableHighlight underlayColor={Colors.white} activeOpacity={0.9} onPress={() => navigation.navigate("DetailsScreen", Products)}>
+		<TouchableHighlight underlayColor={Colors.white} activeOpacity={0.9}>
 			<View style={style.card}>
 				<View style={{ alignItems: "center", top: -40, }}>
 					<Image source={{ uri: print(Products.Display_Image) }} style={{ height: 125, width: 130 }} />
@@ -74,6 +73,7 @@ const HomeScreen = ({ navigation }) => {
 	})
 	let [loading, setloadning] = React.useState(true);
 	let [pagingData, setPagingData] = React.useState(true);
+	let [searchString, setsearchString] = React.useState("");
 	const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState();
 	React.useState(() => {
 		mainBackend.get("/store/getItems/").then((response) => {
@@ -90,6 +90,18 @@ const HomeScreen = ({ navigation }) => {
 			setPagingData(response.data)
 			setloadning(false)
 		})
+	}
+
+	function search(){
+		setloadning(true)
+		mainBackend.get("/store/getSortItems/",{
+			params: {
+				searchString
+			}}).then((response)=>{
+			setPagingData(response.data)
+			setloadning(false)
+			}).catch(err=>console.log(err))
+	
 	}
 	function gotoPrevious(){
 		setloadning(true)
@@ -113,14 +125,6 @@ const HomeScreen = ({ navigation }) => {
 			}})
 			.then((response)=>{
 				data= response.data
-				
-				if(data.next !== null){
-					data.next = data.next +"&categories="+id
-				}
-				
-				if(data.previous !== null){
-					data.previous = data.previous +"&categories="+id
-				}
 				setPagingData(data)
 				setloadning(false)
 			})
@@ -147,15 +151,16 @@ const HomeScreen = ({ navigation }) => {
 			</SafeAreaView>
 		);
 	}
+
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
 			<View style={{ marginTop: 13, flexDirection: "row", paddingHorizontal: 20, }}>
 				<View style={style.inputContainer}>
 					<Icon name="search" size={28} />
-					<TextInput style={{ flex: 1, fontSize: 18 }} placeholder="Search..." />
+					<TextInput style={{ flex: 1, fontSize: 18 }} onChangeText={text=>setsearchString(text)} placeholder="Search..." />
 				</View>
 				<View style={style.sortBtn}>
-					<Pressable>
+					<Pressable onPress={search} >
 						<Icon name="send" size={28} color={Colors.white} />
 					</Pressable>
 				</View>

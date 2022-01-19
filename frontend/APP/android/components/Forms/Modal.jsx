@@ -7,6 +7,9 @@ import { createNavigationContainerRef } from "@react-navigation/native";
 import { mainBackend } from "../../../Configs/MainBackend";
 import Colors from "../../../Configs/Colors/Colors";
 import STYLES from "../../../Configs/Style/formStyles";
+
+
+
 export const navigationRef = createNavigationContainerRef()
 export default function ModalTester(props) {
 	

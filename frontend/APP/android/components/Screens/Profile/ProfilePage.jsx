@@ -13,7 +13,6 @@ import ProfileStyle from '../../../../Configs/Style/ProfileStyle';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {navigationRef} from "../../Forms/Modal"
 import axios from "axios";
-import { mainBackend } from "../../../../Configs/MainBackend";
 // Array [
 //     "First_name",
 //     "Photo",
@@ -22,14 +21,14 @@ import { mainBackend } from "../../../../Configs/MainBackend";
 //     "login_token",
 //     "signup_token",
 //   ]
-const ProfilePage = (props) => {
+const ProfilePage = () => {
     let [name,setName]=React.useState("")
     let [photo,setPhoto]=React.useState("")
     AsyncStorage.multiGet(["First_name","Photo",],(err,res)=>{
         setName(res[0][1])
         setPhoto(res[1][1])
     })
-    return ( <SafeAreaView>
+    return (<SafeAreaView>
             <TouchableHighlight>
                 <View style={ProfileStyle.container}>
                     <View style={ProfileStyle.View}>
@@ -41,7 +40,7 @@ const ProfilePage = (props) => {
 
                     <View style={ProfileStyle.Line} />
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={_=>navigationRef.navigate("Address")} >
                         <View style={ProfileStyle.View}>
                             <Iconss
                                 name='location-outline'
@@ -99,7 +98,7 @@ const ProfilePage = (props) => {
                     <TouchableOpacity onPress={logout}>
                         <View style={ProfileStyle.View}>
                             <Icons
-                                name='customerservice'
+                                name='logout'
                                 color={Colors.grey}
                                 size={40}
                                 style={ProfileStyle.IconSpace}
@@ -107,7 +106,6 @@ const ProfilePage = (props) => {
                             <Text style={[ProfileStyle.Font, ProfileStyle.FontSpace]} >Log Out</Text>
                         </View>
                     </TouchableOpacity>
-
                     <View style={ProfileStyle.Line} />
                 </View>
             </TouchableHighlight>

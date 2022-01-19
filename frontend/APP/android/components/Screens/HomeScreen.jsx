@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useEffect} from "react";
 import {
 	Pressable,
 	ActivityIndicator,
@@ -28,14 +28,24 @@ import { mainBackend } from "../../../Configs/MainBackend"
 const { width } = Dimensions.get("screen");
 const cardWidth = width / 2 - 20;
 import axios from "axios";
-
+import {navigationRef} from "../Forms/Modal"
 function print(text) {
 	return "data:image/png;base64," + text
 }
 
-const Card = ({ Products,navigation }) => {
+const Card = ({ Products }) => {
 	return (
-		<TouchableHighlight underlayColor={Colors.white} activeOpacity={0.9}>
+		<TouchableHighlight onPress={ ()=>
+			{
+			mainBackend.get("/store/getitem/",{
+				params: {
+					product_ID:Products.id
+				}}).then(function (response){
+					navigationRef.navigate("DetailsScreen",{data:response.data})
+				}).catch(err=>{
+					alert("oops something went wrong")
+				})
+			}} underlayColor={Colors.white} activeOpacity={0.9}>
 			<View style={style.card}>
 				<View style={{ alignItems: "center", top: -40, }}>
 					<Image source={{ uri: print(Products.Display_Image) }} style={{ height: 125, width: 130 }} />
@@ -53,7 +63,7 @@ const Card = ({ Products,navigation }) => {
 						{Products.Price}
 					</Text>
 					<View style={style.addToCartBtn}>
-						<Icon name="send" size={20} color={Colors.white} />
+						<Icon name="add-shopping-cart" size={20} color={Colors.white} />
 					</View>
 				</View>
 			</View>
@@ -75,14 +85,16 @@ const HomeScreen = ({ navigation }) => {
 	let [pagingData, setPagingData] = React.useState(true);
 	let [searchString, setsearchString] = React.useState("");
 	const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState();
-	React.useState(() => {
-		mainBackend.get("/store/getItems/").then((response) => {
+	let shit = true
 
-			
+
+	useEffect (() => {
+		
+		mainBackend.get("/store/getItems/").then((response) => {
 			setloadning(false)
 			setPagingData(response.data)
 		})
-	});
+	},[shit]);
 
 	function gotoNext(){
 		setloadning(true)
@@ -112,7 +124,7 @@ const HomeScreen = ({ navigation }) => {
 		})
 	}
 	
-	// 	Electronic 1
+	// Electronic 1
 	// Fashion 2
 	// Groceries 3
 	// Hygiene 4
@@ -133,7 +145,7 @@ const HomeScreen = ({ navigation }) => {
 	const ListCategories = () => {
 		return (
 			<SafeAreaView>
-				<ScrollView horizontal showsHorizontalScrollIndicator={true} contentContainerStyle={style.categoriesListContainer}>
+				<ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={style.categoriesListContainer}>
 					{categories.map((category, index) => (
 						<TouchableOpacity key={index} activeOpacity={0.8} onPress={() => {
 							setSelectedCategoryIndex(index)

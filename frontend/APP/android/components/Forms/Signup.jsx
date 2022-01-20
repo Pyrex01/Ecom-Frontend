@@ -246,16 +246,9 @@ const Signup = () => {
 					<View>
 						<Text style={{color:"rgb(255,0,0)"}}>{confirm_passwordlog}</Text>
 					</View>
-					<TouchableOpacity>
+					<TouchableOpacity onPress={() => submit(user_Data, log_Setters)} >
 						<View style={STYLES.btnPrimary}>
-							<Text
-								style={{
-									color: "#fff",
-									fontWeight: "bold",
-									fontSize: 20,
-								}}
-								onPress={() => submit(user_Data, log_Setters)}
-							>
+							<Text style={{	color: "#fff",	fontWeight: "bold",	fontSize: 20,}}	>
 								Sign Up
 							</Text>
 						</View>

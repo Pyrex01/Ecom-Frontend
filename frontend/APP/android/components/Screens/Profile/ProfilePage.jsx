@@ -28,11 +28,19 @@ const ProfilePage = () => {
         setName(res[0][1])
         setPhoto(res[1][1])
     })
+    function getPic(){
+        if (photo==""){
+            return <Image source={Avataar} style={ProfileStyle.ProfileImage} />
+        }
+        else{
+            return <Image source={{uri:photo}} style={ProfileStyle.ProfileImage} />
+        }
+    }
     return (<SafeAreaView>
             <TouchableHighlight>
                 <View style={ProfileStyle.container}>
                     <View style={ProfileStyle.View}>
-                        <Image source={photo==""?Avataar:{uri:photo}} style={ProfileStyle.ProfileImage} />
+                        { getPic() }
                         <TouchableOpacity>
                             <Text style={[ProfileStyle.Font, ProfileStyle.FontSpace, ProfileStyle.ProfileName]}>{name}</Text>
                         </TouchableOpacity>
@@ -121,8 +129,8 @@ function logout(){
             return;
         }
         var x = "Token "+res
-        axios.post("http://shopingbazar.sytes.net/user/logout/",{},{headers:{Authorization:x}}).then((response)=>{
-
+        axios.post("http://shopingbazar.sytes.net/user/logout/",{},{headers:{Authorization:x}})
+        .then((response)=>{
             switch(response.status){
                 case 400:
                     alert("oops something went wrong")
@@ -136,8 +144,13 @@ function logout(){
                     break;
             }
         })
-        .catch((response)=>{
-            console.log(response)
+        .catch((err)=>{
+            if(err.request.status==401){
+                AsyncStorage.multiRemove(['First_name','Photo','Second_Name','isLogedin','login_token','signup_token'], (err) => {
+                    AsyncStorage.setItem("isLogedin","false")
+                    navigationRef.navigate("BoardScreen")
+                });
+            }
             alert("ooops something went wrong")
         })
     })

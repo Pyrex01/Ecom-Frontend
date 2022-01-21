@@ -5,12 +5,30 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../../Configs/Colors/Colors";
 import Products from "../Sub Components/Products";
 import { PrimaryButton } from "../Sub Components/Button";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {mainBackend} from "../../../Configs/MainBackend"
+
+
+function print(text) {
+	return "data:image/png;base64," + text
+}
 
 const CartScreen = ({ navigation }) => {
+	let [cartItems,setCartItems] = React.useState();
+	let shit=true;
+
+	React.useEffect(()=>{
+		AsyncStorage.getItem("login_token",(err,res)=>{
+			mainBackend.get("/store/getItemsInCart/",{headers:{Authorization:"Token "+res}}).then(response=>{
+				setCartItems(response.data)
+			})
+		})
+	},[shit])
+
 	const CartCard = ({ item }) => {
 		return (
 			<View style={style.cartCard}>
-				<Image source={item.image} style={{ height: 80, width: 80 }} />
+				<Image source={{uri:print(item.Display_Image)}} style={{ height: 80, width: 80 }} />
 				<View
 					style={{
 						height: 100,
@@ -20,13 +38,13 @@ const CartScreen = ({ navigation }) => {
 					}}
 				>
 					<Text style={{ fontWeight: "bold", fontSize: 16 }}>
-						{item.name}
+						{item.Name}
 					</Text>
-					<Text style={{ fontSize: 13, color: Colors.grey }}>
+					{/* <Text style={{ fontSize: 13, color: Colors.grey }}>
 						{item.discription}
-					</Text>
+					</Text> */}
 					<Text style={{ fontSize: 17, fontWeight: "bold" }}>
-						{item.price}
+						{item.Price}
 					</Text>
 				</View>
 				<View style={{ marginRight: 20, alignItems: "center" }}>
@@ -52,7 +70,7 @@ const CartScreen = ({ navigation }) => {
 			<FlatList
 				showsVerticalScrollIndicator={true}
 				contentContainerStyle={{ paddingBottom: 80 }}
-				data={Products}
+				data={cartItems}
 				renderItem={({ item }) => <CartCard item={item} />}
 				ListFooterComponentStyle={{
 					paddingHorizontal: 20,
@@ -71,7 +89,9 @@ const CartScreen = ({ navigation }) => {
 								Total Price
 							</Text>
 							<Text style={{ fontSize: 18, fontWeight: "bold" }}>
-								1550
+								{cartItems==null? 0 :cartItems.reduce((sumofcart,items)=>{
+									return sumofcart + items.Price
+								},0)}
 							</Text>
 						</View>
 						<View style={{ marginHorizontal: 30 }}>

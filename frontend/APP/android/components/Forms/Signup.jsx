@@ -3,6 +3,7 @@ import "react-native-gesture-handler";
 import { } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ProfileStyle from "../../../Configs/Style/ProfileStyle";
 import {
 	SafeAreaView,
 	View,
@@ -76,8 +77,8 @@ const Signup = () => {
 				<View style={{ backgroundColor: Colors.white, flex: 1 }}>
 					<View style={style.header}>
 						<Icon name='arrow-back-ios'	size={28}	onPress={navigationRef.goBack}	>
-						<Text style={{ fontSize: 20, fontWeight: "bold" }}>
-							SignUp
+						<Text style={{ fontSize: 20, fontWeight: "bold",color:Colors.black }}>
+							SIGN UP
 						</Text>
 						</Icon>
 					</View>
@@ -156,6 +157,8 @@ const Signup = () => {
 							<Picker.Item label='Others' value='0' />
 						</Picker>
 					</View>
+					<View style={ProfileStyle.Line} />
+
 					<View>
 						<Text style={{color:"rgb(255,0,0)"}}>{genderlog}</Text>
 					</View>

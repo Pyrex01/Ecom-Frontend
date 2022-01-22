@@ -62,9 +62,6 @@ const Card = ({ Products }) => {
 					<Text style={{ fontSize: 18, fontWeight: "bold" }}>
 						{Products.Price}
 					</Text>
-					<View style={style.addToCartBtn}>
-						<Icon name="add-shopping-cart" size={20} color={Colors.white} />
-					</View>
 				</View>
 			</View>
 		</TouchableHighlight>

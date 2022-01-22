@@ -1,6 +1,6 @@
-import React from "react";
+import React ,{PureComponent} from "react";
 import { SafeAreaView, StyleSheet, View, Text, Image ,ActivityIndicator} from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { RouterLink, useNavigate, useParams } from "react-router-dom";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../../Configs/Colors/Colors";
@@ -13,8 +13,24 @@ function print(text) {
 	return "data:image/png;base64," + text
 }
 
+
+
+
 const DetailsScreen = (props) => {
 		let data = props.route.params.data
+
+		let image_ist = data.Product_details.images
+		image_ist = [data.Display_Image,...image_ist]
+		const ImageView = () => {
+			return (
+				<SafeAreaView>
+					<ScrollView horizontal showsHorizontalScrollIndicator={false}>
+						{image_ist.map((image, index) => ( <Image source={{uri:print(image)}} style={{ height: 220, width: 220,margin:15 }} key={image} /> )
+						)}
+					</ScrollView>
+				</SafeAreaView>
+			);
+		}
 		return (
 		<SafeAreaView style={{ backgroundColor: Colors.white }}>
 			
@@ -30,7 +46,8 @@ const DetailsScreen = (props) => {
 			</View>
 			<ScrollView showsVerticalScrollIndicator={false}>
 				<View style={{	justifyContent: "center",	alignItems: "center",	height: 280,	}}	>
-					<Image source={{uri:print(data.Display_Image)}} style={{ height: 220, width: 220 }}	/>
+					<ImageView />
+					{/* <Image source={{uri:print(data.Display_Image)}} style={{ height: 220, width: 220 }}	/> */}
 				</View>
 				<View style={style.details}>
 					<View style={{	flexDirection: "row",justifyContent: "space-between",	alignItems: "center",}}	>
@@ -48,7 +65,10 @@ const DetailsScreen = (props) => {
 					<Text style={style.detailsText}>
 						{data.Product_details.description}
 					</Text>
-					<View style={{ marginTop: 40, marginBottom: 40 }}>
+					<View style={{margin:10 }}>
+						<SecondaryButton title="Buy" />
+					</View>
+					<View style={{ margin:10,marginBottom:40 }}>
 						<SecondaryButton title="Add To Cart" />
 					</View>
 				</View>

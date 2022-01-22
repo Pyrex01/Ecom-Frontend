@@ -15,12 +15,13 @@ function print(text) {
 
 const CartScreen = ({ navigation }) => {
 	let [cartItems,setCartItems] = React.useState();
-	let shit=true;
+	let [shit,setShit] = React.useState(false)
 
 	React.useEffect(()=>{
 		AsyncStorage.getItem("login_token",(err,res)=>{
 			mainBackend.get("/store/getItemsInCart/",{headers:{Authorization:"Token "+res}}).then(response=>{
 				setCartItems(response.data)
+				setShit(true)
 			})
 		})
 	},[shit])
@@ -28,7 +29,7 @@ const CartScreen = ({ navigation }) => {
 	const CartCard = ({ item }) => {
 		return (
 			<View style={style.cartCard}>
-				<Image source={{uri:print(item.Display_Image)}} style={{ height: 80, width: 80 }} />
+				<Image source={{uri:print(item.Items_ID.Display_Image)}} style={{ height: 80, width: 80 }} />
 				<View
 					style={{
 						height: 100,
@@ -38,19 +39,19 @@ const CartScreen = ({ navigation }) => {
 					}}
 				>
 					<Text style={{ fontWeight: "bold", fontSize: 16 }}>
-						{item.Name}
+						{item.Items_ID.Name}
 					</Text>
 					{/* <Text style={{ fontSize: 13, color: Colors.grey }}>
-						{item.discription}
+						{item.Items_ID.discription}
 					</Text> */}
 					<Text style={{ fontSize: 17, fontWeight: "bold" }}>
-						{item.Price}
+						{item.Items_ID.Price}
 					</Text>
 				</View>
 				<View style={{ marginRight: 20, alignItems: "center" }}>
-					<Text style={{ fontWeight: "bold", fontSize: 18 }}>3</Text>
+					<Text style={{ fontWeight: "bold", fontSize: 18 }}>{item.Quantity}</Text>
 					<View style={style.actionBtn}>
-						<Icon name="remove" size={25} color={Colors.white} />
+						<Icon  name="remove" size={25} color={Colors.white} />
 						<Icon name="add" size={25} color={Colors.white} />
 					</View>
 				</View>
@@ -72,6 +73,7 @@ const CartScreen = ({ navigation }) => {
 				contentContainerStyle={{ paddingBottom: 80 }}
 				data={cartItems}
 				renderItem={({ item }) => <CartCard item={item} />}
+				keyExtractor={(item,index)=>item.Items_ID.id.toString()}
 				ListFooterComponentStyle={{
 					paddingHorizontal: 20,
 					marginTop: 20,
@@ -90,7 +92,7 @@ const CartScreen = ({ navigation }) => {
 							</Text>
 							<Text style={{ fontSize: 18, fontWeight: "bold" }}>
 								{cartItems==null? 0 :cartItems.reduce((sumofcart,items)=>{
-									return sumofcart + items.Price
+									return sumofcart + (items.Items_ID.Price * items.Quantity)
 								},0)}
 							</Text>
 						</View>

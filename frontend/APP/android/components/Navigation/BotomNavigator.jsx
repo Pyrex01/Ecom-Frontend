@@ -70,15 +70,4 @@ const BottomNavigator = () => {
 		</Tab.Navigator>
 	);
 };
-// {
-// 	("tabBarActiveTintColor");
-// 	"#fc5c65", "tabBarShowLabel";
-// 	false, "tabBarStyle";
-// 	[
-// 		{
-// 			display: "flex",
-// 		},
-// 		null,
-// 	];
-// }
 export default BottomNavigator;

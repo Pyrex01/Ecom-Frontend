@@ -10,6 +10,8 @@ import MyAccount from './Screens/MyAccount';
 import Login from "./Forms/Login";
 import Colors from "../../Configs/Colors/Colors"
 import ProfilePage from './Screens/Profile/ProfilePage';
+import WishList from './Screens/WishListScreen';
+import OrderList from './Screens/OrderScreen';
 import Address from './Screens/Profile/Address';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MainPage from './Screens/MainPage';
@@ -32,6 +34,8 @@ export default function Android() {
 					<Stack.Screen name="MyAccount" component={MyAccount} />
 					<Stack.Screen name="DetailsScreen" component={DetailsScreen} />
 					<Stack.Screen name="Profile" component={ProfilePage} />
+					<Stack.Screen name="WishList" component={WishList} />
+					<Stack.Screen name="OrderList" component={OrderList} />
 					<Stack.Screen name="Address" component={Address} />
 				</Stack.Navigator>
 			</NavigationContainer>

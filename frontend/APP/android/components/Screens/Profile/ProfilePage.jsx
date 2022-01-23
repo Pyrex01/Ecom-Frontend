@@ -62,7 +62,7 @@ const ProfilePage = () => {
 
                     <View style={ProfileStyle.Line} />
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>navigationRef.navigate("WishList")}>
                         <View style={ProfileStyle.View}>
                             <Icon
                                 name='favorite-border'
@@ -76,7 +76,7 @@ const ProfilePage = () => {
 
                     <View style={ProfileStyle.Line} />
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>navigationRef.navigate("OrderList")}>
                         <View style={ProfileStyle.View}>
                             <Icon
                                 name='shopping-cart'
@@ -84,7 +84,7 @@ const ProfilePage = () => {
                                 size={40}
                                 style={ProfileStyle.IconSpace}
                             />
-                            <Text style={[ProfileStyle.Font, ProfileStyle.FontSpace]} >Orders</Text>
+                            <Text style={[ProfileStyle.Font, ProfileStyle.FontSpace]} >My Orders</Text>
                         </View>
                     </TouchableOpacity>
 

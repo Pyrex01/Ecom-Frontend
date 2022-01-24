@@ -20,9 +20,9 @@ import { navigationRef } from './Forms/Modal';
 const Stack = createStackNavigator();
 
 
+export default function Android(props) {
 
-export default function Android() {
-	
+	if(props.isFirst){
 	return (
 		<>
 			<NavigationContainer ref={navigationRef}>
@@ -43,4 +43,27 @@ export default function Android() {
 			</NavigationContainer>
 		</>
 	);
+	}
+	else{
+		return (
+			<>
+			<NavigationContainer ref={navigationRef}>
+				<StatusBar backgroundColor={Colors.white} barStyle="dark-content" />
+				<Stack.Navigator screenOptions={{ headerShown: false }}>
+					{/* <Stack.Screen name="MainPage" component={MainPage} /> */}
+					{/* <Stack.Screen name="BoardScreen" component={OnBoardScreen} /> */}
+					<Stack.Screen name="Home" component={BottomNavigator} />
+					<Stack.Screen name="LogIn" component={Login} />
+					<Stack.Screen name="MyAccount" component={MyAccount} />
+					<Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+					<Stack.Screen name="Profile" component={ProfilePage} />
+					<Stack.Screen name="WishList" component={WishList} />
+					<Stack.Screen name="OrderList" component={OrderList} />
+					<Stack.Screen name="Address" component={Address} />
+					<Stack.Screen name="ComplainScreen" component={ComplainScreen} />
+				</Stack.Navigator>
+			</NavigationContainer>
+		</>
+		)
+	}
 }

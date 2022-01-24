@@ -19,11 +19,12 @@ const CartScreen = ({ navigation }) => {
 
 	React.useEffect(()=>{
 		AsyncStorage.getItem("login_token",(err,res)=>{
+			if(res){
 			mainBackend.get("/store/getItemsInCart/",{headers:{Authorization:"Token "+res}}).then(response=>{
 				setCartItems(response.data)
 				setShit(true)
 			})
-		})
+		}})
 	},[shit])
 
 	const CartCard = ({ item }) => {

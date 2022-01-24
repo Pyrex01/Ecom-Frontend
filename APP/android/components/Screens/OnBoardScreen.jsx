@@ -47,6 +47,7 @@ const OnBoardScreen = ({ navigation }) => {
 				<View>
 					<PrimaryButton
 						onPress={() => {
+							AsyncStorage.setItem("firstTime","false");
 							navigation.navigate("Home")
 						}}
 						title="Get Started"

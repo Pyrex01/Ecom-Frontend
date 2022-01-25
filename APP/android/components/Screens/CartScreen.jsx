@@ -1,5 +1,5 @@
 import React from "react";	
-import { SafeAreaView, StyleSheet, View, Text, Image ,FlatList} from "react-native";
+import { SafeAreaView, StyleSheet, View, Text, Image ,FlatList,TouchableOpacity} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../../Configs/Colors/Colors";
 import Products from "../Sub Components/Products";
@@ -16,6 +16,7 @@ const CartScreen = () => {
 	let [cartItems,setCartItems] = React.useState();
 	let [shit,setShit] = React.useState(false)
 
+
 	React.useEffect(()=>{
 		AsyncStorage.getItem("login_token",(err,res)=>{
 			if(res){
@@ -26,7 +27,54 @@ const CartScreen = () => {
 		}})
 	},[shit])
 
-	const CartCard = ({ item }) => {
+	const CartCard = ({ item}) => {
+
+		let [changed,setChanged]=React.useState(false)
+		let [Quantity,setQuantity]=React.useState(item.Quantity)
+		let oldQunatity = item.Quantity;
+
+
+
+		function doneChange(){
+			setChanged(false)
+			AsyncStorage.getItem("login_token",(err,res)=>{
+				mainBackend.post("store/updataQuantitiy/",{cartID:(item.id).toString(),quantity:Quantity},{headers:{Authorization:"Token "+res}})
+				.then(Response=>{
+					if(Response.status==202){
+						setShit(false)
+						return;
+					}
+					if(err){
+						setQuantity(oldQunatity)
+					}
+					else{
+						setQuantity(oldQunatity)
+					}
+				})
+				.catch(err=>
+					setQuantity(oldQunatity)
+					)
+
+			})
+		}
+
+		function subtract(){
+			let newQuantitiy = Quantity - 1;
+			setQuantity(newQuantitiy)
+			if(newQuantitiy<0){
+				setQuantity(0)
+			}
+			setChanged(true)
+		}
+		function add(){
+			let newQuantitiy = Quantity + 1;
+			setQuantity(newQuantitiy)
+			if(newQuantitiy<0){
+				setQuantity(0)
+			}
+			setChanged(true)
+		}
+
 		return (
 			<View style={style.cartCard}>
 
@@ -50,10 +98,20 @@ const CartScreen = () => {
 					</Text>
 				</View>
 				<View style={{ marginRight: 20, alignItems: "center" }}>
-					<Text style={{ fontWeight: "bold", fontSize: 18 }}>{item.Quantity}</Text>
+					<Text style={{ fontWeight: "bold", fontSize: 18 }}>{Quantity}</Text>
 					<View style={style.actionBtn}>
+						<TouchableOpacity onPress={_=>subtract()} >
 						<Icon  name="remove" size={25} color={Colors.white} />
-						<Icon name="add" size={25} color={Colors.white} />
+						</TouchableOpacity>
+						<TouchableOpacity>
+						<Icon name="add" onPress={_=>add()}  size={25} color={Colors.white} />
+						</TouchableOpacity>
+
+						{changed==true?	<TouchableOpacity onPress={ _=>doneChange()} >
+						<Icon name="done" size={25} color={Colors.white} />
+						</TouchableOpacity>:<></>}
+					
+
 					</View>
 				</View>
 			</View>
@@ -66,26 +124,13 @@ const CartScreen = () => {
 						<Text style={{ fontSize: 20, fontWeight: "bold" }}>
 							Cart
 						</Text>
-					</View>
-			<FlatList
-				showsVerticalScrollIndicator={true}
-				contentContainerStyle={{ paddingBottom: 80 }}
-				data={cartItems}
-				renderItem={({ item }) => <CartCard item={item} />}
-				keyExtractor={(item,index)=>item.Items_ID.id.toString()}
-				ListFooterComponentStyle={{
-					paddingHorizontal: 20,
-					marginTop: 20,
-				}}
+					</View>{ cartItems!==null?
+			<FlatList	showsVerticalScrollIndicator={true}	contentContainerStyle={{ paddingBottom: 80 }} data={cartItems}	
+			renderItem={({ item,id }) => <CartCard item={item} id={id} />}	
+			keyExtractor={(item,index)=>item.Items_ID.id.toString()} ListFooterComponentStyle={{	paddingHorizontal: 20,	marginTop: 20,	}}
 				ListFooterComponent={() => (
 					<View>
-						<View
-							style={{
-								flexDirection: "row",
-								justifyContent: "space-between",
-								marginVertical: 15,
-							}}
-						>
+						<View	style={{	flexDirection: "row",	justifyContent: "space-between",	marginVertical: 15,	}}	>
 							<Text style={{ fontSize: 18, fontWeight: "bold" }}>
 								Total Price
 							</Text>
@@ -100,7 +145,7 @@ const CartScreen = () => {
 						</View>
 					</View>
 				)}
-			/>
+			/>:<Text>Login please!</Text>}
 		</SafeAreaView>
 	);
 };

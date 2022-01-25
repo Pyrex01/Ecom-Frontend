@@ -19,6 +19,11 @@ const DetailsScreen = (props) => {
 	let [Addres,setAddres]=React.useState()
 	let [selectedAddressShip,setselectedAddressShip]=React.useState()
 	let [selectedAddressbil,setselectedAddressbil]=React.useState()
+
+	let [firstName,setfirstName] = React.useState();
+	let [secondName,setsecondName] = React.useState();
+	let [quantity,setquantity] = React.useState();
+	let [Phone_number,setPhone_number] = React.useState();
 	function SingleAddress({item,comparator,setter}){
 		return (
 			<TouchableOpacity onPress={_=>setter(item.item.id)} style={{borderRadius:30,alignItems:"center",borderStyle:"solid",borderColor:"rgb(0,0,0)",borderWidth:3,margin:10,backgroundColor:(item.item.id==comparator?"#787878":"#ffffff")}}>
@@ -51,9 +56,35 @@ const DetailsScreen = (props) => {
 			);
 		}
 
+	function order(){
+		AsyncStorage.getItem("login_token",(err,res)=>{
+			mainBackend.post("/store/order/",
+				{
+				itemID:data.id,
+				quantity:quantity,
+				shippingID:selectedAddressShip,
+				billingID:selectedAddressbil,
+				First_Name:firstName,
+				Last_Name:secondName,
+				Phone_Number:Phone_number
+				},
+				{headers:{Authorization:"Token "+res}})
+			.then(response=>{
+				if(response.status==200){
+					setVisibility(false);
+					alert("item orderd successfully")
+				}
+			})
+			.catch(err=>{
+				console.log(err.request.status)
+			})
+		})
+	
+	}
+
 	function addtoCart(){
 		AsyncStorage.getItem("login_token",(err,res)=>{
-
+			if(res){
 			mainBackend.get("/store/setItemsInCart/",{params:{itemID:data.id,quantity :1},headers:{Authorization:"Token "+res}})
 			.then(Response=>{
 				if(Response.status==200){
@@ -63,6 +94,7 @@ const DetailsScreen = (props) => {
 			}).catch(err=>{
 				console.log(err.request)
 			})
+		}
 		})
 	}
 
@@ -74,15 +106,15 @@ const DetailsScreen = (props) => {
 				<Icon size={30} name="close"/ >
 				</TouchableOpacity>
 				<View style={{display:"flex",padding:15}} >
-					<TextInput style={style.inpuTText} placeholder="Recivers First Name" />
-					<TextInput style={style.inpuTText} placeholder="Recivers Second Name" />
-					<TextInput style={style.inpuTText} placeholder="Quantitiy" 	autoCompleteType='tel' keyboardType='number-pad' />
-					<TextInput style={style.inpuTText} placeholder="Phone number of reciever" 	autoCompleteType='tel' keyboardType='number-pad' />
+					<TextInput style={style.inpuTText} onChangeText={text=>setfirstName(text)} placeholder="Recivers First Name" />
+					<TextInput style={style.inpuTText} onChangeText={text=>setsecondName(text)} placeholder="Recivers Last Name" />
+					<TextInput style={style.inpuTText} onChangeText={text=>setquantity(text)} placeholder="Quantitiy" 	autoCompleteType='tel' keyboardType='number-pad' />
+					<TextInput style={style.inpuTText} onChangeText={text=>setPhone_number(text)} placeholder="Phone number of reciever" 	autoCompleteType='tel' keyboardType='number-pad' />
 					<Text style={style.inpuTText}>select Shipping address:</Text>
 					{Addres==[]?<Text>There are no address of yours!</Text>:<FlatList data={Addres} renderItem={item => <SingleAddress item={item} setter={setselectedAddressShip} comparator={selectedAddressShip} />} keyExtractor={item => (item.id).toString()} />}
 					<Text style={style.inpuTText}>select billing address:</Text>
 					{Addres==[]?<Text>There are no address of yours!</Text>:<FlatList data={Addres} renderItem={item => <SingleAddress item={item} setter={setselectedAddressbil} comparator={selectedAddressbil} />} keyExtractor={item => (item.id).toString()} />}
-					<TouchableOpacity style={{backgroundColor:Colors.primary,alignContent:"center",borderRadius:20}} >
+					<TouchableOpacity onPress={_=>order()} style={{backgroundColor:Colors.primary,alignContent:"center",borderRadius:20}} >
 						<Text style={{alignSelf:"center",fontSize:50}}>Buy</Text>
 					</TouchableOpacity>
 				</View>
@@ -116,10 +148,33 @@ const DetailsScreen = (props) => {
 						{data.Product_details.description}
 					</Text>
 					<View style={{margin:10 }}>
-						<SecondaryButton onPress={_=>setVisibility(true)} title="Buy" />
+						<SecondaryButton onPress={_=>{
+							AsyncStorage.getItem("login_token",(err,res)=>{
+								if(res){
+									setVisibility(true)
+								}
+								if(err) {
+									navigationRef.navigate("LogIn")
+								}
+								else{
+									navigationRef.navigate("LogIn")
+								}
+							})
+							}} title="Buy" />
 					</View>
 					<View style={{ margin:10,marginBottom:40 }}>
-						<SecondaryButton onPress={_=>addtoCart()} title="Add To Cart" />
+						<SecondaryButton onPress={_=>{
+											AsyncStorage.getItem("login_token",(err,res)=>{
+												if(res){
+													addtoCart()
+												}
+												if(err) {
+													navigationRef.navigate("LogIn")
+												}
+												else{
+													navigationRef.navigate("LogIn")
+												}})
+								}} title="Add To Cart" />
 					</View>
 				</View>
 			</ScrollView>

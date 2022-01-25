@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, View, SafeAreaView,Pressable,FlatList,Modal,Picker,TextInput,TouchableOpacity,ScrollView} from "react-native";
+import { Text, View, SafeAreaView,Pressable,FlatList,Modal,Picker,TextInput,TouchableOpacity,ScrollView,StyleSheet} from "react-native";
 
 import {mainBackend} from "../../../../Configs/MainBackend"
 import Colors from '../../../../Configs/Colors/Colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import STYLES from "./../../../../Configs/Style/formStyles";
+import {navigationRef} from "../../Forms/Modal"
 
 function SingleAddress({item}){
     return (
@@ -206,6 +207,12 @@ export default function Address() {
                 </View>
                 </ScrollView>
             </Modal>
+            <View style={style.header}>
+						<Icon	name="arrow-back-ios"	size={28} onPress={navigationRef.goBack}/>
+						<Text style={{ fontSize: 20, fontWeight: "bold" }}>
+							Cart
+						</Text>
+					</View>
             <View>
             <TouchableOpacity onPress={_=> setVisibility(true)} style={{marginHorizontal:40,height:30,borderRadius:20,backgroundColor:Colors.primary,alignItems:'center',marginTop:20,marginBottom:20}}>
                 <Text style={{color:"rgb(0,0,0)",marginTop:4}}>Create new Address</Text>
@@ -219,3 +226,33 @@ export default function Address() {
         </SafeAreaView>
     );
 }
+
+const style = StyleSheet.create({
+	header: {
+		paddingVertical: 20,
+		flexDirection: "row",
+		alignItems: "center",
+		marginHorizontal: 20,
+	},
+	cartCard: {
+		height: 100,
+		elevation: 15,
+		borderRadius: 10,
+		backgroundColor: Colors.white,
+		marginVertical: 10,
+		marginHorizontal: 20,
+		paddingHorizontal: 10,
+		flexDirection: "row",
+		alignItems: "center",
+	},
+	actionBtn: {
+		width: 80,
+		height: 30,
+		backgroundColor: Colors.primary,
+		borderRadius: 30,
+		paddingHorizontal: 5,
+		flexDirection: "row",
+		justifyContent: "center",
+		alignContent: "center",
+	},
+});

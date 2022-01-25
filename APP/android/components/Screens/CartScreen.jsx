@@ -12,6 +12,7 @@ function print(text) {
 }
 
 const CartScreen = () => {
+	
 	let [cartItems,setCartItems] = React.useState();
 	let [shit,setShit] = React.useState(false)
 

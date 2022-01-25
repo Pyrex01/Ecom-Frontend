@@ -1,5 +1,5 @@
 import React from "react";	
-import { SafeAreaView, StyleSheet, View, Text, Image ,FlatList,TouchableOpacity} from "react-native";
+import { SafeAreaView, StyleSheet, View, Text, Image ,FlatList,TouchableOpacity,Modal,ScrollView,TextInput} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../../Configs/Colors/Colors";
 import Products from "../Sub Components/Products";
@@ -15,7 +15,22 @@ const CartScreen = () => {
 	
 	let [cartItems,setCartItems] = React.useState();
 	let [shit,setShit] = React.useState(false)
+	let [selectedAddressShip,setselectedAddressShip]=React.useState()
+	let [selectedAddressbil,setselectedAddressbil]=React.useState()
+	let [visibility,setVisibility]=React.useState(false)
+	let [firstName,setfirstName] = React.useState();
+	let [secondName,setsecondName] = React.useState();
+	let [Phone_number,setPhone_number] = React.useState();
 
+	let [Addres,setAddress] = React.useState([])
+	function SingleAddress({item,comparator,setter}){
+		return (
+			<TouchableOpacity onPress={_=>setter(item.item.id)} style={{borderRadius:30,alignItems:"center",borderStyle:"solid",borderColor:"rgb(0,0,0)",borderWidth:3,margin:10,backgroundColor:(item.item.id==comparator?"#787878":"#ffffff")}}>
+				<Text style={{fontWeight:"bold",fontSize:17,margin:5 ,color:(item.item.id==comparator?"#ffffff":"#000000")}} >{item.item.Name}  {item.item.Phone_number} </Text>
+				<Text style={{margin:10,color:(item.item.id==comparator?"#ffffff":"#000000")}}>{item.item.Landmark} {item.item.Regein} {item.item.Town} {item.item.State} {item.item.Pincode}</Text>
+			</TouchableOpacity>
+		)
+	}
 
 	React.useEffect(()=>{
 		AsyncStorage.getItem("login_token",(err,res)=>{
@@ -24,9 +39,44 @@ const CartScreen = () => {
 				setCartItems(response.data)
 				setShit(true)
 			})
+			mainBackend.get("/resident/getAddress/",{headers:{Authorization:"Token "+res}}).then(Response=>{
+				setAddress(Response.data)
+			})
 		}})
 	},[shit])
 
+
+	function checkOUTWholeCart(){
+		AsyncStorage.getItem("login_token",(err,res)=>{
+			if(res){
+				mainBackend.post("/store/checkout/",{
+					first_name:firstName,
+					last_name:secondName,
+					Phone_number:Phone_number,
+					shipping_address_id:selectedAddressShip,
+					billing_address_id:selectedAddressbil 
+				},{headers:{Authorization:"Token "+res}})
+				.then(response=>{
+					if(response.status==202){
+						alert("all items ordered successfully!")
+						navigationRef.navigate("Home")
+						setShit(true)
+					}
+				})
+				.catch(err=>{
+					console.log(err.request.status)
+					console.log(err.request)
+					console.log(err.request.data)
+				})
+
+
+				}
+				})
+
+	}
+
+
+// =====================================================================================================================================================================================
 	const CartCard = ({ item}) => {
 
 		let [changed,setChanged]=React.useState(false)
@@ -58,6 +108,7 @@ const CartScreen = () => {
 			})
 		}
 
+
 		function subtract(){
 			let newQuantitiy = Quantity - 1;
 			setQuantity(newQuantitiy)
@@ -79,14 +130,7 @@ const CartScreen = () => {
 			<View style={style.cartCard}>
 
 				<Image source={{uri:print(item.Items_ID.Display_Image)}} style={{ height: 80, width: 80 }} />
-				<View
-					style={{
-						height: 100,
-						marginLeft: 10,
-						paddingVertical: 20,
-						flex: 1,
-					}}
-				>
+				<View	style={{height: 100,marginLeft: 10,	paddingVertical: 20,flex: 1,}}>
 					<Text style={{ fontWeight: "bold", fontSize: 16 }}>
 						{item.Items_ID.Name}
 					</Text>
@@ -117,13 +161,38 @@ const CartScreen = () => {
 			</View>
 		);
 	};
+
+// =====================================================================================================================================================================================
+
 	return (
 		<SafeAreaView style={{ backgroundColor: Colors.white, flex: 1 }}>
-								<View style={style.header}>
+						<Modal visible={visibility}  animationType="slide" >
+				<ScrollView>
+				<TouchableOpacity onPress={_=>setVisibility(false)} >
+				<Icon size={30} name="close"/ >
+				</TouchableOpacity>
+				<View style={{display:"flex",padding:15}} >
+					<TextInput style={style.inpuTText} onChangeText={text=>setfirstName(text)} placeholder="Recivers First Name" />
+					<TextInput style={style.inpuTText} onChangeText={text=>setsecondName(text)} placeholder="Recivers Last Name" />
+					<TextInput style={style.inpuTText} onChangeText={text=>setPhone_number(text)} placeholder="Phone number of reciever" 	autoCompleteType='tel' keyboardType='number-pad' />
+					<Text style={style.inpuTText}>select Shipping address:</Text>
+					{Addres==[]?<Text>There are no address of yours!</Text>:<FlatList data={Addres} renderItem={item => <SingleAddress item={item} setter={setselectedAddressShip} comparator={selectedAddressShip} />} keyExtractor={item => (item.id).toString()} />}
+					<Text style={style.inpuTText}>select billing address:</Text>
+					{Addres==[]?<Text>There are no address of yours!</Text>:<FlatList data={Addres} renderItem={item => <SingleAddress item={item} setter={setselectedAddressbil} comparator={selectedAddressbil} />} keyExtractor={item => (item.id).toString()} />}
+					<TouchableOpacity onPress={_=>checkOUTWholeCart()} style={{backgroundColor:Colors.primary,alignContent:"center",borderRadius:20}} >
+						<Text style={{alignSelf:"center",fontSize:50}}>Buy</Text>
+					</TouchableOpacity>
+				</View>
+				</ScrollView>
+
+			</Modal>
+				<View style={style.header}>
 						<Icon	name="arrow-back-ios"	size={28} onPress={navigationRef.goBack}/>
 						<Text style={{ fontSize: 20, fontWeight: "bold" }}>
 							Cart
 						</Text>
+
+						<TouchableOpacity onPress={_=>setShit(false)} ><Text style={{marginHorizontal:10,fontWeight:"bold",color:Colors.primary,backgroundColor:Colors.secondary,width:55,borderRadius:5,padding:3}}>Reload!</Text></TouchableOpacity>
 					</View>{ cartItems!==null?
 			<FlatList	showsVerticalScrollIndicator={true}	contentContainerStyle={{ paddingBottom: 80 }} data={cartItems}	
 			renderItem={({ item,id }) => <CartCard item={item} id={id} />}	
@@ -141,7 +210,7 @@ const CartScreen = () => {
 							</Text>
 						</View>
 						<View style={{ marginHorizontal: 30 }}>
-							<PrimaryButton title="CHECKOUT" />
+							<PrimaryButton onPress={_=>setVisibility(true)} title="CHECKOUT" />
 						</View>
 					</View>
 				)}
@@ -149,7 +218,11 @@ const CartScreen = () => {
 		</SafeAreaView>
 	);
 };
+// =====================================================================================================================================================================================
 const style = StyleSheet.create({
+	inpuTText:{
+			fontSize:30
+		},
 	header: {
 		paddingVertical: 20,
 		flexDirection: "row",

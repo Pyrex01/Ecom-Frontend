@@ -16,11 +16,23 @@ const OrderList = ({ navigation }) => {
 	let [cartItems,setCartItems] = React.useState();
 	let [shit,setShit] = React.useState(false)
 
+	let statuses = {
+		'O':"ORDERED",
+        'D':"DISPATCHED",
+        'S':"SHIPED",
+        'OD':"OUT FOR DELIVERY",
+        'D':"DONE"
+	}
+
 	React.useEffect(()=>{
 		AsyncStorage.getItem("login_token",(err,res)=>{
-			mainBackend.get("/store/getItemsInCart/",{headers:{Authorization:"Token "+res}}).then(response=>{
+			mainBackend.get("/store/getallOrders",{headers:{Authorization:"Token "+res}})
+			.then(response=>{
 				setCartItems(response.data)
 				setShit(true)
+			})
+			.catch(err=>{
+				console.log(err.request.status)
 			})
 		})
 	},[shit])
@@ -49,7 +61,8 @@ const OrderList = ({ navigation }) => {
 				</View>
 				<View style={{ marginRight: 20, alignItems: "center" }}>
 					<Text style={{ fontWeight: "bold", fontSize: 18 }}>{item.Quantity}</Text>
-					<Text style={{ fontWeight: "bold", fontSize: 10 }}>Status:On the way</Text>
+					<Text style={{ fontWeight: "bold", fontSize: 10 }}>{statuses[item.Status]}</Text>
+					<Text style={{ fontWeight: "bold", fontSize: 9 }}>{item.Tracking_ID}</Text>
 				</View>
 			</View>
 		);

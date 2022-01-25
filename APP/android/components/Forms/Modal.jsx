@@ -49,26 +49,30 @@ function otpSubmit(otp, setotpwarning) {
 				switch (response.status) {
 					case 202:
 						alert("signup success");
-						navigationRef.navigate("BoardScreen")
+						navigationRef.navigate("LogIn")
 						break;
+
+				}
+			}).catch((response)=>{
+
+				switch(response.request.status){
 					case 410:
 						alert("otp time expired try again");
-						Alert.alert("otp time expired try again");
-						navigationRef.navigate("BoardScreen")
+					
 						break;
 					case 400:
 						alert("oops something went wrong!");
-						Alert.alert("oops something went wrong!");
-						navigationRef.navigate("BoardScreen")
+				
 						break;
 					case 404:
 						alert("nothing found!");
-						navigationRef.navigate("BoardScreen")
 						break;
 				}
-			}).catch((response)=>{
 				alert("something wrong happened")
-				navigationRef.navigate("BoardScreen")
+				navigationRef.navigate("Home")
+			})
+			.finally(_=>{
+				AsyncStorage.removeItem("signup_token")
 			});
 	});
 }

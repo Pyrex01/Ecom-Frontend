@@ -1,19 +1,17 @@
-import React from "react";
-import { SafeAreaView, StyleSheet, View, Text, Image } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import React from "react";	
+import { SafeAreaView, StyleSheet, View, Text, Image ,FlatList} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../../Configs/Colors/Colors";
 import Products from "../Sub Components/Products";
 import { PrimaryButton } from "../Sub Components/Button";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {mainBackend} from "../../../Configs/MainBackend"
-
-
+import {navigationRef} from "../Forms/Modal"
 function print(text) {
 	return "data:image/png;base64," + text
 }
 
-const CartScreen = ({ navigation }) => {
+const CartScreen = () => {
 	let [cartItems,setCartItems] = React.useState();
 	let [shit,setShit] = React.useState(false)
 
@@ -30,6 +28,7 @@ const CartScreen = ({ navigation }) => {
 	const CartCard = ({ item }) => {
 		return (
 			<View style={style.cartCard}>
+
 				<Image source={{uri:print(item.Items_ID.Display_Image)}} style={{ height: 80, width: 80 }} />
 				<View
 					style={{
@@ -61,6 +60,12 @@ const CartScreen = ({ navigation }) => {
 	};
 	return (
 		<SafeAreaView style={{ backgroundColor: Colors.white, flex: 1 }}>
+								<View style={style.header}>
+						<Icon	name="arrow-back-ios"	size={28} onPress={navigationRef.goBack}/>
+						<Text style={{ fontSize: 20, fontWeight: "bold" }}>
+							Cart
+						</Text>
+					</View>
 			<FlatList
 				showsVerticalScrollIndicator={true}
 				contentContainerStyle={{ paddingBottom: 80 }}

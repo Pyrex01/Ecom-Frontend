@@ -1,6 +1,4 @@
 import React from 'react';
-import "react-native-gesture-handler";
-import { } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import {View ,SafeAreaView,Text,ScrollView,StyleSheet,TextInput,TouchableOpacity} from "react-native";
 import Colors from '../../../Configs/Colors/Colors';

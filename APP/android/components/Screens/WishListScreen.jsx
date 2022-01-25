@@ -1,6 +1,5 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, View, Text, Image,TouchableOpacity } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { SafeAreaView, StyleSheet, View, Text, Image,TouchableOpacity,FlatList } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../../Configs/Colors/Colors";
 import Products from "../Sub Components/Products";

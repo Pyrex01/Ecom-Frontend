@@ -1,4 +1,3 @@
-import "react-native-gesture-handler";
 import React, { useState } from "react";
 import {
 	SafeAreaView,
@@ -6,12 +5,11 @@ import {
 	Text,
 	TextInput,
 	Image,
-	StyleSheet,
+	StyleSheet,ScrollView,TouchableOpacity
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../../Configs/Colors/Colors";
 import STYLES from "../../../Configs/Style/formStyles";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { mainBackend } from "../../../Configs/MainBackend";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -237,7 +235,7 @@ const Login = () => {
 								AsyncStorage.setItem(key, response.data[key]);
 							}
 							AsyncStorage.setItem("isLogedin", "true");
-							navigationRef.navigate("BoardScreen")
+							navigationRef.navigate("Home")
 							break;
 						case 403:
 							SetLog("sorry wrong credentials");

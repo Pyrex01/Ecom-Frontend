@@ -1,39 +1,94 @@
-import React ,{PureComponent} from "react";
-import { SafeAreaView, StyleSheet, View, Text, Image ,ActivityIndicator} from "react-native";
-import { FlatList, ScrollView } from "react-native-gesture-handler";
-import { RouterLink, useNavigate, useParams } from "react-router-dom";
+import React from "react";
+import { SafeAreaView, StyleSheet, View, Text, Image ,ActivityIndicator,Modal,ScrollView,TouchableOpacity,Picker,FlatList,TextInput} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../../Configs/Colors/Colors";
 import { SecondaryButton } from "../Sub Components/Button";
 import {navigationRef} from "./../Forms/Modal"
 import axios from "axios";
 import { mainBackend } from "../../../Configs/MainBackend";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function print(text) {
 	return "data:image/png;base64," + text
 }
 
 
-
-
 const DetailsScreen = (props) => {
-		let data = props.route.params.data
-
-		let image_ist = data.Product_details.images
+	let data = props.route.params.data
+	let [visibility,setVisibility]=React.useState(false)
+	let [Addres,setAddres]=React.useState()
+	let [selectedAddressShip,setselectedAddressShip]=React.useState()
+	let [selectedAddressbil,setselectedAddressbil]=React.useState()
+	function SingleAddress({item,comparator,setter}){
+		return (
+			<TouchableOpacity onPress={_=>setter(item.item.id)} style={{borderRadius:30,alignItems:"center",borderStyle:"solid",borderColor:"rgb(0,0,0)",borderWidth:3,margin:10,backgroundColor:(item.item.id==comparator?"#787878":"#ffffff")}}>
+				<Text style={{fontWeight:"bold",fontSize:17,margin:5 ,color:(item.item.id==comparator?"#ffffff":"#000000")}} >{item.item.Name}  {item.item.Phone_number} </Text>
+				<Text style={{margin:10,color:(item.item.id==comparator?"#ffffff":"#000000")}}>{item.item.Landmark} {item.item.Regein} {item.item.Town} {item.item.State} {item.item.Pincode}</Text>
+			</TouchableOpacity>
+		)
+	}
+	React.useEffect(()=>{
+		AsyncStorage.getItem("login_token",(err,res)=>{
+			if(err){
+				console.log(err)
+			}
+			if(res){
+				mainBackend.get("/resident/getAddress/",{headers:{Authorization:"Token "+res}}).then(Response=>{
+					setAddres(Response.data)
+				})
+			}
+		})
+	},[true])
+	let image_ist = data.Product_details.images
 		image_ist = [data.Display_Image,...image_ist]
 		const ImageView = () => {
 			return (
 				<SafeAreaView>
 					<ScrollView horizontal showsHorizontalScrollIndicator={false}>
-						{image_ist.map((image, index) => ( <Image source={{uri:print(image)}} style={{ height: 220, width: 220,margin:15 }} key={image} /> )
-						)}
+						{image_ist.map((image, index) => ( <Image source={{uri:print(image)}} style={{ height: 220, width: 220,margin:15 }} key={index} /> ))}
 					</ScrollView>
 				</SafeAreaView>
 			);
 		}
+
+	function addtoCart(){
+		AsyncStorage.getItem("login_token",(err,res)=>{
+
+			mainBackend.get("/store/setItemsInCart/",{params:{itemID:data.id,quantity :1},headers:{Authorization:"Token "+res}})
+			.then(Response=>{
+				if(Response.status==200){
+					alert("Item added successfully!")
+					return;
+				}
+			}).catch(err=>{
+				console.log(err.request)
+			})
+		})
+	}
+
 		return (
 		<SafeAreaView style={{ backgroundColor: Colors.white }}>
-			
+			<Modal visible={visibility}  animationType="slide" >
+				<ScrollView>
+				<TouchableOpacity onPress={_=>setVisibility(false)} >
+				<Icon size={30} name="close"/ >
+				</TouchableOpacity>
+				<View style={{display:"flex",padding:15}} >
+					<TextInput style={style.inpuTText} placeholder="Recivers First Name" />
+					<TextInput style={style.inpuTText} placeholder="Recivers Second Name" />
+					<TextInput style={style.inpuTText} placeholder="Quantitiy" 	autoCompleteType='tel' keyboardType='number-pad' />
+					<TextInput style={style.inpuTText} placeholder="Phone number of reciever" 	autoCompleteType='tel' keyboardType='number-pad' />
+					<Text style={style.inpuTText}>select Shipping address:</Text>
+					{Addres==[]?<Text>There are no address of yours!</Text>:<FlatList data={Addres} renderItem={item => <SingleAddress item={item} setter={setselectedAddressShip} comparator={selectedAddressShip} />} keyExtractor={item => (item.id).toString()} />}
+					<Text style={style.inpuTText}>select billing address:</Text>
+					{Addres==[]?<Text>There are no address of yours!</Text>:<FlatList data={Addres} renderItem={item => <SingleAddress item={item} setter={setselectedAddressbil} comparator={selectedAddressbil} />} keyExtractor={item => (item.id).toString()} />}
+					<TouchableOpacity style={{backgroundColor:Colors.primary,alignContent:"center",borderRadius:20}} >
+						<Text style={{alignSelf:"center",fontSize:50}}>Buy</Text>
+					</TouchableOpacity>
+				</View>
+				</ScrollView>
+
+			</Modal>
 			<View style={style.header}>
 				<Icon
 					name="arrow-back-ios"
@@ -47,7 +102,6 @@ const DetailsScreen = (props) => {
 			<ScrollView showsVerticalScrollIndicator={false}>
 				<View style={{	justifyContent: "center",	alignItems: "center",	height: 280,	}}	>
 					<ImageView />
-					{/* <Image source={{uri:print(data.Display_Image)}} style={{ height: 220, width: 220 }}	/> */}
 				</View>
 				<View style={style.details}>
 					<View style={{	flexDirection: "row",justifyContent: "space-between",	alignItems: "center",}}	>
@@ -55,29 +109,30 @@ const DetailsScreen = (props) => {
 							{data.Name}
 						</Text>
 						<View style={style.iconContainer}>
-							<Icon
-								name="favorite-border"
-								color={Colors.primary}
-								size={25}
-							/>
+							<Icon	name="favorite-border"	color={Colors.primary}	size={25}/>
 						</View>
 					</View>
 					<Text style={style.detailsText}>
 						{data.Product_details.description}
 					</Text>
 					<View style={{margin:10 }}>
-						<SecondaryButton title="Buy" />
+						<SecondaryButton onPress={_=>setVisibility(true)} title="Buy" />
 					</View>
 					<View style={{ margin:10,marginBottom:40 }}>
-						<SecondaryButton title="Add To Cart" />
+						<SecondaryButton onPress={_=>addtoCart()} title="Add To Cart" />
 					</View>
 				</View>
 			</ScrollView>
 		</SafeAreaView>
 	);
-};
+}
+
+
 
 const style = StyleSheet.create({
+	inpuTText:{
+		fontSize:30
+	},
 	header: {
 		paddingVertical: 20,
 		flexDirection: "row",

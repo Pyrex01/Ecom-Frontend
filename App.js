@@ -1,5 +1,4 @@
 import React from 'react';
-import "react-native-gesture-handler";
 import * as encoding from "text-encoding";
 import Android from "./APP/android/components/navigation";
 import AsyncStorage from '@react-native-async-storage/async-storage';

@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import "react-native-gesture-handler";
-import { } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ProfileStyle from "../../../Configs/Style/ProfileStyle";
@@ -144,13 +142,7 @@ const Signup = () => {
 							style={STYLES.inputIcon}
 						/>
 
-						<Picker
-							selectedValue={gender}
-							style={{ height: 50, width: 150 ,marginHorizontal:30}}
-							onValueChange={(itemValue, itemIndex) =>
-								setGender(itemValue)
-							}
-						>
+						<Picker	selectedValue={gender} style={{ height: 50, width: 150 ,marginHorizontal:30}} onValueChange={(itemValue, itemIndex) =>setGender(itemValue)}>
 							<Picker.Item label='Select' value='' />
 							<Picker.Item label='Male' value='1' />
 							<Picker.Item label='Female' value='2' />

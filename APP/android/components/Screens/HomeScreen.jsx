@@ -10,14 +10,12 @@ import {
 	View,
 	Platform,
 	Button,
-} from "react-native";
-import {
 	FlatList,
 	ScrollView,
 	TextInput,
 	TouchableHighlight,
-	TouchableOpacity,
-} from "react-native-gesture-handler";
+	TouchableOpacity
+} from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Colors from "../../../Configs/Colors/Colors";
 import categories from "../Sub Components/categories";

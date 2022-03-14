@@ -67,15 +67,7 @@ const Card = ({ Products }) => {
 };
 
 const HomeScreen = ({ navigation }) => {
-	let name;
-	AsyncStorage.getItem("login_token", (err, result) => {
-		if (err) { return; }
-		else {
-			AsyncStorage.getItem("First_name", (er, res) => {
-				name = res;
-			})
-		}
-	})
+
 	let [loading, setloadning] = React.useState(true);
 	let [pagingData, setPagingData] = React.useState(true);
 	let [searchString, setsearchString] = React.useState("");
@@ -84,7 +76,6 @@ const HomeScreen = ({ navigation }) => {
 
 
 	useEffect (() => {
-		
 		mainBackend.get("/store/getItems/").then((response) => {
 			setloadning(false)
 			setPagingData(response.data)

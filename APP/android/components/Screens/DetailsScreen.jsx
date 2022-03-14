@@ -85,6 +85,7 @@ const DetailsScreen = (props) => {
 	function addtoCart(){
 		AsyncStorage.getItem("login_token",(err,res)=>{
 			if(res){
+				console.log("if entered")
 			mainBackend.get("/store/setItemsInCart/",{params:{itemID:data.id,quantity:1},headers:{Authorization:"Token "+res}})
 			.then(Response=>{
 				if(Response.status==200){
@@ -153,7 +154,7 @@ const DetailsScreen = (props) => {
 								if(res){
 									setVisibility(true)
 								}
-								if(err) {
+								else {
 									navigationRef.navigate("LogIn")
 								}
 							})
@@ -165,7 +166,7 @@ const DetailsScreen = (props) => {
 												if(res){
 													addtoCart()
 												}
-												if(err) {
+												else {
 													navigationRef.navigate("LogIn")
 												}})
 								}} title="Add To Cart" />

@@ -11,13 +11,19 @@ const Tab = createBottomTabNavigator();
 const BottomNavigator = () => {
 	let [comp,setComp] =React.useState()
 	function  myacc () {return <MyAccount islogedin={comp}/> }
-	AsyncStorage.getItem("isLogedin",(err,result)=>{    
-		if(result=="true"){
-			setComp( true)
-		}
-		if(result!=="true"){
-			setComp(false)
-		} })
+
+	React.useState(()=>{
+		AsyncStorage.getItem("isLogedin",(err,result)=>{    
+			if(result=="true"){
+				setComp( true)
+			}
+			if(result!=="true"){
+				setComp(false)
+			} })
+	},[true]
+	)
+
+
 	return (
 		<Tab.Navigator
 		screenOptions={{

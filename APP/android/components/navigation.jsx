@@ -15,7 +15,6 @@ import OrderList from './Screens/OrderScreen';
 import Address from './Screens/Profile/Address';
 import ComplainScreen from './Forms/ComplainScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import MainPage from './Screens/MainPage';
 import { navigationRef } from './Forms/Modal';
 const Stack = createStackNavigator();
 

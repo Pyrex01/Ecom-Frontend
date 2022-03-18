@@ -28,7 +28,7 @@ const cardWidth = width / 2 - 20;
 import axios from "axios";
 import {navigationRef} from "../Forms/Modal"
 function print(text) {
-	return "data:image/png;base64," + text
+	return text.startsWith("data:image/png;base64,") ? text : "data:image/png;base64," +text ;
 }
 
 const Card = ({ Products }) => {
@@ -50,7 +50,7 @@ const Card = ({ Products }) => {
 				</View>
 				<View style={{ marginHorizontal: 20 }}>
 					<Text style={{ fontSize: 18, fontWeight: "bold" }}>
-						{Products.Name}
+						{Products.Name.length > 14 ? Products.Name.substring(0,10)+"...":Products.Name}
 					</Text>
 					{/* <Text style={{ fontSize: 14, color: Colors.grey, marginTop: 2, }}	>
 						{Products.discription}
@@ -58,7 +58,7 @@ const Card = ({ Products }) => {
 				</View>
 				<View style={{ marginTop: 8, marginHorizontal: 30, flexDirection: "row", justifyContent: "space-between", }}>
 					<Text style={{ fontSize: 18, fontWeight: "bold" }}>
-						{Products.Price}
+						{Products.Price + "₹"}
 					</Text>
 				</View>
 			</View>

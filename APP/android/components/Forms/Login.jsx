@@ -228,6 +228,8 @@ const Login = () => {
 				.then(function (response) {
 					switch (response.status) {
 						case 400:
+							AsyncStorage.clear()
+							navigationRef.navigate("Home ")
 							alert("oops something went wrong!");
 							break;
 						case 202:
@@ -235,7 +237,7 @@ const Login = () => {
 								AsyncStorage.setItem(key, response.data[key]);
 							}
 							AsyncStorage.setItem("isLogedin", "true");
-							navigationRef.navigate("Home")
+							navigationRef.navigate("Home ")
 							break;
 						case 403:
 							SetLog("sorry wrong credentials");

@@ -124,37 +124,37 @@ const ProfilePage = () => {
 };
 
 function logout(){
-
     AsyncStorage.getItem("login_token",(err,res)=>{
-        if(err){
-            console.log("err");
-            return;
-        }
-        var x = "Token "+res
-        axios.post("http://shopingbazar.sytes.net/user/logout/",{},{headers:{Authorization:x}})
-        .then((response)=>{
-            switch(response.status){
-                case 400:
-                    alert("oops something went wrong")
-                    navigationRef.navigate("BoardScreen")
-                    break;
-                case 200:
+        if(res){
+            console.log("token here",res)
+            var x = "Token "+res
+            axios.post("http://apiservice.ddns.net/user/logout/",{},{headers:{Authorization:x}})
+            .then((response)=>{
+                switch(response.status){
+                    case 400:
+                        alert("oops something went wrong")
+                        navigationRef.navigate("Home ")
+                        break;
+                    case 200:
+                        AsyncStorage.multiRemove(['First_name','Photo','Second_Name','isLogedin','login_token','signup_token'], (err) => {
+                            AsyncStorage.setItem("isLogedin","false")
+                        });
+                        navigationRef.navigate("Home ")
+                        break;
+                }
+            })
+            .catch((err)=>{
+                if(err.request.status==401){
+                    console.log(err)
                     AsyncStorage.multiRemove(['First_name','Photo','Second_Name','isLogedin','login_token','signup_token'], (err) => {
                         AsyncStorage.setItem("isLogedin","false")
                     });
-                    navigationRef.navigate("BoardScreen")
-                    break;
-            }
-        })
-        .catch((err)=>{
-            if(err.request.status==401){
-                AsyncStorage.multiRemove(['First_name','Photo','Second_Name','isLogedin','login_token','signup_token'], (err) => {
-                    AsyncStorage.setItem("isLogedin","false")
-                    navigationRef.navigate("BoardScreen")
-                });
-            }
-            alert("ooops something went wrong")
-        })
+                    navigationRef.navigate("Home ")
+                    alert("ooops something went wrong!")
+                }
+            })
+        }
+
     })
 }
 

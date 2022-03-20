@@ -12,16 +12,14 @@ const BottomNavigator = () => {
 	let [comp,setComp] =React.useState()
 	function  myacc () {return <MyAccount islogedin={comp}/> }
 
-	React.useState(()=>{
-		AsyncStorage.getItem("isLogedin",(err,result)=>{    
-			if(result=="true"){
-				setComp( true)
+	AsyncStorage.getItem("isLogedin",(err,result)=>{    
+		if(result=="true"){
+			setComp(true)
 			}
-			if(result!=="true"){
+			else{
 				setComp(false)
 			} })
-	},[true]
-	)
+
 
 
 	return (

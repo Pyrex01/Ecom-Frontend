@@ -9,7 +9,7 @@ import { mainBackend } from "../../../Configs/MainBackend";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function print(text) {
-	return "data:image/png;base64," + text
+	return text.startsWith("data:image") ? text : "data:image/png;base64," +text ;
 }
 
 

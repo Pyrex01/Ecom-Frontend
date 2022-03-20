@@ -28,7 +28,7 @@ const cardWidth = width / 2 - 20;
 import axios from "axios";
 import {navigationRef} from "../Forms/Modal"
 function print(text) {
-	return text.startsWith("data:image/png;base64,") ? text : "data:image/png;base64," +text ;
+	return text.startsWith("data:image") ? text : "data:image/png;base64," +text ;
 }
 
 const Card = ({ Products }) => {

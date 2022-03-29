@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {mainBackend} from "../../../Configs/MainBackend"
 import {navigationRef} from "../Forms/Modal"
 function print(text) {
-	return text.startsWith("data:image/png;base64,") ? text : "data:image/png;base64," +text ;
+	return text.startsWith("data:image") ? text : "data:image/png;base64," +text ;
 }
 
 const CartScreen = () => {

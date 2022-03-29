@@ -9,7 +9,7 @@ import {mainBackend} from "../../../Configs/MainBackend"
 
 
 function print(text) {
-	return "data:image/png;base64," + text
+	return text.startsWith("data:image") ? text : "data:image/png;base64," +text ;
 }
 
 const OrderList = ({ navigation }) => {
